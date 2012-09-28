@@ -10,10 +10,18 @@ z-index: 10;
 }
 div.background
   {
-  width:500px;
-  height:250px;
+  
   background:url(images/stripe.png) repeat;
-  border:2px solid black;
-  background: yellow;
+border-top-style:dashed;
+border-right-style:dotted;
+border-bottom-style:dashed;
+border-left-style:dotted;
+ 
   z-index: 0;
   }
+  div.status
+  {
+
+  }
+
+.ui-progressbar .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }

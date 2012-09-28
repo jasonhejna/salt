@@ -15,8 +15,12 @@ if (isset($_SESSION['user_id'])) {
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery.tzineClock/jquery.tzineClock.css" />
+<script type="text/javascript" src="jquery.tzineClock/jquery.tzineClock.js"></script>
+<script type="text/javascript" src="clockscript.js"></script>
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script type="text/javascript">
+
 	var happiness;
 	var unix_time;
 	var date= new Date();
@@ -70,8 +74,10 @@ if (isset($_SESSION['user_id'])) {
 			buttons: {
 						Submit: function() {
 							countDown(80,"status");
+
 							$( this ).dialog( "close" );
 							//var unix = unix_time;
+							$(".boxin").hide();
 							$(".background").show();
 							$.ajax({
 							    type: 'post',
@@ -87,6 +93,7 @@ if (isset($_SESSION['user_id'])) {
 
 		});
 	});	
+
 	</script>
 </head>
 <body>
@@ -100,12 +107,15 @@ if (isset($_SESSION['user_id'])) {
 </div>
 <div class="grid_18 prefix_3 suffix_3">
 	<br/><br/>
-	<div hidden class="background"><div id="status"></div></div>
+	<div hidden class="background">
+		<div id="status"></div>
+		<div id="progressbar"></div><br/><br/><br/>
+	</div>
 	<div class="boxin">
 		
 	<center><h1 class="q">At this moment, would you say you are</h1>
 	<form>
-	<div id="radio">
+	<div id="radio" >
 		<input type="radio" id="radio1" name="radio" /><label for="radio1">very happy</label>
 		<input type="radio" id="radio2" name="radio" /><label for="radio2">rather happy</label>
 		<input type="radio" id="radio3" name="radio" /><label for="radio3">not very happy</label>
@@ -126,19 +136,23 @@ if (isset($_SESSION['user_id'])) {
 <div class="grid_24">
 
  <script type="text/javascript">
+
 function countDown(secs,elem) {
 var element = document.getElementById(elem);
 element.innerHTML = ""+secs+" seconds remaining until you may answer again";
 if(secs < 1) {
 clearTimeout(timer);
-$("#status").hide();
 $(".background").hide();
+$(".boxin").show();
  element.innerHTML = '<h2>Countdown Complete!</h2>';
  //element.innerHTML += '<a href="#">Click here now</a>';
- 
+
 }
 secs--;
 var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
+		$( "#progressbar" ).progressbar({
+			value: secs
+		});
 }
  </script>
 
