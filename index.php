@@ -3,6 +3,7 @@ include 'dbc.php';
 page_protect();
 
 if (isset($_SESSION['user_id'])) {
+
 	$goturid = $_SESSION['user_id'];
 	?>
 <!DOCTYPE html>
@@ -15,15 +16,13 @@ if (isset($_SESSION['user_id'])) {
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
-<link rel="stylesheet" type="text/css" href="jquery.tzineClock/jquery.tzineClock.css" />
-<script type="text/javascript" src="jquery.tzineClock/jquery.tzineClock.js"></script>
-<script type="text/javascript" src="clockscript.js"></script>
+
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script type="text/javascript">
 
-	var happiness;
+	var happiness = 5;
 	var unix_time;
-	var date= new Date();
+	var date = new Date();
 	$.fx.speeds._default = 700; //animation speed
 	$(document).ready(function(){
 		$("#radio1").click(function(){
@@ -60,9 +59,39 @@ if (isset($_SESSION['user_id'])) {
   		});
   	});
 
+
+
 	$(function() {
 		$( "#radio" ).buttonset();
 	});
+	function question(happiness,happiness) {
+								//$("#question0").show();
+								//$("#question1").show();
+								//$("#question2").show();
+								//$("#question3").show();
+	
+							if (happiness == '1'){
+								
+								$("#question0").show();
+								
+							}
+							else if (happiness == '2'){
+								$("#question1").show();
+								
+							}
+							else if (happiness == '3'){
+								$("#question2").show();
+								
+							}
+							else if (happiness == '4'){
+								$("#question3").show();
+							}
+							else {
+								
+								//$("#question3").hide(); hide and display question again
+
+							}
+	}
 	$(function() {
 		$( "#dialog" ).dialog({
 			resizable: false,
@@ -73,18 +102,23 @@ if (isset($_SESSION['user_id'])) {
 			modal:true,
 			buttons: {
 						Submit: function() {
-							countDown(100,"status");
-
+							countDown(660,"status");
+							
 							$( this ).dialog( "close" );
 							//var unix = unix_time;
+							
 							$(".boxin").hide();
 							$(".background").show();
 							$.ajax({
 							    type: 'post',
 							    url: 'happypost.php',
 							    data: {yahoo:unix_time,happiness:happiness},
+							    success: function () {//On Successful service call
+                       			
+                        		question(happiness, happiness);
+                    			},
 							});
-							
+
 						},
 						Cancel: function() {
 							$( this ).dialog( "close" );
@@ -112,7 +146,10 @@ if (isset($_SESSION['user_id'])) {
 	function countDown(secs,elem) {
 	var element = document.getElementById(elem);
 	var mins = Math.round(secs/60);
+	
+	
 	element.innerHTML = ""+mins+"minutes";
+	
 
 	
 
@@ -125,9 +162,12 @@ if (isset($_SESSION['user_id'])) {
 
 	}
 	secs--;
+
 	var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
+
 			$( "#progressbar" ).progressbar({
-				value: secs
+				
+				value: secs/6.6
 			});
 	}
 	 </script>
@@ -135,6 +175,7 @@ if (isset($_SESSION['user_id'])) {
 	<div class="clear"></div>
 	<div hidden class="background">
 		
+
 		<table border="0">
 		<tr>
 		<td><div style="width:60px;height:20px;" class="pbartop" id="progressbar"></div></td>
@@ -142,10 +183,18 @@ if (isset($_SESSION['user_id'])) {
 		</tr>
 		</table> 
 		<center>
-		
+		<form>
+			
+			<h1 hidden class="question0"  id="question0" name="question0">Why do you feel happy?</h1>
+			<h1 hidden class="question1"  id="question1" name="question1">Why do you feel so happy?</h1>
+			<h1 hidden class="question2"  id="question2" name="question2">why aren't you feeling very happy?</h1>
+			<h1 hidden class="question3"  id="question3" name="question3">why aren't you feeling happy?</h1>
+			<textarea rows="4" cols="50"></textarea><br/>
+			<input type="submit">
+		</form>
 
-		<br/><br/><br/>
-	</center>
+		<br/><br/>
+		</center>
 	</div>
 	<div class="boxin">
 		
