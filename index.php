@@ -73,7 +73,7 @@ if (isset($_SESSION['user_id'])) {
 			modal:true,
 			buttons: {
 						Submit: function() {
-							countDown(80,"status");
+							countDown(100,"status");
 
 							$( this ).dialog( "close" );
 							//var unix = unix_time;
@@ -106,10 +106,46 @@ if (isset($_SESSION['user_id'])) {
 </div>
 </div>
 <div class="grid_18 prefix_3 suffix_3">
+	<!-- coundown timer time -->
+	 <script type="text/javascript">
+
+	function countDown(secs,elem) {
+	var element = document.getElementById(elem);
+	var mins = Math.round(secs/60);
+	element.innerHTML = ""+mins+"minutes";
+
+	
+
+	if(secs < 1) {
+	clearTimeout(timer);
+	$(".background").hide();
+	$(".boxin").show();
+	 element.innerHTML = '<h2>Countdown Complete!</h2>';
+	 //element.innerHTML += '<a href="#">Click here now</a>';
+
+	}
+	secs--;
+	var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
+			$( "#progressbar" ).progressbar({
+				value: secs
+			});
+	}
+	 </script>
 	<br/><br/>
+	<div class="clear"></div>
 	<div hidden class="background">
-		<div id="status"></div>
-		<div id="progressbar"></div><br/><br/><br/>
+		
+		<table border="0">
+		<tr>
+		<td><div style="width:60px;height:20px;" class="pbartop" id="progressbar"></div></td>
+		<td><h2 class="mini" id="status"></h2></td>
+		</tr>
+		</table> 
+		<center>
+		
+
+		<br/><br/><br/>
+	</center>
 	</div>
 	<div class="boxin">
 		
@@ -135,26 +171,7 @@ if (isset($_SESSION['user_id'])) {
 <div class="clear"></div>
 <div class="grid_24">
 
- <script type="text/javascript">
 
-function countDown(secs,elem) {
-var element = document.getElementById(elem);
-element.innerHTML = ""+secs+" seconds remaining until you may answer again";
-if(secs < 1) {
-clearTimeout(timer);
-$(".background").hide();
-$(".boxin").show();
- element.innerHTML = '<h2>Countdown Complete!</h2>';
- //element.innerHTML += '<a href="#">Click here now</a>';
-
-}
-secs--;
-var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
-		$( "#progressbar" ).progressbar({
-			value: secs
-		});
-}
- </script>
 
 
 

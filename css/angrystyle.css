@@ -1,23 +1,26 @@
 h1.q{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
 }
+h2.mini{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
+}
 div.boxin{
 border-top-style:dashed;
 border-right-style:dotted;
 border-bottom-style:dashed;
 border-left-style:dotted;
-z-index: 10;
+
 }
 div.background
   {
+  /*background-image: url("images/stripe.png");*/
   
-  background:url(images/stripe.png) repeat;
 border-top-style:dashed;
 border-right-style:dotted;
 border-bottom-style:dashed;
 border-left-style:dotted;
  
-  z-index: 0;
+
   }
   div.status
   {
@@ -25,3 +28,8 @@ border-left-style:dotted;
   }
 
 .ui-progressbar .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
+div.pbartop{
+
+	width:160px;
+	height:90px;
+}
