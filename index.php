@@ -4,52 +4,53 @@ page_protect();
 
 if (isset($_SESSION['user_id'])) {
 	$goturid = $_SESSION['user_id'];
-	echo $goturid; //save this for writing into happiness table
-
 	?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <title>Happy Data</title>
+<link rel="stylesheet" href="css/angrystyle.css" />
 <link rel="stylesheet" href="css/960_24_col.css" />
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script>
-	
+	var happiness;
+	var unix_time;
+	var date= new Date();
 	$.fx.speeds._default = 700; //animation speed
 	$(document).ready(function(){
 		$("#radio1").click(function(){
-    		//$("#radio").hide();
+    		//$("#boxin").hide();
+			happiness = '1';
 
-    		var happiness = '1';
-    		var unix_time = Math.round(+new Date()/1000);
+    		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
   		$("#radio2").click(function(){
     		//$("#radio").hide();
+			happiness = '2';
 
-    		var happiness = '2';
-    		var unix_time = Math.round(+new Date()/1000);
+    		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
   		$("#radio3").click(function(){
     		//$("#radio").hide();
+			happiness = '3';
 
-    		var happiness = '3';
-    		var unix_time = Math.round(+new Date()/1000);
+    		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
   		$("#radio4").click(function(){
     		//$("#radio").hide();
+			happiness = '4';
 
-    		var happiness = '4';
-    		var unix_time = Math.round(+new Date()/1000);
+    		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
@@ -65,23 +66,19 @@ if (isset($_SESSION['user_id'])) {
 			autoOpen: false,
 			show: "blind",
 			hide: "explode",
+			modal:true,
 			buttons: {
 						Submit: function() {
 							$( this ).dialog( "close" );
+							//var unix = unix_time;
+
 							$.ajax({
 							    type: 'post',
 							    url: 'happypost.php',
-							    data: 'id=10',
-							    success: function(response) {
-							        alert(response);
-							    }
+							    data: {yahoo:unix_time,happiness:happiness},
+
 							});
-							<?php
-							//SQL SHOULD BE IN ITS OWN FILE WITH AJAX RESPONSE
-							 mysql_query("INSERT INTO happy (`user_id`,`happiness`,`unix_time`)
-					 		VALUES ('$goturid','happiness','unix_time')
-					 		") or die(mysql_error()); 
-					 		?>
+
 						},
 						Cancel: function() {
 							$( this ).dialog( "close" );
@@ -101,8 +98,10 @@ if (isset($_SESSION['user_id'])) {
   <a href="logout.php">Logout </a>
 </div>
 </div>
-<div class="grid_19 prefix_5">
-	<p>At this moment, would you say you are</p>
+<div class="grid_18 prefix_3 suffix_3">
+	<br/><br/>
+	<div class="boxin">
+	<center><h1 class="q">At this moment, would you say you are</h1>
 	<form>
 	<div id="radio">
 		<input type="radio" id="radio1" name="radio" /><label for="radio1">very happy</label>
@@ -111,11 +110,18 @@ if (isset($_SESSION['user_id'])) {
 		<input type="radio" id="radio4" name="radio" /><label for="radio4">not at all happy</label>
 	</div>
 	</form>
+	</center>
+	<br/><br/>
+	</div> <!-- end div of boxin css -->
 </div>
 <div class="clear"></div>
 <div class="grid_24">
 <div id="dialog" title="confirmation">
 <p>hello<p>
+</div>
+<div class="clear"></div>
+<div class="grid_24">
+
 </div>
 </div> <!--where I left 960 end div -->
 </body>
