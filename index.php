@@ -46,7 +46,12 @@ if (isset($_SESSION['user_id'])) {
 	var date = new Date();
 	$.fx.speeds._default = 700; //animation speed
 	$(document).ready(function(){
-		$('div[id~="foxbox"]').css({"display":"none"});
+		//make sure things are hidden in IE, other browsers use hidden in the tag
+		
+		$('h1[id~="question0"]').css({"display":"none"});
+		$('h1[id~="question1"]').css({"display":"none"});
+		$('h1[id~="question2"]').css({"display":"none"});
+		$('h1[id~="question3"]').css({"display":"none"});
 		
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
@@ -82,41 +87,24 @@ if (isset($_SESSION['user_id'])) {
   		});
   	});
 
-
-
 	$(function() {
 		$( "#radio" ).buttonset();
 	});
 	function question(happiness,happiness) {
-								//$("#question0").show();
-								//$("#question1").show();
-								//$("#question2").show();
-								//$("#question3").show();
-								
-								
-	
 							if (happiness == '1'){
-								
-								
 								$("#question0").show();
-
-								
 							}
 							else if (happiness == '2'){
 								$("#question1").show();
-								
 							}
 							else if (happiness == '3'){
 								$("#question2").show();
-								
 							}
 							else if (happiness == '4'){
 								$("#question3").show();
 							}
 							else {
-								
 								//$("#question3").hide(); hide and display question again
-
 							}
 	}
 	$(function() {
@@ -129,36 +117,35 @@ if (isset($_SESSION['user_id'])) {
 			modal:true,
 			buttons: {
 						Submit: function() {
+							
+							$('h1[id~="question0"]').css({"display":"none"});
+							$('h1[id~="question1"]').css({"display":"none"});
+							$('h1[id~="question2"]').css({"display":"none"});
+							$('h1[id~="question3"]').css({"display":"none"});
+
 							$( this ).dialog( "close" );
-							$("#foxbox").show();
-										$('h1[id~="question0"]').css({"display":"none"});
-										$('h1[id~="question1"]').css({"display":"none"});
-										$('h1[id~="question2"]').css({"display":"none"});
-										$('h1[id~="question3"]').css({"display":"none"});
-							countDown(660,"status");
 							
-							
-							//var unix = unix_time;
 							
 							$(".boxin").hide();
-							$(".foxbox").show();
 							$(".background").show();
+							$(".foxbox").show();
+							
+							$(".proghide").show();
 							$.ajax({
 							    type: 'post',
 							    url: 'happypost.php',
 							    data: {yahoo:unix_time,happiness:happiness},
 							    success: function () {//On Successful service call
-                       			
+                       			countDown(23,"status");
                         		question(happiness, happiness);
                     			},
 							});
-
+							
 						},
 						Cancel: function() {
 							$( this ).dialog( "close" );
 						},
 					}
-
 		});
 	});	
 
@@ -167,38 +154,44 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <div class="container_24">
 	<div class="clear"></div>
-<div class="grid_11 prefix_4">
+<div class="grid_13 prefix_3">
+	<p style="color:#FFFFFF;">. </p><!-- for some reason there needs to be content other the 960 class below moves -->
+	<div hidden class="proghide" id="proghide">
 		<table border="0">
+			
 		<tr>
 			<td><h2 class="mini" id="status"></h2></td>
 			<td><div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div></td>
 		</tr>
-		</table> 
+		
+		</table>
+		</div>
 </div>
-			<div class="grid_9">
-	
-
+			<div class="grid_8">
 			<div class="usericons">
 			<button ONCLICK="window.location.href=''">About this site</button>
 			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
 			<button ONCLICK="window.location.href='logout.php'">Logout</button>
 			</div>
 			</div>
-
 	<div class="clear"></div>
 	<div class="grid_18 prefix_3 suffix_3">
-
 	<!-- coundown timer time -->
 	 <script type="text/javascript">
 	function countDown(secs,elem) {
-	var element = document.getElementById(elem);
+		if (secs > -1) {
+var element = document.getElementById(elem);
 	var mins = Math.round(secs/60);
 	element.innerHTML = ""+mins+"minutes";
 	if(secs < 1) {
 	clearTimeout(timer);
-	$(".background").hide();
+	//var secs = 660;
+
 	$(".boxin").show();
-	 element.innerHTML = 'go';
+	$(".foxbox").show();
+	$(".proghide").hide();
+	$(".background").hide();
+	 element.innerHTML += 'go';
 	 //element.innerHTML += '<a href="#">Click here now</a>';
 	}
 	secs--;
@@ -207,18 +200,16 @@ if (isset($_SESSION['user_id'])) {
 
 			$( "#progressbar" ).progressbar({
 				
-				value: secs/6.6
+				value: secs
 			});
+		}
+	
 	}
-
-	
 	 </script>
-	
+
 	<div class="clear"></div>
 	<div hidden class="background">
 		<center>
-
-
 		<div hidden class="foxbox" id="foxbox">
 <table border="0">
 <tr>
@@ -228,21 +219,17 @@ if (isset($_SESSION['user_id'])) {
 			<h1 hidden class="hide"  id="question2" name="question2">Why aren't you feeling very happy?</h1>
 			<h1 hidden class="hide"  id="question3" name="question3">Why aren't you feeling happy?</h1>
 			</td>
-			<td><h1 class="grey">(optional) </h1></td>
+			<td><h1 style="color:#A9A9A9;font-size: 1.4em;" class="greyed">(optional) </h1></td>
 </tr>
 </table> 
-
-
 			<form>
-			<textarea rows="4" cols="60"></textarea><br/><br/>
+			<textarea rows="4" cols="57"></textarea><br/><br/>
 			<input type="submit" value="Submit">
 		</form>
 		<br/><br/>
 		</center>
 	</div>
-	
 	<div class="boxin">
-		
 	<center><h1 class="q">At this moment, would you say you are</h1>
 	<form>
 	<div id="radio" >
@@ -264,11 +251,7 @@ if (isset($_SESSION['user_id'])) {
 </div>
 <div class="clear"></div>
 <div class="grid_24">
-
-
-
-
-
+<br/><br/>hello
 </div>
 </div> <!--where I left 960 end div -->
 </body>

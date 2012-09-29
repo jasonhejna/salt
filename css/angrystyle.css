@@ -2,10 +2,13 @@ h1.q{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
 }
 h1.hide{
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;display: none;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
 }
-h1.grey{
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#A9A9A9;text-shadow: 1px 1px #93968F;
+h1.greyed{
+	color:#A9A9A9;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	 font-size: 2.0em;
+	 text-shadow: 1px 1px #93968F;
 }
 h2.mini{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
