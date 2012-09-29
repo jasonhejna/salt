@@ -23,7 +23,7 @@ Please complete wherever marked xxxxxxxxx
 Note: If you use cpanel, the name will be like account_database
 *************************************************************/
 
-define ("DB_HOST", "localhost"); // set database host
+define ("DB_HOST", "127.0.0.1"); // set database host
 define ("DB_USER", "root"); // set database user
 define ("DB_PASS","toor"); // set database password
 define ("DB_NAME","salt"); // set database name
