@@ -17,6 +17,7 @@ if (isset($_SESSION['user_id'])) {
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script type="text/javascript">
@@ -44,6 +45,10 @@ if (isset($_SESSION['user_id'])) {
 	var happiness = 5;
 	var unix_time;
 	var date = new Date();
+	var geocoder =  new google.maps.Geocoder();
+    var lat;
+    var lon;
+    var latlon;
 	$.fx.speeds._default = 700; //animation speed
 	$(document).ready(function(){
 		//make sure things are hidden in IE, other browsers use hidden in the tag
@@ -85,8 +90,21 @@ if (isset($_SESSION['user_id'])) {
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
-  	});
-
+  		$("#button1").click(function(){
+			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
+          		if (status == google.maps.GeocoderStatus.OK) {
+          			lat = results[0].geometry.location.lat();
+          			lon = results[0].geometry.location.lng();
+          			latlon = lat+","+lon;
+          			img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+          			document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+            		//alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng()); 
+          		} else {
+            		alert("Something got wrong " + status);
+          		}
+        	});
+		});
+	});
 	$(function() {
 		$( "#radio" ).buttonset();
 	});
@@ -244,6 +262,14 @@ var element = document.getElementById(elem);
 </div><!-- end of 960 of all of form -->
 	</div> <!-- end div of boxin css -->
 </div>
+
+
+<form>
+Address: <input id="address1" type="text" name="address" />
+<input type="button" id="button1" value="Submit"/>
+</form>
+
+
 <div class="clear"></div>
 <div class="grid_24">
 <div id="dialog" title="confirmation">
@@ -254,6 +280,7 @@ var element = document.getElementById(elem);
 <br/><br/>hello
 </div>
 </div> <!--where I left 960 end div -->
+<div id="mapholder"></div>
 </body>
 </html>
 <?php }
