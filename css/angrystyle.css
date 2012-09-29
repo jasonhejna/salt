@@ -4,22 +4,27 @@ h1.q{
 h2.mini{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
 }
-div.boxin{
-border-top-style:dashed;
-border-right-style:dotted;
-border-bottom-style:dashed;
-border-left-style:dotted;
+div.boxin{ 
 
+border-style:solid;
+border-width:3px;
+border-color:#93968F;
+-moz-border-radius: 15px;
+border-radius: 15px; 
+-moz-box-shadow: 3px 3px 0 5px #C0D8EF;
+-webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
+box-shadow: 3px 3px 0 3px #C0D8EF;
 }
 div.background
   {
-  /*background-image: url("images/stripe.png");*/
+  /*
   
 border-top-style:dashed;
 border-right-style:dotted;
 border-bottom-style:dashed;
 border-left-style:dotted;
- 
+ -moz-border-radius: 15px;
+border-radius: 15px; */
 
   }
   div.status
@@ -30,6 +35,7 @@ border-left-style:dotted;
 .ui-progressbar .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
 div.pbartop{
 
-	width:160px;
+	width:200px;
 	height:90px;
 }
+
