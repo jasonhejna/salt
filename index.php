@@ -3,9 +3,9 @@ include 'dbc.php';
 page_protect();
 
 if (isset($_SESSION['user_id'])) {
-
 	$goturid = $_SESSION['user_id'];
-	?>
+	//echo $goturid;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +100,7 @@ if (isset($_SESSION['user_id'])) {
           			document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
             		//alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng()); 
           		} else {
-            		alert("Something got wrong " + status);
+            		alert("Something went wrong " + status);
           		}
         	});
 		});
@@ -265,7 +265,15 @@ var element = document.getElementById(elem);
 
 
 <form>
-Address: <input id="address1" type="text" name="address" />
+Address: <input id="address1" type="text" name="address" value="
+<?php
+$sql="select * from users where id='$goturid'";
+$result=mysql_query($sql);
+while($row = mysql_fetch_array($result)){
+echo $row['address'];
+}
+?>
+" />
 <input type="button" id="button1" value="Submit"/>
 </form>
 
@@ -277,7 +285,7 @@ Address: <input id="address1" type="text" name="address" />
 </div>
 <div class="clear"></div>
 <div class="grid_24">
-<br/><br/>hello
+<br/><br/>
 </div>
 </div> <!--where I left 960 end div -->
 <div id="mapholder"></div>
