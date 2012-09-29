@@ -1,6 +1,12 @@
 h1.q{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
 }
+h1.hide{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;display: none;
+}
+h1.grey{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#A9A9A9;text-shadow: 1px 1px #93968F;
+}
 h2.mini{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
 }
@@ -9,11 +15,21 @@ div.boxin{
 border-style:solid;
 border-width:3px;
 border-color:#93968F;
--moz-border-radius: 15px;
-border-radius: 15px; 
+-moz-border-radius: 21px;
+border-radius: 21px; 
 -moz-box-shadow: 3px 3px 0 5px #C0D8EF;
 -webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
 box-shadow: 3px 3px 0 3px #C0D8EF;
+}
+div.foxbox{
+	border-style:solid;
+	border-width:3px;
+	border-color:#93968F;
+	-moz-border-radius: 21px;
+	border-radius: 21px; 
+	-moz-box-shadow: 3px 3px 0 5px #C0D8EF;
+	-webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
+	box-shadow: 3px 3px 0 3px #C0D8EF;
 }
 div.background
   {

@@ -21,6 +21,7 @@ if (isset($_SESSION['user_id'])) {
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script type="text/javascript">
 
+		
 		$(function() {
 		$( ".usericons button:first" ).button({
             icons: {
@@ -34,7 +35,7 @@ if (isset($_SESSION['user_id'])) {
             text: false
         }).next().button({
             icons: {
-                primary: "ui-icon-unlocked"
+                primary: "ui-icon-locked"
             },
             text: false
         })
@@ -45,6 +46,8 @@ if (isset($_SESSION['user_id'])) {
 	var date = new Date();
 	$.fx.speeds._default = 700; //animation speed
 	$(document).ready(function(){
+		$('div[id~="foxbox"]').css({"display":"none"});
+		
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
 			happiness = '1';
@@ -89,10 +92,14 @@ if (isset($_SESSION['user_id'])) {
 								//$("#question1").show();
 								//$("#question2").show();
 								//$("#question3").show();
+								
+								
 	
 							if (happiness == '1'){
 								
+								
 								$("#question0").show();
+
 								
 							}
 							else if (happiness == '2'){
@@ -122,12 +129,19 @@ if (isset($_SESSION['user_id'])) {
 			modal:true,
 			buttons: {
 						Submit: function() {
+							$( this ).dialog( "close" );
+							$("#foxbox").show();
+										$('h1[id~="question0"]').css({"display":"none"});
+										$('h1[id~="question1"]').css({"display":"none"});
+										$('h1[id~="question2"]').css({"display":"none"});
+										$('h1[id~="question3"]').css({"display":"none"});
 							countDown(660,"status");
 							
-							$( this ).dialog( "close" );
+							
 							//var unix = unix_time;
 							
 							$(".boxin").hide();
+							$(".foxbox").show();
 							$(".background").show();
 							$.ajax({
 							    type: 'post',
@@ -153,21 +167,24 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <div class="container_24">
 	<div class="clear"></div>
-<div class="grid_5 prefix_16 suffix_3">
-	<!-- <div class="myaccount">
-	<div id="icons">
-		<a class="ui-icon ui-icon-info" title="info" href="mysettings.php"></a>
-		<a class="ui-icon ui-icon-wrench" title="Account" href="mysettings.php"></a>
-
-		<a class="ui-icon ui-icon-circle-close" title="Logout" href="logout.php"></a>
-	</div>
-	</div> -->
-	<div class="usericons">
-	<button ONCLICK="window.location.href='mysettings.php'">About this site</button>
-	<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
-	<button ONCLICK="window.location.href='logout.php'">Logout</button>
-	</div>
+<div class="grid_11 prefix_4">
+		<table border="0">
+		<tr>
+			<td><h2 class="mini" id="status"></h2></td>
+			<td><div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div></td>
+		</tr>
+		</table> 
 </div>
+			<div class="grid_9">
+	
+
+			<div class="usericons">
+			<button ONCLICK="window.location.href=''">About this site</button>
+			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
+			<button ONCLICK="window.location.href='logout.php'">Logout</button>
+			</div>
+			</div>
+
 	<div class="clear"></div>
 	<div class="grid_18 prefix_3 suffix_3">
 
@@ -181,7 +198,7 @@ if (isset($_SESSION['user_id'])) {
 	clearTimeout(timer);
 	$(".background").hide();
 	$(".boxin").show();
-	 element.innerHTML = 'gogogo';
+	 element.innerHTML = 'go';
 	 //element.innerHTML += '<a href="#">Click here now</a>';
 	}
 	secs--;
@@ -193,29 +210,37 @@ if (isset($_SESSION['user_id'])) {
 				value: secs/6.6
 			});
 	}
+
+	
 	 </script>
 	
 	<div class="clear"></div>
 	<div hidden class="background">
 		<center>
-		<table border="0">
-		<tr>
-		<td><h2 class="mini" id="status"></h2></td>
-		<td><div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div></td>
-		</tr>
-		</table> 
-		
-			<h1 hidden class="q"  id="question0" name="question0">Why do you feel so happy?</h1>
-			<h1 hidden class="q"  id="question1" name="question1">Why do you feel happy?</h1>
-			<h1 hidden class="q"  id="question2" name="question2">why aren't you feeling very happy?</h1>
-			<h1 hidden class="q"  id="question3" name="question3">why aren't you feeling happy?</h1>
+
+
+		<div hidden class="foxbox" id="foxbox">
+<table border="0">
+<tr>
+			<td>
+			<h1 hidden class="hide"  id="question0" name="question0">Why do you feel so happy?</h1>
+			<h1 hidden class="hide"  id="question1" name="question1">Why do you feel happy?</h1>
+			<h1 hidden class="hide"  id="question2" name="question2">Why aren't you feeling very happy?</h1>
+			<h1 hidden class="hide"  id="question3" name="question3">Why aren't you feeling happy?</h1>
+			</td>
+			<td><h1 class="grey">(optional) </h1></td>
+</tr>
+</table> 
+
+
 			<form>
-			<textarea rows="4" cols="50"></textarea><br/>
+			<textarea rows="4" cols="60"></textarea><br/><br/>
 			<input type="submit" value="Submit">
 		</form>
 		<br/><br/>
 		</center>
 	</div>
+	
 	<div class="boxin">
 		
 	<center><h1 class="q">At this moment, would you say you are</h1>
@@ -229,7 +254,7 @@ if (isset($_SESSION['user_id'])) {
 	</form>
 	</center>
 	<br/><br/>
-		
+</div><!-- end of 960 of all of form -->
 	</div> <!-- end div of boxin css -->
 </div>
 <div class="clear"></div>
