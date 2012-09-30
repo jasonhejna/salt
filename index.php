@@ -45,9 +45,14 @@ if (isset($_SESSION['user_id'])) {
 	var unix_time;
 	var date = new Date();
 	$.fx.speeds._default = 700; //animation speed
+	var geocoder = new google.maps.Geocoder();
+	var lat;
+	var lon;
+	var latlon;
 	$(document).ready(function(){
 		//make sure things are hidden in IE, other browsers use hidden in the tag
-		
+		//$('div[id~="proghide"]').css({"display":"none"});
+		$('div[id~="foxbox"]').css({"display":"none"});
 		$('h1[id~="question0"]').css({"display":"none"});
 		$('h1[id~="question1"]').css({"display":"none"});
 		$('h1[id~="question2"]').css({"display":"none"});
@@ -85,6 +90,20 @@ if (isset($_SESSION['user_id'])) {
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
+  		 $("#button1").click(function(){
+			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
+			if (status == google.maps.GeocoderStatus.OK) {
+			lat = results[0].geometry.location.lat();
+			lon = results[0].geometry.location.lng();
+			latlon = lat+","+lon;
+			img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+			document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+			//alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng());
+			} else {
+			alert("Something got wrong " + status);
+			}
+			});
+			});
   	});
 
 	$(function() {
@@ -124,13 +143,7 @@ if (isset($_SESSION['user_id'])) {
 							$('h1[id~="question3"]').css({"display":"none"});
 
 							$( this ).dialog( "close" );
-							
-							
-							$(".boxin").hide();
-							$(".background").show();
-							$(".foxbox").show();
-							
-							$(".proghide").show();
+
 							$.ajax({
 							    type: 'post',
 							    url: 'happypost.php',
@@ -138,6 +151,10 @@ if (isset($_SESSION['user_id'])) {
 							    success: function () {//On Successful service call
                        			countDown(23,"status");
                         		question(happiness, happiness);
+                        		$(".boxin").hide();
+								$(".background").show();
+								$(".foxbox").show();
+								$(".proghide").show();
                     			},
 							});
 							
@@ -153,44 +170,42 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
 <div class="container_24">
-	<div class="clear"></div>
-<div class="grid_13 prefix_3">
-	<p style="color:#FFFFFF;">. </p><!-- for some reason there needs to be content other the 960 class below moves -->
+<div class="clear"></div>
+<div class="grid_11 prefix_2">
+	<span style="color:#FFFFFF;">. </span><!-- for some reason there needs to be content other the 960 class below moves -->
 	<div hidden class="proghide" id="proghide">
 		<table border="0">
-			
 		<tr>
 			<td><h2 class="mini" id="status"></h2></td>
 			<td><div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div></td>
 		</tr>
-		
 		</table>
-		</div>
+	</div>
 </div>
-			<div class="grid_8">
+<div class="grid_8 prefix_3">
 			<div class="usericons">
 			<button ONCLICK="window.location.href=''">About this site</button>
 			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
 			<button ONCLICK="window.location.href='logout.php'">Logout</button>
 			</div>
-			</div>
-	<div class="clear"></div>
-	<div class="grid_18 prefix_3 suffix_3">
-	<!-- coundown timer time -->
-	 <script type="text/javascript">
+</div>
+
+<!-- coundown timer time -->
+<script type="text/javascript">
 	function countDown(secs,elem) {
-		if (secs > -1) {
-var element = document.getElementById(elem);
+	if (secs > -1) {
+	var element = document.getElementById(elem);
 	var mins = Math.round(secs/60);
 	element.innerHTML = ""+mins+"minutes";
+}
 	if(secs < 1) {
 	clearTimeout(timer);
 	//var secs = 660;
 
 	$(".boxin").show();
-	$(".foxbox").show();
+	$(".foxbox").hide();
 	$(".proghide").hide();
-	$(".background").hide();
+	$(".background").show();
 	 element.innerHTML += 'go';
 	 //element.innerHTML += '<a href="#">Click here now</a>';
 	}
@@ -202,17 +217,18 @@ var element = document.getElementById(elem);
 				
 				value: secs
 			});
-		}
+		
 	
 	}
-	 </script>
-
-	<div class="clear"></div>
+</script>
+<div class="clear"></div>
+<div class="grid_18 prefix_3 suffix_3">
+	
 	<div hidden class="background">
 		<center>
 		<div hidden class="foxbox" id="foxbox">
-<table border="0">
-<tr>
+		<table border="0">
+		<tr>
 			<td>
 			<h1 hidden class="hide"  id="question0" name="question0">Why do you feel so happy?</h1>
 			<h1 hidden class="hide"  id="question1" name="question1">Why do you feel happy?</h1>
@@ -220,19 +236,24 @@ var element = document.getElementById(elem);
 			<h1 hidden class="hide"  id="question3" name="question3">Why aren't you feeling happy?</h1>
 			</td>
 			<td><h1 style="color:#A9A9A9;font-size: 1.4em;" class="greyed">(optional) </h1></td>
-</tr>
-</table> 
+		</tr>
+		</table> 
 			<form>
 			<textarea rows="4" cols="57"></textarea><br/><br/>
 			<input type="submit" value="Submit">
 		</form>
+	</div>
 		<br/><br/>
 		</center>
-	</div>
-	<div class="boxin">
+
+</div>
+</div> <!-- end of 960 of all of form -->
+<div class="clear"></div>
+<div class="grid_17 prefix_4 suffix_3">
+	<div class="boxin" id="boxin">
 	<center><h1 class="q">At this moment, would you say you are</h1>
 	<form>
-	<div id="radio" >
+	<div id="radio" class="radio">
 		<input type="radio" id="radio1" name="radio" /><label for="radio1">very happy</label>
 		<input type="radio" id="radio2" name="radio" /><label for="radio2">rather happy</label>
 		<input type="radio" id="radio3" name="radio" /><label for="radio3">not very happy</label>
@@ -241,17 +262,21 @@ var element = document.getElementById(elem);
 	</form>
 	</center>
 	<br/><br/>
-</div><!-- end of 960 of all of form -->
-	</div> <!-- end div of boxin css -->
+	<div>
+		<!-- Brodies map -->
+		<form>
+		Address: <input id="address1" type="text" name="address" />
+		<input type="button" id="button1" value="Submit"/>
+		</form>
+		</div>
+		<div id="mapholder"></div>
+</div><!-- end div of boxin css -->
 </div>
 <div class="clear"></div>
 <div class="grid_24">
-<div id="dialog" title="confirmation">
-<p>hello<p>
-</div>
-<div class="clear"></div>
-<div class="grid_24">
-<br/><br/>hello
+	<div id="dialog" title="confirmation">
+	<p>hello<p>
+	</div>
 </div>
 </div> <!--where I left 960 end div -->
 </body>
