@@ -160,21 +160,25 @@ if (isset($_SESSION['user_id'])) {
 //google calendar
 google.load('visualization', '1', {packages: ['annotatedtimeline']});
     function drawVisualization() {
-      var data = new google.visualization.DataTable();
+    <?php include 'graphconnection.php'; ?>
+      /*var raw_data =  ;
+      var data = google.visualization.arrayToDataTable(raw_data);*/
+
+    var data = new google.visualization.DataTable();
       data.addColumn('date', 'Date');
       data.addColumn('number', 'your happiness');
       data.addColumn('string', 'title1');
       data.addColumn('string', 'text1');
-      data.addColumn('number', 'comparis value');
-      data.addColumn('string', 'title2');
-      data.addColumn('string', 'text2');
+
       data.addRows([
-        [new Date(2008, 1 ,1), 1, null, null, 4, null, null],
-        [new Date(2008, 1 ,2), 2, null, null, null, null, null],
-        [new Date(2008, 1 ,3), 3, null, null, null, null, null],
-        [new Date(2008, 1 ,4), 4, null, null, null, null, null],
-        [new Date(2008, 1 ,5), 1, null, null, null, null, null],
-        [new Date(2008, 1 ,6), 2, null, null, null, null, null]
+        [new Date(2008, 1 ,1), 1, null, null],
+        [new Date(2008, 1 ,2), 2, null, null],
+        [new Date(2008, 1 ,3), 3, null, null],
+        [new Date(2008, 1 ,4), 4, null, null],
+        [new Date(2008, 1 ,5), 1, null, null],
+        [new Date(2008, 1 ,6), 2, null, null],
+        //<?php echo json_encode($data) ?>
+
       ]);
     
       var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
@@ -289,7 +293,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <div class="clear"></div>
 <div class="grid_20 prefix_4">
 	<br/><br/><br/>
-<div id="visualization" style="width: 800px; height: 400px;"></div>
+<div id="visualization" style="width: 670px; height: 400px;"></div>
 </div>
 
 <div class="clear"></div>
