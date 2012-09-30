@@ -49,8 +49,11 @@ if (isset($_SESSION['user_id'])) {
     var lat;
     var lon;
     var latlon;
+    var x=document.getElementById("error_message");
 	$.fx.speeds._default = 700; //animation speed
 	$(document).ready(function(){
+		$.getLocation();
+	
 		//make sure things are hidden in IE, other browsers use hidden in the tag
 		
 		$('h1[id~="question0"]').css({"display":"none"});
@@ -125,6 +128,35 @@ if (isset($_SESSION['user_id'])) {
 								//$("#question3").hide(); hide and display question again
 							}
 	}
+/*	$.showError = function(error){ //Error handling for geolocation, does not work in jquery
+	  switch(error.code) {
+		case error.PERMISSION_DENIED:
+	    	x.innerHTML="User denied the request for Geolocation."
+  			break;
+		case error.POSITION_UNAVAILABLE:
+			x.innerHTML="Location information is unavailable."
+		    break;
+    	case error.TIMEOUT:
+			x.innerHTML="The request to get user location timed out."
+      		break;
+    	case error.UNKNOWN_ERROR:
+      		x.innerHTML="An unknown error occurred."
+      		break;
+    	}
+  	};*/
+  	$.getLocation = function() { //retrieves geolocation, send to showposition function
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition($.showPosition);//,$.showError);
+    	}
+		else{
+			x.innerHTML="Geolocation is not supported by this browser.";
+		}
+	};
+  	$.showPosition = function(position){ //shows geolocation on the "map" image
+		var latlon=position.coords.latitude+","+position.coords.longitude;
+  		var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+  		document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+  	};
 	$(function() {
 		$( "#dialog" ).dialog({
 			resizable: false,
@@ -281,11 +313,12 @@ echo $row['address'];
 <div class="clear"></div>
 <div class="grid_24">
 <div id="dialog" title="confirmation">
-<p>hello<p>
+<p>hello</p>
 </div>
 <div class="clear"></div>
 <div class="grid_24">
 <br/><br/>
+<p id="error_message"></p>
 </div>
 </div> <!--where I left 960 end div -->
 <div id="mapholder"></div>
