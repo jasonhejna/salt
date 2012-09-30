@@ -17,11 +17,10 @@ if (isset($_SESSION['user_id'])) {
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script type="text/javascript">
-
-		
 		$(function() {
 		$( ".usericons button:first" ).button({
             icons: {
@@ -45,12 +44,9 @@ if (isset($_SESSION['user_id'])) {
 	var unix_time;
 	var date = new Date();
 	$.fx.speeds._default = 700; //animation speed
-	var geocoder = new google.maps.Geocoder();
-	var lat;
-	var lon;
-	var latlon;
+
 	$(document).ready(function(){
-		//make sure things are hidden in IE, other browsers use hidden in the tag
+		//make sure things are hidden in IE, since IE doesn't like the hidden tag
 		//$('div[id~="proghide"]').css({"display":"none"});
 		$('div[id~="foxbox"]').css({"display":"none"});
 		$('h1[id~="question0"]').css({"display":"none"});
@@ -60,7 +56,7 @@ if (isset($_SESSION['user_id'])) {
 		
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
-			happiness = '1';
+			happiness = '4';
 			
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -68,7 +64,7 @@ if (isset($_SESSION['user_id'])) {
   		});
   		$("#radio2").click(function(){
     		//$("#radio").hide();
-			happiness = '2';
+			happiness = '3';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -76,7 +72,7 @@ if (isset($_SESSION['user_id'])) {
   		});
   		$("#radio3").click(function(){
     		//$("#radio").hide();
-			happiness = '3';
+			happiness = '2';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -84,42 +80,29 @@ if (isset($_SESSION['user_id'])) {
   		});
   		$("#radio4").click(function(){
     		//$("#radio").hide();
-			happiness = '4';
+			happiness = '1';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
-  		 $("#button1").click(function(){
-			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
-			if (status == google.maps.GeocoderStatus.OK) {
-			lat = results[0].geometry.location.lat();
-			lon = results[0].geometry.location.lng();
-			latlon = lat+","+lon;
-			img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
-			document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
-			//alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng());
-			} else {
-			alert("Something got wrong " + status);
-			}
-			});
-			});
+
   	});
 
 	$(function() {
 		$( "#radio" ).buttonset();
 	});
 	function question(happiness,happiness) {
-							if (happiness == '1'){
+							if (happiness == '4'){
 								$("#question0").show();
 							}
-							else if (happiness == '2'){
+							else if (happiness == '3'){
 								$("#question1").show();
 							}
-							else if (happiness == '3'){
+							else if (happiness == '2'){
 								$("#question2").show();
 							}
-							else if (happiness == '4'){
+							else if (happiness == '1'){
 								$("#question3").show();
 							}
 							else {
@@ -150,11 +133,20 @@ if (isset($_SESSION['user_id'])) {
 							    data: {yahoo:unix_time,happiness:happiness},
 							    success: function () {//On Successful service call
                        			countDown(23,"status");
-                        		question(happiness, happiness);
+                        		question(happiness, happiness); 
+                        		//trying to fucking hide the highlighted radio button after the countdown
+                        		//$("input:radio").removeAttr("checked");
+                        		//$(this).attr('checked', false);
+                        		//$('form[id^="radform"]').find("input:radio:checked").removeAttr("checked");
+                        		//$('form[id^="radform"]').find("input:radio:checked").attr('checked', false);
+                        		//$('form[id^="form-"]').find("input:radio:checked").prop('checked',false);
+
+
                         		$(".boxin").hide();
 								$(".background").show();
 								$(".foxbox").show();
 								$(".proghide").show();
+								$(".visualization").show();
                     			},
 							});
 							
@@ -165,7 +157,32 @@ if (isset($_SESSION['user_id'])) {
 					}
 		});
 	});	
-
+//google calendar
+google.load('visualization', '1', {packages: ['annotatedtimeline']});
+    function drawVisualization() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Date');
+      data.addColumn('number', 'your happiness');
+      data.addColumn('string', 'title1');
+      data.addColumn('string', 'text1');
+      data.addColumn('number', 'comparis value');
+      data.addColumn('string', 'title2');
+      data.addColumn('string', 'text2');
+      data.addRows([
+        [new Date(2008, 1 ,1), 1, null, null, 4, null, null],
+        [new Date(2008, 1 ,2), 2, null, null, null, null, null],
+        [new Date(2008, 1 ,3), 3, null, null, null, null, null],
+        [new Date(2008, 1 ,4), 4, null, null, null, null, null],
+        [new Date(2008, 1 ,5), 1, null, null, null, null, null],
+        [new Date(2008, 1 ,6), 2, null, null, null, null, null]
+      ]);
+    
+      var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
+          document.getElementById('visualization'));
+      annotatedtimeline.draw(data, {'displayAnnotations': true});
+    }
+    
+    google.setOnLoadCallback(drawVisualization);
 	</script>
 </head>
 <body>
@@ -206,6 +223,10 @@ if (isset($_SESSION['user_id'])) {
 	$(".foxbox").hide();
 	$(".proghide").hide();
 	$(".background").show();
+
+
+
+
 	 element.innerHTML += 'go';
 	 //element.innerHTML += '<a href="#">Click here now</a>';
 	}
@@ -252,7 +273,7 @@ if (isset($_SESSION['user_id'])) {
 <div class="grid_17 prefix_4 suffix_3">
 	<div class="boxin" id="boxin">
 	<center><h1 class="q">At this moment, would you say you are</h1>
-	<form>
+	<form id="radform">
 	<div id="radio" class="radio">
 		<input type="radio" id="radio1" name="radio" /><label for="radio1">very happy</label>
 		<input type="radio" id="radio2" name="radio" /><label for="radio2">rather happy</label>
@@ -266,20 +287,20 @@ if (isset($_SESSION['user_id'])) {
 </div><!-- end div of boxin css -->
 </div>
 <div class="clear"></div>
+<div class="grid_20 prefix_4">
+	<br/><br/><br/>
+<div id="visualization" style="width: 800px; height: 400px;"></div>
+</div>
+
+<div class="clear"></div>
 <div class="grid_24">
 	<div id="dialog" title="confirmation">
 	<p>hello<p>
 	</div>
 </div>
-</div> <!--where I left 960 end div -->
-	<div>
-		<!-- Brodies map -->
-		<form>
-		Address: <input id="address1" type="text" name="address" />
-		<input type="button" id="button1" value="Submit"/>
-		</form>
-		</div>
-		<div id="mapholder"></div>
+
+</div> <!-- end of 960 grid -->
+
 </body>
 </html>
 <?php }
