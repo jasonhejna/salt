@@ -161,8 +161,7 @@ if (isset($_SESSION['user_id'])) {
 google.load('visualization', '1', {packages: ['annotatedtimeline']});
     function drawVisualization() {
     <?php include 'graphconnection.php'; ?>
-      /*var raw_data =  ;
-      var data = google.visualization.arrayToDataTable(raw_data);*/
+
 
     var data = new google.visualization.DataTable();
       data.addColumn('date', 'Date');
@@ -177,7 +176,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
         [new Date(2008, 1 ,4), 4, null, null],
         [new Date(2008, 1 ,5), 1, null, null],
         [new Date(2008, 1 ,6), 2, null, null],
-        //<?php echo json_encode($data) ?>
+        
 
       ]);
     
