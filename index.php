@@ -262,14 +262,7 @@ if (isset($_SESSION['user_id'])) {
 	</form>
 	</center>
 	<br/><br/>
-	<div>
-		<!-- Brodies map -->
-		<form>
-		Address: <input id="address1" type="text" name="address" />
-		<input type="button" id="button1" value="Submit"/>
-		</form>
-		</div>
-		<div id="mapholder"></div>
+
 </div><!-- end div of boxin css -->
 </div>
 <div class="clear"></div>
@@ -279,6 +272,14 @@ if (isset($_SESSION['user_id'])) {
 	</div>
 </div>
 </div> <!--where I left 960 end div -->
+	<div>
+		<!-- Brodies map -->
+		<form>
+		Address: <input id="address1" type="text" name="address" />
+		<input type="button" id="button1" value="Submit"/>
+		</form>
+		</div>
+		<div id="mapholder"></div>
 </body>
 </html>
 <?php }
