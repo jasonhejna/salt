@@ -1,0 +1,60 @@
+h1.q{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
+}
+h1.hide{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
+}
+h1.greyed{
+	color:#A9A9A9;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	 font-size: 2.0em;
+	 text-shadow: 1px 1px #93968F;
+}
+div.mini{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.1em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
+}
+div.boxin{ 
+
+border-style:solid;
+border-width:3px;
+border-color:#93968F;
+-moz-border-radius: 21px;
+border-radius: 21px; 
+-moz-box-shadow: 3px 3px 0 5px #C0D8EF;
+-webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
+box-shadow: 3px 3px 0 3px #C0D8EF;
+}
+div.foxbox{
+	border-style:solid;
+	border-width:3px;
+	border-color:#93968F;
+	-moz-border-radius: 21px;
+	border-radius: 21px; 
+	-moz-box-shadow: 3px 3px 0 5px #C0D8EF;
+	-webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
+	box-shadow: 3px 3px 0 3px #C0D8EF;
+}
+div.background
+  {
+  /*
+  
+border-top-style:dashed;
+border-right-style:dotted;
+border-bottom-style:dashed;
+border-left-style:dotted;
+ -moz-border-radius: 15px;
+border-radius: 15px; */
+
+  }
+  div.status
+  {
+
+  }
+
+.ui-progressbar .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
+div.pbartop{
+
+	width:200px;
+	height:90px;
+}
+
