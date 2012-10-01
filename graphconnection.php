@@ -10,16 +10,18 @@ $result = mysql_query("SELECT `happiness`, `unix_time` FROM happy WHERE `user_id
 //echo json_encode($result);
 //[new Date(2008, 1 ,1), 1, null, null],
 //what the fuck, I know I need to add some null values and convert unix time to the right format
+$time = $row['unix_time'];
 $data = array();
 $i = 0;
 while($row = mysql_fetch_array($result)) {
     $i += 1;
-
+    $time = $row['unix_time'];
+    $ftime = strftime("%Y,%m,%d",$time);
     //array_push($data, array($i) + $row);
-    array_push($data, array($i) + $row);
+    array_push($data, array($i) + $ftime, $row['happiness'], "null", "null");
 }
 }
 ?>
 
     
-      var raw_data = <?php echo json_encode($data) ?>
+      

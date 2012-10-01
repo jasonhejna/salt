@@ -111,8 +111,9 @@ if (isset($_SESSION['user_id'])) {
 	}
 	$(function() {
 		$( "#dialog" ).dialog({
+
 			resizable: false,
-			height:140,
+			height:230,
 			autoOpen: false,
 			show: "blind",
 			hide: "explode",
@@ -160,7 +161,7 @@ if (isset($_SESSION['user_id'])) {
 //google calendar
 google.load('visualization', '1', {packages: ['annotatedtimeline']});
     function drawVisualization() {
-    <?php include 'graphconnection.php'; ?>
+    <?php //include 'graphconnection.php'; ?>
 
 
     var data = new google.visualization.DataTable();
@@ -176,7 +177,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
         [new Date(2008, 1 ,4), 4, null, null],
         [new Date(2008, 1 ,5), 1, null, null],
         [new Date(2008, 1 ,6), 2, null, null],
-        
+        <?php //echo json_encode($data) ?>
 
       ]);
     
@@ -275,13 +276,14 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <div class="clear"></div>
 <div class="grid_17 prefix_4 suffix_3">
 	<div class="boxin" id="boxin">
-	<center><h1 class="q">At this moment, would you say you are</h1>
+	<center>
+		<img src="images/ilanguage.png"><br/><br/><br/>
 	<form id="radform">
 	<div id="radio" class="radio">
-		<input type="radio" id="radio1" name="radio" /><label for="radio1">very happy</label>
-		<input type="radio" id="radio2" name="radio" /><label for="radio2">rather happy</label>
-		<input type="radio" id="radio3" name="radio" /><label for="radio3">not very happy</label>
-		<input type="radio" id="radio4" name="radio" /><label for="radio4">not at all happy</label>
+		<input type="radio" id="radio1" name="radio" /><label for="radio1">:D</label>
+		<input type="radio" id="radio2" name="radio" /><label for="radio2">:)</label>
+		<input type="radio" id="radio3" name="radio" /><label for="radio3">:(</label>
+		<input type="radio" id="radio4" name="radio" /><label for="radio4">:'(</label>
 	</div>
 	</form>
 	</center>
@@ -298,7 +300,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <div class="clear"></div>
 <div class="grid_24">
 	<div id="dialog" title="confirmation">
-	<p>hello<p>
+	hello
 	</div>
 </div>
 
