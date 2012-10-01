@@ -10,8 +10,8 @@ h1.greyed{
 	 font-size: 2.0em;
 	 text-shadow: 1px 1px #93968F;
 }
-h2.mini{
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
+div.mini{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.1em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
 }
 div.boxin{ 
 

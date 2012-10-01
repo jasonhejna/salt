@@ -147,6 +147,7 @@ if (isset($_SESSION['user_id'])) {
 								$(".background").show();
 								$(".foxbox").show();
 								$(".proghide").show();
+								
 								$(".visualization").show();
                     			},
 							});
@@ -161,7 +162,7 @@ if (isset($_SESSION['user_id'])) {
 //google calendar
 google.load('visualization', '1', {packages: ['annotatedtimeline']});
     function drawVisualization() {
-    <?php //include 'graphconnection.php'; ?>
+    
 
 
     var data = new google.visualization.DataTable();
@@ -177,7 +178,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
         [new Date(2008, 1 ,4), 4, null, null],
         [new Date(2008, 1 ,5), 1, null, null],
         [new Date(2008, 1 ,6), 2, null, null],
-        <?php //echo json_encode($data) ?>
+        
 
       ]);
     
@@ -192,25 +193,24 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <body>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_11 prefix_2">
-	<span style="color:#FFFFFF;">. </span><!-- for some reason there needs to be content other the 960 class below moves -->
-	<div hidden class="proghide" id="proghide">
-		<table border="0">
-		<tr>
-			<td><h2 class="mini" id="status"></h2></td>
-			<td><div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div></td>
-		</tr>
-		</table>
+<div class="grid_9 prefix_3">.
+<div hidden class="proghide" id="proghide" style="float:left;">
+			<div hidden class="mini" id="status"></div>
+			<div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div>
 	</div>
 </div>
-<div class="grid_8 prefix_3">
-			<div class="usericons">
+
+
+<div class="grid_8 suffix_4">
+			<div class="usericons" style="float:right;">
 			<button ONCLICK="window.location.href=''">About this site</button>
 			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
 			<button ONCLICK="window.location.href='logout.php'">Logout</button>
 			</div>
+
 </div>
 
+<div class="clear"></div>
 <!-- coundown timer time -->
 <script type="text/javascript">
 	function countDown(secs,elem) {
@@ -227,7 +227,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	$(".foxbox").hide();
 	$(".proghide").hide();
 	$(".background").show();
-
+	$(".progressbar").hide();
 
 
 
@@ -247,8 +247,8 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	}
 </script>
 <div class="clear"></div>
-<div class="grid_18 prefix_3 suffix_3">
-	
+<div class="grid_17 prefix_4 suffix_3">
+	<br/>
 	<div hidden class="background">
 		<center>
 		<div hidden class="foxbox" id="foxbox">
@@ -277,17 +277,17 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <div class="grid_17 prefix_4 suffix_3">
 	<div class="boxin" id="boxin">
 	<center>
-		<img src="images/ilanguage.png"><br/><br/><br/>
+		<br/><img src="images/ilanguage.png"><br/><br/>
 	<form id="radform">
 	<div id="radio" class="radio">
-		<input type="radio" id="radio1" name="radio" /><label for="radio1">:D</label>
-		<input type="radio" id="radio2" name="radio" /><label for="radio2">:)</label>
-		<input type="radio" id="radio3" name="radio" /><label for="radio3">:(</label>
-		<input type="radio" id="radio4" name="radio" /><label for="radio4">:'(</label>
+		<input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio2" name="radio" /><label for="radio2"><img src="images/hap2.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap3.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio4" name="radio" /><label for="radio4"><img src="images/hap4.png" width="50px" height="50px"></label>
 	</div>
 	</form>
 	</center>
-	<br/><br/>
+	<br/>
 
 </div><!-- end div of boxin css -->
 </div>
