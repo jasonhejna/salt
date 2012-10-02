@@ -14,9 +14,11 @@ if (isset($_SESSION['user_id'])) {
 <link rel="stylesheet" href="css/angrystyle.css" />
 
 <link rel="stylesheet" href="css/960_24_col.css" />
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+
 
 
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
@@ -44,9 +46,136 @@ if (isset($_SESSION['user_id'])) {
 	var happiness = 5;
 	var unix_time;
 	var date = new Date();
+	var geocoder =  new google.maps.Geocoder();
+    var lat;
+    var lon;
+    var latlon;
+    var x=document.getElementById("error_message");
 	$.fx.speeds._default = 700; //animation speed
 
 	$(document).ready(function(){
+		$.getLocation();
+		var geocoder = new google.maps.Geocoder();
+		if(!localStorage.lastLatLon){
+		geocoder.geocode( { 'address': 
+		<?php
+        $result = mysql_query("SELECT * FROM users WHERE `id` = $goturid");
+        while($row = mysql_fetch_array($result)){
+        $country = $row['country'];
+        echo "'$country'";
+        }
+		?>
+		}, function(results, status) {
+          		if (status == google.maps.GeocoderStatus.OK) {
+          			lat = results[0].geometry.location.lat();
+          			lon = results[0].geometry.location.lng();
+          			latlon = lat+","+lon;
+          			localStorage.lastLatLon = latlon;
+          			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=2&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+  					document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
+          		}
+          		else {
+            		alert("Something went wrong " + status);
+          		}
+          	});
+          }
+        else{
+        	var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+  			document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
+        }
+	
+		document.getElementById("y").innerHTML = localStorage.lastLatLon;
+		$.getLocation();
+
+	$("#button1").click(function(){
+			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
+          		if (status == google.maps.GeocoderStatus.OK) {
+          			lat = results[0].geometry.location.lat();
+          			lon = results[0].geometry.location.lng();
+          			latlon = lat+","+lon;
+          			img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+          			document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+            		//alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng()); 
+          		} else {
+            		alert("Something went wrong " + status);
+          		}
+        	});
+	});
+
+	$("#button1").click(function(){
+	      geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
+	      if (status == google.maps.GeocoderStatus.OK) {
+	      lat = results[0].geometry.location.lat();
+	      lon = results[0].geometry.location.lng();
+	      latlon = lat+","+lon;
+	      img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+	      document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+	      //alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng());
+	      } else {
+	      alert("Something got wrong " + status);
+	      }
+	      });
+    });
+});
+$.getLocation = function() { //retrieves geolocation, send to showposition function
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition($.showPosition);//,$.showError);
+      }
+    else{
+      x.innerHTML="Geolocation is not supported by this browser.";
+
+    $.showError = function(error){ //Error handling for geolocation, does not work in jquery
+    switch(error.code) {
+    case error.PERMISSION_DENIED:
+        document.getElementById("x").innerHTML="User denied the request for Geolocation.";
+        var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+        document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
+        break;
+    case error.POSITION_UNAVAILABLE:
+      document.getElementById("x").innerHTML="Location information is unavailable.";
+        break;
+      case error.TIMEOUT:
+      document.getElementById("x").innerHTML="The request to get user location timed out.";
+          break;
+      case error.UNKNOWN_ERROR:
+          document.getElementById("x").innerHTML="An unknown error occurred.";
+          break;
+      }
+    };
+    $.getLocation = function() { //retrieves geolocation, send to showposition function
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition($.showPosition,$.showError);
+      }
+    else{
+      document.getElementById("x").innerHTML="Geolocation is not supported by this browser.";
+      var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+        document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
+
+    }
+  };
+    $.showPosition = function(position){ //shows geolocation on the "map" image
+    var latlon=position.coords.latitude+","+position.coords.longitude;
+
+      var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=14&size=400x300&sensor=false";
+      document.getElementById("mapholder").innerHTML="<img src='"+img_url+"'>";
+    };
+
+    var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+    
+    geocoder.geocode({'latLng': latlng}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+              document.getElementById("x").innerHTML=results[0].formatted_address;
+          }
+          else {
+            alert("Geocoder failed due to: " + status);
+          }
+        });
+      var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+latlon;
+      document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
+      localStorage.lastLatLon = latlon;
+    };
+
+
 //$(".visualization").hide();
 		//make sure things are hidden in IE, since IE doesn't like the hidden tag
 		//$('div[id~="proghide"]').css({"display":"none"});
@@ -269,8 +398,38 @@ if (isset($_SESSION['user_id'])) {
 <div class="grid_20 prefix_4">
 	<br/>
 	<div hidden id="charthider">
-	<iframe frameborder="0" width="670" height="500" marginheight="0" marginwidth="0" src="gchart.php"></iframe>
+	<iframe frameborder="0" scrolling="no" width="670" height="500" marginheight="0" marginwidth="0" src="gchart.php"></iframe>
 	</div>
+
+<form>
+Address: <input id="address1" type="text" name="address" value="
+<?php
+$sql="select * from users where id='$goturid'";
+$result=mysql_query($sql);
+while($row = mysql_fetch_array($result)){
+echo $row['address'];
+}
+?>
+" />
+<input type="button" id="button1" value="Submit"/>
+</form>
+	<p id="error_message"></p>
+
+	<div>
+		<!-- Brodies map -->
+		<form>
+		Address: <input id="address1" type="text" name="address" />
+		<input type="button" id="button1" value="Submit"/>
+		</form>
+		</div>
+		<div id="mapholder"></div>
+	</div>
+</div>
+
+<div id="x"></div>
+<div id="y"></div>
+
+<div id="mapholder"></div>
 
 </div>
 
@@ -279,8 +438,6 @@ if (isset($_SESSION['user_id'])) {
 	<div id="dialog" title="?">
 		Are you sure?
 	</div>
-</div>
-
 </div> <!-- end of 960 grid -->
 
 </body>
