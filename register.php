@@ -13,7 +13,7 @@ For further usage, please contact me.
 
 ***********************************************************/
 
-
+error_reporting (E_ALL ^ E_NOTICE);
 include 'dbc.php';
 
 $err = array();
