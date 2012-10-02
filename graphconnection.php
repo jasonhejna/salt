@@ -1,6 +1,6 @@
 <?php 
-// include 'dbc.php';
-// page_protect();
+ include 'dbc.php';
+ page_protect();
 if (isset($_SESSION['user_id'])) {
 	$sesvar = $_SESSION['user_id'];
 

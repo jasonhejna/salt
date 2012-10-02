@@ -17,10 +17,11 @@ if (isset($_SESSION['user_id'])) {
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
 
 	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script type="text/javascript">
+		
 		$(function() {
 		$( ".usericons button:first" ).button({
             icons: {
@@ -46,6 +47,7 @@ if (isset($_SESSION['user_id'])) {
 	$.fx.speeds._default = 700; //animation speed
 
 	$(document).ready(function(){
+//$(".visualization").hide();
 		//make sure things are hidden in IE, since IE doesn't like the hidden tag
 		//$('div[id~="proghide"]').css({"display":"none"});
 		$('div[id~="foxbox"]').css({"display":"none"});
@@ -56,7 +58,7 @@ if (isset($_SESSION['user_id'])) {
 		
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
-			happiness = '4';
+			happiness = '3';
 			
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -64,7 +66,7 @@ if (isset($_SESSION['user_id'])) {
   		});
   		$("#radio2").click(function(){
     		//$("#radio").hide();
-			happiness = '3';
+			happiness = '2';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -72,7 +74,7 @@ if (isset($_SESSION['user_id'])) {
   		});
   		$("#radio3").click(function(){
     		//$("#radio").hide();
-			happiness = '2';
+			happiness = '1';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -80,7 +82,7 @@ if (isset($_SESSION['user_id'])) {
   		});
   		$("#radio4").click(function(){
     		//$("#radio").hide();
-			happiness = '1';
+			happiness = '0';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -93,16 +95,16 @@ if (isset($_SESSION['user_id'])) {
 		$( "#radio" ).buttonset();
 	});
 	function question(happiness,happiness) {
-							if (happiness == '4'){
+							if (happiness == '3'){
 								$("#question0").show();
 							}
-							else if (happiness == '3'){
+							else if (happiness == '2'){
 								$("#question1").show();
 							}
-							else if (happiness == '2'){
+							else if (happiness == '1'){
 								$("#question2").show();
 							}
-							else if (happiness == '1'){
+							else if (happiness == '0'){
 								$("#question3").show();
 							}
 							else {
@@ -146,9 +148,9 @@ if (isset($_SESSION['user_id'])) {
                         		$(".boxin").hide();
 								$(".background").show();
 								$(".foxbox").show();
+								$("#charthider").show();
 								$(".proghide").show();
-								
-								$(".visualization").show();
+								//$(".hidevis").hide();
                     			},
 							});
 							
@@ -159,35 +161,7 @@ if (isset($_SESSION['user_id'])) {
 					}
 		});
 	});	
-//google calendar
-google.load('visualization', '1', {packages: ['annotatedtimeline']});
-    function drawVisualization() {
-    
 
-
-    var data = new google.visualization.DataTable();
-      data.addColumn('date', 'Date');
-      data.addColumn('number', 'your happiness');
-      data.addColumn('string', 'title1');
-      data.addColumn('string', 'text1');
-
-      data.addRows([
-        [new Date(2008, 1 ,1), 1, null, null],
-        [new Date(2008, 1 ,2), 2, null, null],
-        [new Date(2008, 1 ,3), 3, null, null],
-        [new Date(2008, 1 ,4), 4, null, null],
-        [new Date(2008, 1 ,5), 1, null, null],
-        [new Date(2008, 1 ,6), 2, null, null],
-        
-
-      ]);
-    
-      var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
-          document.getElementById('visualization'));
-      annotatedtimeline.draw(data, {'displayAnnotations': true});
-    }
-    
-    google.setOnLoadCallback(drawVisualization);
 	</script>
 </head>
 <body>
@@ -293,14 +267,17 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 </div>
 <div class="clear"></div>
 <div class="grid_20 prefix_4">
-	<br/><br/><br/>
-<div id="visualization" style="width: 670px; height: 400px;"></div>
+	<br/>
+	<div hidden id="charthider">
+	<iframe frameborder="0" width="670" height="500" marginheight="0" marginwidth="0" src="gchart.php"></iframe>
+	</div>
+
 </div>
 
 <div class="clear"></div>
 <div class="grid_24">
-	<div id="dialog" title="confirmation">
-	hello
+	<div id="dialog" title="?">
+		Are you sure?
 	</div>
 </div>
 
