@@ -34,9 +34,9 @@ form#logForm{
   border-color:#93968F;
   -moz-border-radius: 21px;
   border-radius: 17px; 
-  -moz-box-shadow: 3px 3px 0 5px #C0D8EF;
-  -webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
-  box-shadow: 3px 3px 0 3px #C0D8EF;
+  -moz-box-shadow: 4px 5px 0 0px #C0D8EF;
+  -webkit-box-shadow: 4px 5px 0 0px #C0D8EF;
+  box-shadow: 4px 5px 0 0px #C0D8EF;
   padding-top:20px;
   padding-bottom:20px;
   padding-right:1px;
@@ -49,30 +49,44 @@ form#regForm{
   border-color:#93968F;
   -moz-border-radius: 21px;
   border-radius: 17px; 
-  -moz-box-shadow: 3px 3px 0 5px #C0D8EF;
-  -webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
-  box-shadow: 3px 3px 0 3px #C0D8EF;
+  -moz-box-shadow: 4px 5px 0 0px #C0D8EF;
+  -webkit-box-shadow: 4px 5px 0 0px #C0D8EF;
+  box-shadow: 4px 5px 0 0px #C0D8EF;
   padding-top:20px;
   padding-bottom:20px;
   padding-right:0px;
   padding-left:12px;
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.9em;color:#000;
 }
-span.title{
+span.ftitle{
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.4em;color:#000;
 }
 div.boxin{ 
 
-border-style:solid;
-border-width:3px;
-border-color:#93968F;
--moz-border-radius: 21px;
-border-radius: 21px; 
--moz-box-shadow: 3px 3px 0 5px #C0D8EF;
--webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
-box-shadow: 3px 3px 0 3px #C0D8EF;
   padding-top:0px;
   padding-bottom:0px;
   padding-right:5px;
   padding-left:5px;
+}
+hr{
+  border:0;
+  height:3px;
+  background-color: #93968F;
+}
+span.title {
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.5em;color:#FFFFFF;
+}
+#bartitle {
+  border-style:solid;
+border-width:3px;
+border-color:#FFF;
+  background-color: #1c94c4;
+  -moz-border-radius: 14px;
+  border-radius: 14px; 
+  -moz-box-shadow: 4px 5px 0 0px #C0D8EF;
+-webkit-box-shadow: 4px 5px 0 0px #C0D8EF;
+box-shadow: 4px 5px 0 0px #C0D8EF;
+}
+span.lang {
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.8em;color:#FFFFFF;
 }

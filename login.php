@@ -295,12 +295,27 @@ $(function() {
 	   }
 	  /******************************* END ********************************/	  
 	  ?>
+
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_14 suffix_1">
+<div class="grid_24" id="bartitle">
+    <div class="grid_22 alpha">
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="title">MentalState</span>
+    </div>
+    <!-- end .grid_6.alpha -->
+    <div class="grid_2 omega">
+      <br>
+      <span class="lang">english</span>
+    </div>
+
+  </div><!-- end .grid_24 -->
+  <br><br><br><br>
+<div class="clear"></div>
+<div class="grid_15">
   <div class="boxin" id="boxin">
   <center>
-    <br/><img src="images/ilanguage.png" width="540" height="438"><br/><br/>
+    <img src="images/ilanguage.png" ><br><br>
 
   <form>
   <div id="radio">
@@ -311,13 +326,13 @@ $(function() {
   </div>
   </form>
   </center>
-  <br/>
+  <br>
 
 </div><!-- end div of boxin css -->
 </div>
 <div class="grid_9">
 <form action="login.php" method="post" name="logForm" id="logForm" >
-            <span class="title">Login</span><br>
+            <span class="ftitle">Login</span><br>
             Email or Username:<br/>
             <input name="usr_email" type="text" class="required" id="txtbox" size="25">
             <br/>
@@ -332,7 +347,7 @@ $(function() {
 </form>
 
 <form action="register.php" method="post" name="regForm" id="regForm" >
-          <span class="title">Sign Up / Registration</span><br>
+          <span class="ftitle">Sign Up / Registration</span><br>
           It's Free Forever<br><br>
             Your Full Name<span class="required"><font color="#CC0000">*</font></span> 
             <br>
