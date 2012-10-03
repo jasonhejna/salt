@@ -220,7 +220,7 @@ $a_link =
 
 $message = 
 "Hello \n
-Thank you for registering with us. Here are your login details...\n
+Thank you for registering with MentalState.me. Here are your login details...\n
 
 User ID: $user_name
 Email: $usr_email \n 
@@ -265,23 +265,9 @@ THIS IS AN AUTOMATED RESPONSE.
   });
 
 $(function() {
-    $( ".usericons button:first" ).button({
-            icons: {
-                primary: "ui-icon-info"
-            },
-            text: false
-        }).next().button({
-            icons: {
-                primary: "ui-icon-wrench"
-            },
-            text: false
-        }).next().button({
-            icons: {
-                primary: "ui-icon-locked"
-            },
-            text: false
-        })
+    $( "#radio" ).buttonset();
   });
+
   
   $(document).ready(function(){
     $.validator.addMethod("username", function(value, element) {
@@ -311,12 +297,13 @@ $(function() {
 	  ?>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_15">
+<div class="grid_14 suffix_1">
   <div class="boxin" id="boxin">
   <center>
-    <br/><img src="images/ilanguage.png" width="578" height="469"><br/><br/>
-  <form id="radform">
-  <div id="radio" class="radio">
+    <br/><img src="images/ilanguage.png" width="540" height="438"><br/><br/>
+
+  <form>
+  <div id="radio">
     <input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
     <input type="radio" id="radio2" name="radio" /><label for="radio2"><img src="images/hap2.png" width="50px" height="50px"></label>
     <input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap3.png" width="50px" height="50px"></label>
@@ -336,8 +323,8 @@ $(function() {
             <br/>
             Password:<br>
             <input name="pwd" type="password" class="required password" id="txtbox" size="25">
-            <br/>
-            <a href="forgot.php">Forgot Password?</a>
+            
+            <a href="forgot.php">Forgot Password?</a><br>
             <input name="remember" type="checkbox" id="remember" value="1">
                 Remember me
                 <br><br>
@@ -354,15 +341,15 @@ $(function() {
           
           
             Username<span class="required"><font color="#CC0000">*</font></span> 
+
             <br>
             <input name="user_name" type="text" id="user_name" class="required username" minlength="5" > 
-              <br><br>
-              <input name="btnAvailable" type="button" id="btnAvailable" 
+             <input name="btnAvailable" type="button" id="btnAvailable" 
               onclick='$("#checkid").html("Please wait..."); $.get("checkuser.php",{ cmd: "check", user: $("#user_name").val() } ,function(data){  $("#checkid").html(data); });'
               value="Check Availability"> 
-              
-                <span style="color:red; font: bold 12px verdana; " id="checkid" ></span> 
-              <br><br>
+              <br>
+                <span style="color:red; font: bold 12px verdana; " id="checkid" ></span>
+              <br>
            Your Email<span class="required"><font color="#CC0000">*</font></span> 
             <br>
             <input name="usr_email" type="text" id="usr_email3" class="required email"> 

@@ -114,7 +114,7 @@ date_default_timezone_set('America/New_York');
 		
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
-			happiness = '4';
+			happiness = '3';
 			
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -122,7 +122,7 @@ date_default_timezone_set('America/New_York');
   		});
   		$("#radio2").click(function(){
     		//$("#radio").hide();
-			happiness = '3';
+			happiness = '2';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -130,7 +130,7 @@ date_default_timezone_set('America/New_York');
   		});
   		$("#radio3").click(function(){
     		//$("#radio").hide();
-			happiness = '2';
+			happiness = '1';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -138,7 +138,7 @@ date_default_timezone_set('America/New_York');
   		});
   		$("#radio4").click(function(){
     		//$("#radio").hide();
-			happiness = '1';
+			happiness = '0';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -180,16 +180,16 @@ date_default_timezone_set('America/New_York');
 		$( "#radio" ).buttonset();
 	});
 	function question(happiness,happiness) {
-							if (happiness == '4'){
+							if (happiness == '3'){
 								$("#question0").show();
 							}
-							else if (happiness == '3'){
+							else if (happiness == '2'){
 								$("#question1").show();
 							}
-							else if (happiness == '2'){
+							else if (happiness == '1'){
 								$("#question2").show();
 							}
-							else if (happiness == '1'){
+							else if (happiness == '0'){
 								$("#question3").show();
 							}
 							else {
