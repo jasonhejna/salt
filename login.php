@@ -12,7 +12,7 @@ Limitations:
 For further usage, please contact me.
 
 ***********************************************************/
-//error_reporting (E_ALL ^ E_NOTICE);
+error_reporting (E_ALL ^ E_NOTICE);
 include 'dbc.php';
 
 $err = array();
@@ -252,18 +252,45 @@ THIS IS AN AUTOMATED RESPONSE.
 <html>
 <head>
 <title>MentalState.me</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta charset="utf-8">
 <link rel="stylesheet" href="css/960_24_col.css" />
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
-<link rel="stylesheet" href="css/angrystyle.css" />
-  <script>
+<link rel="stylesheet" href="css/loginstyle.css" />
+  <script type="text/javascript">
   $(document).ready(function(){
     $("#logForm").validate();
+
+  });
+
+$(function() {
+    $( ".usericons button:first" ).button({
+            icons: {
+                primary: "ui-icon-info"
+            },
+            text: false
+        }).next().button({
+            icons: {
+                primary: "ui-icon-wrench"
+            },
+            text: false
+        }).next().button({
+            icons: {
+                primary: "ui-icon-locked"
+            },
+            text: false
+        })
+  });
+  
+  $(document).ready(function(){
+    $.validator.addMethod("username", function(value, element) {
+        return this.optional(element) || /^[a-z0-9\_]+$/i.test(value);
+    }, "Username must contain only letters, numbers, or underscore.");
+
+    $("#regForm").validate();
   });
   </script>
-
 
 </head>
 
@@ -284,62 +311,94 @@ THIS IS AN AUTOMATED RESPONSE.
 	  ?>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_5 prefix_13">
-	<form action="login.php" method="post" name="logForm" id="logForm" >
-            Email or Username<br/>
+<div class="grid_15">
+  <div class="boxin" id="boxin">
+  <center>
+    <br/><img src="images/ilanguage.png" width="578" height="469"><br/><br/>
+  <form id="radform">
+  <div id="radio" class="radio">
+    <input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
+    <input type="radio" id="radio2" name="radio" /><label for="radio2"><img src="images/hap2.png" width="50px" height="50px"></label>
+    <input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap3.png" width="50px" height="50px"></label>
+    <input type="radio" id="radio4" name="radio" /><label for="radio4"><img src="images/hap4.png" width="50px" height="50px"></label>
+  </div>
+  </form>
+  </center>
+  <br/>
+
+</div><!-- end div of boxin css -->
+</div>
+<div class="grid_9">
+<form action="login.php" method="post" name="logForm" id="logForm" >
+            <span class="title">Login</span><br>
+            Email or Username:<br/>
             <input name="usr_email" type="text" class="required" id="txtbox" size="25">
             <br/>
+            Password:<br>
+            <input name="pwd" type="password" class="required password" id="txtbox" size="25">
+            <br/>
+            <a href="forgot.php">Forgot Password?</a>
             <input name="remember" type="checkbox" id="remember" value="1">
                 Remember me
-</div>
-<div class="grid_5">
-
-          Password<br/>
-            <input name="pwd" type="password" class="required password" id="txtbox" size="25">
-          
-          
-                
-                  
-            <br/>
-                
-                  <a href="forgot.php">Forgot Password</a> 
-                  <br/>
-                
-
-</div>
-<div class="grid_1">
-<br/>
-<input name="doLogin" type="submit" id="doLogin3" value="Login">
+                <br><br>
+            <input name="doLogin" type="submit" id="doLogin3" value="Login">
 </form>
-</div>
+
+<form action="register.php" method="post" name="regForm" id="regForm" >
+          <span class="title">Sign Up / Registration</span><br>
+          It's Free Forever<br><br>
+            Your Full Name<span class="required"><font color="#CC0000">*</font></span> 
+            <br>
+            <input name="full_name" type="text" id="full_name" class="required">
+            <br>
+          
+          
+            Username<span class="required"><font color="#CC0000">*</font></span> 
+            <br>
+            <input name="user_name" type="text" id="user_name" class="required username" minlength="5" > 
+              <br><br>
+              <input name="btnAvailable" type="button" id="btnAvailable" 
+              onclick='$("#checkid").html("Please wait..."); $.get("checkuser.php",{ cmd: "check", user: $("#user_name").val() } ,function(data){  $("#checkid").html(data); });'
+              value="Check Availability"> 
+              
+                <span style="color:red; font: bold 12px verdana; " id="checkid" ></span> 
+              <br><br>
+           Your Email<span class="required"><font color="#CC0000">*</font></span> 
+            <br>
+            <input name="usr_email" type="text" id="usr_email3" class="required email"> 
+              <span class="example">* Valid email</span>
+            <br>
+            Password<span class="required"><font color="#CC0000">*</font></span> 
+            <br>
+            <input name="pwd" type="password" class="required password" minlength="5" id="pwd"> 
+              <span class="example">* 5 chars min</span>
+              <br>
+          Retype Password<span class="required"><font color="#CC0000">*</font></span> 
+          <br>
+            <input name="pwd2"  id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd">
+          
+            <br><br>
+            <strong>Image Verification </strong>
+            <script type="text/javascript">
+             var RecaptchaOptions = {
+                theme : 'white'
+             };
+             </script>
+              <?php 
+            require_once('recaptchalib.php');
+            
+                echo recaptcha_get_html($publickey);
+            ?>
+            <br>
+          <input name="doRegister" type="submit" id="doRegister" value="Register">
+        
+      </form>
+  </div>
 <div class="clear"></div>
 </div>  <!-- end 960 container_24 -->
 <!-- start of user registration -->
-  <script>
-  $(document).ready(function(){
-    $.validator.addMethod("username", function(value, element) {
-        return this.optional(element) || /^[a-z0-9\_]+$/i.test(value);
-    }, "Username must contain only letters, numbers, or underscore.");
 
-    $("#regForm").validate();
-  });
-  </script>
 
-<link href="styles.css" rel="stylesheet" type="text/css">
-</head>
-
-<body>
-<table width="100%" border="0" cellspacing="0" cellpadding="5" class="main">
-  <tr> 
-    <td colspan="3">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td width="160" valign="top"><p>&nbsp;</p>
-      <p>&nbsp; </p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p></td>
-    <td width="732" valign="top"><p>
     <?php 
      if (isset($_GET['done'])) { ?>
       <h2>Thank you</h2> Your registration is now complete and you can <a href="login.php">login here</a>";
@@ -359,69 +418,7 @@ THIS IS AN AUTOMATED RESPONSE.
      ?> 
      
       <br>
-      <form action="register.php" method="post" name="regForm" id="regForm" >
-        <table width="95%" border="0" cellpadding="3" cellspacing="3" class="forms">
-
-          <tr> 
-            <td colspan="2"><h4><strong>Login Details</strong></h4></td>
-          </tr>
-          <tr> 
-            <td>Your Name<span class="required"><font color="#CC0000">*</font></span></td> 
-            <td><input name="full_name" type="text" id="full_name" class="required"></td>
-          </tr>
-          <tr> 
-            <td>Username<span class="required"><font color="#CC0000">*</font></span></td>
-            <td><input name="user_name" type="text" id="user_name" class="required username" minlength="5" > 
-              <input name="btnAvailable" type="button" id="btnAvailable" 
-              onclick='$("#checkid").html("Please wait..."); $.get("checkuser.php",{ cmd: "check", user: $("#user_name").val() } ,function(data){  $("#checkid").html(data); });'
-              value="Check Availability"> 
-                <span style="color:red; font: bold 12px verdana; " id="checkid" ></span> 
-            </td>
-          </tr>
-          <tr> 
-            <td>Your Email<span class="required"><font color="#CC0000">*</font></span> 
-            </td>
-            <td><input name="usr_email" type="text" id="usr_email3" class="required email"> 
-              <span class="example">** Valid email please..</span></td>
-          </tr>
-          <tr> 
-            <td>Password<span class="required"><font color="#CC0000">*</font></span> 
-            </td>
-            <td><input name="pwd" type="password" class="required password" minlength="5" id="pwd"> 
-              <span class="example">** 5 chars minimum..</span></td>
-          </tr>
-          <tr> 
-            <td>Retype Password<span class="required"><font color="#CC0000">*</font></span> 
-            </td>
-            <td><input name="pwd2"  id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd"></td>
-          </tr>
-          <tr> 
-            <td colspan="2">&nbsp;</td>
-          </tr>
-          <tr> 
-            <td width="22%"><strong>Image Verification </strong></td>
-            <td width="78%"> 
-              <?php 
-            require_once('recaptchalib.php');
-            
-                echo recaptcha_get_html($publickey);
-            ?>
-            </td>
-          </tr>
-        </table>
-        <p align="center">
-          <input name="doRegister" type="submit" id="doRegister" value="Register">
-        </p>
-      </form>
-      <p align="right"><span style="font: normal 9px verdana">Powered by <a href="http://php-login-script.com">PHP 
-                  Login Script v2.0</a></span></p>
-       
-      </td>
-    <td width="196" valign="top">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td colspan="3">&nbsp;</td>
-  </tr>
-</table>
+      
+      
 </body>
 </html>

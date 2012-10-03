@@ -15,13 +15,15 @@ date_default_timezone_set('America/New_York');
 <title>Happy Data</title>
 <!-- <style type="text/css">
  #map { width: 150px; height: 150px; border: 0px; padding: 0px; }
- </style> --!>
+ </style> -->
+ <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/angrystyle.css" />
 
 <link rel="stylesheet" href="css/960_24_col.css" />
-<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
-<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+
+
  <script type="text/javascript" src="http://www.google.com/jsapi"></script>
  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
@@ -62,7 +64,22 @@ date_default_timezone_set('America/New_York');
  	
 	$.fx.speeds._default = 700; //animation speed
 
+		//make sure things are hidden in IE, since IE doesn't like the hidden tag
+		//$('div[id~="proghide"]').css({"display":"none"});
+		
+		//$('div[id~="foxbox"]').css({"display":"none"});
+		//$(".foxbox").toggle();
+
+		//$('div[id~="charthider"]').css({"display":"none"});
+		$('h1[id~="question0"]').css({"display":"none"});
+		$('h1[id~="question1"]').css({"display":"none"});
+		$('h1[id~="question2"]').css({"display":"none"});
+		$('h1[id~="question3"]').css({"display":"none"});
+
+
 	$(document).ready(function(){
+//document.getElementById(foxbox).style.display = 'none'; 
+
 	if(!localStorage.lastLatLon){
 		geocoder.geocode( { 'address': 
 		<?php
@@ -94,13 +111,6 @@ date_default_timezone_set('America/New_York');
 	
 		document.getElementById("y").innerHTML = localStorage.lastLatLon;
 		$.getLocation();
-		//make sure things are hidden in IE, since IE doesn't like the hidden tag
-		//$('div[id~="proghide"]').css({"display":"none"});
-		$('div[id~="foxbox"]').css({"display":"none"});
-		$('h1[id~="question0"]').css({"display":"none"});
-		$('h1[id~="question1"]').css({"display":"none"});
-		$('h1[id~="question2"]').css({"display":"none"});
-		$('h1[id~="question3"]').css({"display":"none"});
 		
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
@@ -315,6 +325,9 @@ date_default_timezone_set('America/New_York');
 								$(".foxbox").show();
 								$(".proghide").show();
 								$(".visualization").show();
+								
+								
+
                     			},
 							});
 							
@@ -360,7 +373,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <body>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_9 prefix_3">.
+<div class="grid_9 prefix_3"><span style="color:#FFF;">.</span>
 <div hidden class="proghide" id="proghide" style="float:left;">
 			<div hidden class="mini" id="status"></div>
 			<div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div>
@@ -391,6 +404,9 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
 	$(".boxin").show();
 	$(".foxbox").hide();
+			//make sure things are hidden in IE, since IE doesn't like the hidden tag
+		//$('div[id~="proghide"]').css({"display":"none"});
+	//document.getElementById(foxbox).style.display = 'none'; 
 	$(".proghide").hide();
 	$(".background").show();
 
@@ -413,11 +429,11 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	}
 </script>
 <div class="clear"></div>
-<div class="grid_17 prefix_4 suffix_3">
+<div class="grid_17 suffix_3">
 	<br/>
 	<div hidden class="background">
 		<center>
-		<div hidden class="foxbox" id="foxbox">
+		<div hidden class="foxbox" id="foxbox" style="display:none">
 		<table border="0">
 		<tr>
 			<td>
@@ -440,7 +456,15 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 </div>
 </div> <!-- end of 960 of all of form -->
 <div class="clear"></div>
-<div class="grid_17 prefix_4 suffix_3">
+<div class="grid_4">
+	<div id="map"></div>
+<form>
+	
+<input id="address1" type="text" name="address" value="miami,FL">
+<input type="button" id="button1" value="Submit"/>
+</form>
+</div>
+<div class="grid_17 suffix_3">
 	<div class="boxin" id="boxin">
 	<center>
 		<br/><img src="images/ilanguage.png"><br/><br/>
@@ -457,19 +481,12 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
 </div><!-- end div of boxin css -->
 </div>
-<div class="grid_20" id="map">
-</div>
-<div class="grid_18">
-<form>
-<input id="address1" type="text" name="address" value="miami,FL">
-<input type="button" id="button1" value="Submit"/>
-</form>
-</div>
+
 <div class="clear"></div>
 <div class="grid_20 prefix_4">
 	<br/>
 	<div id="charthider">
-	<iframe frameborder="0" scrolling="no" width="670" height="500" marginheight="0" marginwidth="0" src="gchart.php"></iframe>
+	<iframe frameborder="0" scrolling="no" width="670" height="500" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
 	</div>
 </div>
 

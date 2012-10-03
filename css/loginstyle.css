@@ -1,0 +1,78 @@
+input[type="text"],
+input[type="password"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-background-clip: padding;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+  border-radius: 0;
+  -webkit-appearance: none;
+  background-color: white;
+  border: 1px solid;
+  border-color: #848484 #c1c1c1 #e1e1e1;
+  color: black;
+  outline: 0;
+  margin: 0;
+  padding: 2px 3px;
+  text-align: left;
+  font-size: 13px;
+  font-family: Arial, "Liberation Sans", FreeSans, sans-serif;
+  height: 1.8em;
+  vertical-align: top;
+  *padding-top: 2px;
+  *padding-bottom: 1px;
+  *height: auto;
+}
+form#logForm{
+  border-style:solid;
+  border-width:3px;
+  border-color:#93968F;
+  -moz-border-radius: 21px;
+  border-radius: 17px; 
+  -moz-box-shadow: 3px 3px 0 5px #C0D8EF;
+  -webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
+  box-shadow: 3px 3px 0 3px #C0D8EF;
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-right:1px;
+  padding-left:12px;
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.9em;color:#000;
+}
+form#regForm{
+  border-style:solid;
+  border-width:3px;
+  border-color:#93968F;
+  -moz-border-radius: 21px;
+  border-radius: 17px; 
+  -moz-box-shadow: 3px 3px 0 5px #C0D8EF;
+  -webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
+  box-shadow: 3px 3px 0 3px #C0D8EF;
+  padding-top:20px;
+  padding-bottom:20px;
+  padding-right:0px;
+  padding-left:12px;
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.9em;color:#000;
+}
+span.title{
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.4em;color:#000;
+}
+div.boxin{ 
+
+border-style:solid;
+border-width:3px;
+border-color:#93968F;
+-moz-border-radius: 21px;
+border-radius: 21px; 
+-moz-box-shadow: 3px 3px 0 5px #C0D8EF;
+-webkit-box-shadow: 3px 3px 0 5px #C0D8EF;
+box-shadow: 3px 3px 0 3px #C0D8EF;
+  padding-top:0px;
+  padding-bottom:0px;
+  padding-right:5px;
+  padding-left:5px;
+}
