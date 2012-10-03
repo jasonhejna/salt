@@ -300,7 +300,7 @@ $(function() {
 <div class="clear"></div>
 <div class="grid_24" id="bartitle">
     <div class="grid_22 alpha">
-      &nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
       <span class="title">MentalState</span>
     </div>
     <!-- end .grid_6.alpha -->
@@ -316,7 +316,6 @@ $(function() {
   <div class="boxin" id="boxin">
   <center>
     <img src="images/ilanguage.png" ><br><br>
-
   <form>
   <div id="radio">
     <input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
@@ -342,10 +341,10 @@ $(function() {
             <a href="forgot.php">Forgot Password?</a><br>
             <input name="remember" type="checkbox" id="remember" value="1">
                 Remember me
-                <br><br>
+                <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input name="doLogin" type="submit" id="doLogin3" value="Login">
 </form>
-
+<br><br>
 <form action="register.php" method="post" name="regForm" id="regForm" >
           <span class="ftitle">Sign Up / Registration</span><br>
           It's Free Forever<br><br>
@@ -391,7 +390,7 @@ $(function() {
             
                 echo recaptcha_get_html($publickey);
             ?>
-            <br>
+            <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input name="doRegister" type="submit" id="doRegister" value="Register">
         
       </form>

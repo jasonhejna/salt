@@ -374,10 +374,6 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <div class="container_24">
 <div class="clear"></div>
 <div class="grid_9 prefix_3"><span style="color:#FFF;">.</span>
-<div hidden class="proghide" id="proghide" style="float:left;">
-			<div hidden class="mini" id="status"></div>
-			<div style="width:210px;height:20px;" class="pbartop" id="progressbar"></div>
-	</div>
 </div>
 
 
@@ -429,11 +425,18 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	}
 </script>
 <div class="clear"></div>
-<div class="grid_17 suffix_3">
-	<br/>
-	<div hidden class="background">
-		<center>
+<div class="grid_16 prefix_5 suffix_3">
+	
+	
+		
 		<div hidden class="foxbox" id="foxbox" style="display:none">
+
+			<div hidden class="proghide" id="proghide">
+			<div hidden class="mini" id="status"></div>
+			<div class="pbartop" id="progressbar"></div>
+			</div>
+			<br><br><br>
+			<center>
 		<table border="0">
 		<tr>
 			<td>
@@ -446,14 +449,15 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 		</tr>
 		</table> 
 			<form>
-			<textarea rows="4" cols="57"></textarea><br/><br/>
+			<textarea rows="4" cols="57"></textarea>
 			<input type="submit" value="Submit">
 		</form>
-	</div>
-		<br/><br/>
-		</center>
 
-</div>
+		</center>
+	</div>
+		
+
+
 </div> <!-- end of 960 of all of form -->
 <div class="clear"></div>
 <div class="grid_4">
