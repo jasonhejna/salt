@@ -315,7 +315,7 @@ $(function() {
 <div class="grid_15">
   <div class="boxin" id="boxin">
   <center>
-    <img src="images/ilanguage.png" ><br><br>
+    <img src="images/ilanguage.png" width="595" height="450"><br><br>
   <form>
   <div id="radio">
     <input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>

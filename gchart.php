@@ -46,7 +46,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 </script>
 </head>
 <body>
-	<div id="visualization" style="width: 670px; height: 400px;"></div>
+	<div id="visualization" style="width: 680px; height: 400px;"></div>
 </body>
 </html>
 <?php } ?>

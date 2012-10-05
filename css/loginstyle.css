@@ -81,13 +81,15 @@ span.title {
 #bartitle {
   border-style:solid;
 border-width:3px;
-border-color:#1c94c4;
+border-color:#FFF;
   background-color: #1c94c4;
   -moz-border-radius: 14px;
   border-radius: 14px; 
-  -moz-box-shadow: 4px 5px 0 0px #C0D8EF;
--webkit-box-shadow: 4px 5px 0 0px #C0D8EF;
-box-shadow: 10px 10px 0 0px #C0D8EF;
+  -moz-box-shadow: 4px 5px 0 0px #1c94c4;
+-webkit-box-shadow: 4px 5px 0 0px #1c94c4;
+box-shadow: 10px 10px 0 0px #1c94c4;
+background-image: url("../images/stripe.png");
+background-repeat: repeat-x;
 }
 span.lang {
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.8em;color:#FFFFFF;

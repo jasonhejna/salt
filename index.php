@@ -48,7 +48,7 @@ date_default_timezone_set('America/New_York');
         })
 	});
 	
-	var happiness = 5;
+	var happiness = 6;
 	var unix_time;
 	var date = new Date();
 	var geocoder = new google.maps.Geocoder();
@@ -63,22 +63,11 @@ date_default_timezone_set('America/New_York');
  	var bounds = new google.maps.LatLngBounds();*/
  	
 	$.fx.speeds._default = 700; //animation speed
-
-		//make sure things are hidden in IE, since IE doesn't like the hidden tag
-		//$('div[id~="proghide"]').css({"display":"none"});
-		
-		//$('div[id~="foxbox"]').css({"display":"none"});
-		//$(".foxbox").toggle();
-
-		//$('div[id~="charthider"]').css({"display":"none"});
-		$('h1[id~="question0"]').css({"display":"none"});
-		$('h1[id~="question1"]').css({"display":"none"});
-		$('h1[id~="question2"]').css({"display":"none"});
-		$('h1[id~="question3"]').css({"display":"none"});
-
-
-	$(document).ready(function(){
-//document.getElementById(foxbox).style.display = 'none'; 
+$(document).ready(function(){
+          $('div#dismap').show();
+		$('div#disprog').hide();
+		$('div#ilang').show();
+		$('div#whylang').hide();
 
 	if(!localStorage.lastLatLon){
 		geocoder.geocode( { 'address': 
@@ -112,17 +101,21 @@ date_default_timezone_set('America/New_York');
 		document.getElementById("y").innerHTML = localStorage.lastLatLon;
 		$.getLocation();
 		
+		//addign values when radio onlclick
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
-			happiness = '3';
+
+			happiness = '5';
 			
     		unix_time = date.getTime()/1000;
+
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
   		$("#radio2").click(function(){
     		//$("#radio").hide();
-			happiness = '2';
+
+			happiness = '4';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -130,7 +123,8 @@ date_default_timezone_set('America/New_York');
   		});
   		$("#radio3").click(function(){
     		//$("#radio").hide();
-			happiness = '1';
+
+			happiness = '3';
 
     		unix_time = date.getTime()/1000;
     		$( "#dialog" ).dialog( "open" );
@@ -138,6 +132,23 @@ date_default_timezone_set('America/New_York');
   		});
   		$("#radio4").click(function(){
     		//$("#radio").hide();
+
+			happiness = '2';
+
+    		unix_time = date.getTime()/1000;
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
+  		$("#radio5").click(function(){
+    		//$("#radio").hide();
+
+			happiness = '1';
+
+    		unix_time = date.getTime()/1000;
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
+  		$("#radio6").click(function(){
 			happiness = '0';
 
     		unix_time = date.getTime()/1000;
@@ -179,23 +190,6 @@ date_default_timezone_set('America/New_York');
 	$(function() {
 		$( "#radio" ).buttonset();
 	});
-	function question(happiness,happiness) {
-							if (happiness == '3'){
-								$("#question0").show();
-							}
-							else if (happiness == '2'){
-								$("#question1").show();
-							}
-							else if (happiness == '1'){
-								$("#question2").show();
-							}
-							else if (happiness == '0'){
-								$("#question3").show();
-							}
-							else {
-								//$("#question3").hide(); hide and display question again
-							}
-	}
 	
 	$.showError = function(error){ 
 	  switch(error.code) {
@@ -286,6 +280,7 @@ date_default_timezone_set('America/New_York');
  	 	center = bounds.getCenter();
 	 	//map.fitBounds(bounds);
  		};*/
+
 	$(function() {
 		$( "#dialog" ).dialog({
 			resizable: false,
@@ -297,12 +292,10 @@ date_default_timezone_set('America/New_York');
 			modal:true,
 			buttons: {
 						Submit: function() {
-							
-							$('h1[id~="question0"]').css({"display":"none"});
-							$('h1[id~="question1"]').css({"display":"none"});
-							$('h1[id~="question2"]').css({"display":"none"});
-							$('h1[id~="question3"]').css({"display":"none"});
-
+                        		$('div#dismap').hide();
+								$('div#disprog').show();
+								$('div#ilang').hide();
+								$('div#whylang').show();
 							$( this ).dialog( "close" );
 
 							$.ajax({
@@ -310,30 +303,18 @@ date_default_timezone_set('America/New_York');
 							    url: 'happypost.php',
 							    data: {time:unix_time,happiness:happiness,latylony:localStorage.lastLatLon},
 							    success: function () {//On Successful service call
-                       			countDown(23,"status");
-                        		question(happiness, happiness); 
-                        		//trying to fucking hide the highlighted radio button after the countdown
-                        		//$("input:radio").removeAttr("checked");
-                        		//$(this).attr('checked', false);
-                        		//$('form[id^="radform"]').find("input:radio:checked").removeAttr("checked");
-                        		//$('form[id^="radform"]').find("input:radio:checked").attr('checked', false);
-                        		//$('form[id^="form-"]').find("input:radio:checked").prop('checked',false);
-								
-
-                        		$(".boxin").hide();
-								$(".background").show();
-								$(".foxbox").show();
-								$(".proghide").show();
-								$(".visualization").show();
-								
-								
-
+                       			countDown(660,"status");
+                        		//question(happiness, happiness); 
                     			},
 							});
 							
 						},
 						Cancel: function() {
 							$( this ).dialog( "close" );
+							    $('div#dismap').show();
+								$('div#disprog').hide();
+								$('div#ilang').show();
+								$('div#whylang').hide();
 						},
 					}
 		});
@@ -373,23 +354,32 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <body>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_9 prefix_3"><span style="color:#FFF;">.</span>
-</div>
-
-
-<div class="grid_8 suffix_4">
-			<div class="usericons" style="float:right;">
+<div class="grid_21 push_2" id="bartitle">
+    <div class="grid_14 alpha">
+      &nbsp;&nbsp;&nbsp;
+      <span class="title">MentalState</span>
+    </div>
+    <!-- end .grid_6.alpha -->
+    <div class="grid_7 omega">
+      
+      <div class="usericons" style="float:right;">
 			<button ONCLICK="window.location.href=''">About this site</button>
 			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
 			<button ONCLICK="window.location.href='logout.php'">Logout</button>
-			</div>
+			&nbsp;		
+		</div>
+    </div>
 
-</div>
+  </div><!-- end .grid_24 -->
+  <br><br><br>
+<div class="clear"></div>
+
 
 <!-- coundown timer time -->
 <script type="text/javascript">
+
 	function countDown(secs,elem) {
-	if (secs > -1) {
+	if (secs > 1) {
 	var element = document.getElementById(elem);
 	var mins = Math.round(secs/60);
 	element.innerHTML = ""+mins+"minutes";
@@ -398,17 +388,10 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	clearTimeout(timer);
 	//var secs = 660;
 
-	$(".boxin").show();
-	$(".foxbox").hide();
-			//make sure things are hidden in IE, since IE doesn't like the hidden tag
-		//$('div[id~="proghide"]').css({"display":"none"});
-	//document.getElementById(foxbox).style.display = 'none'; 
-	$(".proghide").hide();
-	$(".background").show();
-
-
-
-
+	$('div#dismap').show();
+	$('div#disprog').hide();
+	$('div#ilang').show();
+	$('div#whylang').hide();
 	 element.innerHTML += 'go';
 	 //element.innerHTML += '<a href="#">Click here now</a>';
 	}
@@ -418,82 +401,70 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
 			$( "#progressbar" ).progressbar({
 				
-				value: secs
+				value: secs/6.6
 			});
 		
 	
 	}
 </script>
 <div class="clear"></div>
-<div class="grid_16 prefix_5 suffix_3">
-	
-	
-		
-		<div hidden class="foxbox" id="foxbox" style="display:none">
-
-			<div hidden class="proghide" id="proghide">
-			<div hidden class="mini" id="status"></div>
-			<div class="pbartop" id="progressbar"></div>
-			</div>
-			<br><br><br>
-			<center>
-		<table border="0">
-		<tr>
-			<td>
-			<h1 hidden class="hide"  id="question0" name="question0">Why do you feel so happy?</h1>
-			<h1 hidden class="hide"  id="question1" name="question1">Why do you feel happy?</h1>
-			<h1 hidden class="hide"  id="question2" name="question2">Why aren't you feeling very happy?</h1>
-			<h1 hidden class="hide"  id="question3" name="question3">Why aren't you feeling happy?</h1>
-			</td>
-			<td><h1 style="color:#A9A9A9;font-size: 1.4em;" class="greyed">(optional) </h1></td>
-		</tr>
-		</table> 
-			<form>
-			<textarea rows="4" cols="57"></textarea>
-			<input type="submit" value="Submit">
-		</form>
-
-		</center>
-	</div>
-		
-
-
-</div> <!-- end of 960 of all of form -->
-<div class="clear"></div>
-<div class="grid_4">
+<div class="grid_4 prefix_2">
+	<br>
+	<div id="dismap">
 	<div id="map"></div>
 <form>
 	
-<input id="address1" type="text" name="address" value="miami,FL">
+<input id="address1" type="text" name="address" value="">
 <input type="button" id="button1" value="Submit"/>
 </form>
+
+	</div>
+
+
+			<div  id="disprog">
+			<div hidden class="mini" id="status"></div>
+			<div style="width:140px;height:24px" class="pbartop" id="progressbar"></div>
+			</div>
+
 </div>
-<div class="grid_17 suffix_3">
-	<div class="boxin" id="boxin">
+<div class="grid_17 suffix_1">
+	<div id="ilang">
 	<center>
 		<br/><img src="images/ilanguage.png"><br/><br/>
-	<form id="radform">
+	<form>
 	<div id="radio" class="radio">
 		<input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
 		<input type="radio" id="radio2" name="radio" /><label for="radio2"><img src="images/hap2.png" width="50px" height="50px"></label>
-		<input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap3.png" width="50px" height="50px"></label>
-		<input type="radio" id="radio4" name="radio" /><label for="radio4"><img src="images/hap4.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap6.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio4" name="radio" /><label for="radio4"><img src="images/hap5.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio5" name="radio" /><label for="radio5"><img src="images/hap3.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio6" name="radio" /><label for="radio6"><img src="images/hap4.png" width="50px" height="50px"></label>
 	</div>
 	</form>
 	</center>
 	<br/>
-
+<hr>
 </div><!-- end div of boxin css -->
-</div>
-
-<div class="clear"></div>
-<div class="grid_20 prefix_4">
-	<br/>
-	<div id="charthider">
-	<iframe frameborder="0" scrolling="no" width="670" height="500" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
+		<div id="whylang" >
+			<br>
+			<center>
+				<img src="images/whylanguage.png">
+			<form id="textarea" name="textarea" action="textconec.php" method="post">
+			<textarea id="textarea" name="textarea" rows="4" cols="57"></textarea>
+			<br>
+			<input type="submit" name="submit" value="Send" id="submit"/>
+		</form>
+		</center>
+		<br><hr><br>
 	</div>
-</div>
 
+	
+	<div id="dischart">
+<br><br>
+	<iframe frameborder="0" scrolling="no" width="680" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
+	</div>
+
+</div>
 <div class="clear"></div>
 <div class="grid_24">
 	<div id="dialog" title="confirmation">
