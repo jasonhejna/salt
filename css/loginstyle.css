@@ -43,6 +43,7 @@ form#logForm{
   padding-right:1px;
   padding-left:12px;
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.9em;color:#969696;
+
 }
 form#regForm{
   background-color:#FFF;
@@ -59,6 +60,7 @@ form#regForm{
   padding-right:0px;
   padding-left:12px;
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.9em;color:#969696;
+
 }
 span.ftitle{
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.7em;color:#1c94c4;

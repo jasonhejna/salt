@@ -52,6 +52,7 @@ date_default_timezone_set('America/New_York');
 	var unix_time;
 	var date = new Date();
 	var geocoder = new google.maps.Geocoder();
+
 /*	var icon = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/micons/blue.png",
  		new google.maps.Size(32, 32),
  		new google.maps.Point(0, 0),
@@ -100,7 +101,10 @@ $(document).ready(function(){
 	
 		document.getElementById("y").innerHTML = localStorage.lastLatLon;
 		$.getLocation();
-		
+		$("#txtdialog").click(function(){
+			$( "#textdialog" ).dialog( "open" );
+
+		});
 		//addign values when radio onlclick
 		$("#radio1").click(function(){
     		//$("#boxin").hide();
@@ -281,6 +285,50 @@ $(document).ready(function(){
 	 	//map.fitBounds(bounds);
  		};*/
 
+
+/*function textdialog(){
+	$( "#textdialog" ).dialog( "open" );
+}*/
+
+	$(function() {
+		$( "#textdialog" ).dialog({
+			resizable: false,
+			height:200,
+			width:400,
+			autoOpen: false,
+			show: "blind",
+			hide: "explode",
+			modal:true,
+			buttons: {
+						Submit: function() {
+							var dataString = $("#textarea").serialize();
+/*                       		$('div#dismap').show();
+								$('div#disprog').hide();
+								$('div#ilang').show();*/
+								$('div#whylang').hide();
+								
+							$( this ).dialog( "close" );
+							    $.ajax({  
+							      type: "POST",  
+							      url: "textconec.php",  
+							      data: dataString,  
+							      success: function() {  
+							        //display message back to user here  
+							      }  
+							    });  
+							    return false;  
+							//$.post("textconec.php", $("#textarea").serialize());
+							
+						},
+						Cancel: function() {
+							$( this ).dialog( "close" );
+
+						},
+					}
+		});
+	});
+
+
 	$(function() {
 		$( "#dialog" ).dialog({
 			resizable: false,
@@ -371,7 +419,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
     </div>
 
   </div><!-- end .grid_24 -->
-  <br><br><br>
+ 
 <div class="clear"></div>
 
 
@@ -428,9 +476,10 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
 </div>
 <div class="grid_17 suffix_1">
+	<br>
 	<div id="ilang">
 	<center>
-		<br/><img src="images/ilanguage.png"><br/><br/>
+		<img src="images/ilanguage.png"><br><br>
 	<form>
 	<div id="radio" class="radio">
 		<input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
@@ -442,17 +491,17 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</div>
 	</form>
 	</center>
-	<br/>
+	<br><hr><br>
 <hr>
 </div><!-- end div of boxin css -->
 		<div id="whylang" >
 			<br>
 			<center>
 				<img src="images/whylanguage.png">
-			<form id="textarea" name="textarea" action="textconec.php" method="post">
+			<form >
 			<textarea id="textarea" name="textarea" rows="4" cols="57"></textarea>
 			<br>
-			<input type="submit" name="submit" value="Send" id="submit"/>
+			<input type="button" value="Submit" id="txtdialog" for="txtdialog" />
 		</form>
 		</center>
 		<br><hr><br>
@@ -460,14 +509,14 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
 	
 	<div id="dischart">
-<br><br>
 	<iframe frameborder="0" scrolling="no" width="680" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
 	</div>
 
 </div>
 <div class="clear"></div>
 <div class="grid_24">
-	<div id="dialog" title="confirmation">
+	<div id="dialog" title="confirmation"></div>
+	<div id="textdialog" title="?">
 	</div>
 </div>
 <div id="x"></div>
