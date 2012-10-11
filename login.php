@@ -302,6 +302,7 @@ $(function() {
     <div class="grid_22 alpha">
       &nbsp;&nbsp;&nbsp;
       <span class="title">MentalState</span>
+
     </div>
     <!-- end .grid_6.alpha -->
     <div class="grid_2 omega">
@@ -310,26 +311,17 @@ $(function() {
     </div>
 
   </div><!-- end .grid_24 -->
-  <br><br><br><br>
 <div class="clear"></div>
-<div class="grid_15">
+<div class="grid_15"><br>
   <div class="boxin" id="boxin">
   <center>
-    <img src="images/ilanguage.png" width="595" height="450"><br><br>
-  <form>
-  <div id="radio">
-    <input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
-    <input type="radio" id="radio2" name="radio" /><label for="radio2"><img src="images/hap2.png" width="50px" height="50px"></label>
-    <input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap3.png" width="50px" height="50px"></label>
-    <input type="radio" id="radio4" name="radio" /><label for="radio4"><img src="images/hap4.png" width="50px" height="50px"></label>
-  </div>
-  </form>
+    <img src="images/ilanguage.png" width="580" height="470"><br><br>
   </center>
   <br>
 
 </div><!-- end div of boxin css -->
 </div>
-<div class="grid_9">
+<div class="grid_9"><br>
 <form action="login.php" method="post" name="logForm" id="logForm" >
             <span class="ftitle">Login</span><br>
             Email or Username:<br/>
@@ -344,7 +336,7 @@ $(function() {
                 <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <input name="doLogin" type="submit" id="doLogin3" value="Login">
 </form>
-<br><br>
+<br>
 <form action="register.php" method="post" name="regForm" id="regForm" >
           <span class="ftitle">Sign Up / Registration</span><br>
           It's Free Forever<br><br>

@@ -37,7 +37,7 @@ $db = mysql_select_db(DB_NAME, $link) or die("Couldn't select database");
 */
 $user_registration = 1;  // set 0 or 1
 
-define("COOKIE_TIME_OUT", 1500); //specify cookie timeout in days (default is 10 days)
+define("COOKIE_TIME_OUT", 100); //specify cookie timeout in days (default is 10 days)
 define('SALT_LENGTH', 9); // salt for password
 
 //define ("ADMIN_NAME", "admin"); // sp

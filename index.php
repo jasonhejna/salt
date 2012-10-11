@@ -20,14 +20,11 @@ date_default_timezone_set('America/New_York');
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/angrystyle.css" />
-
 <link rel="stylesheet" href="css/960_24_col.css" />
+<script type='text/javascript' src='js/jquery.autocomplete.js'></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
-
- <script type="text/javascript" src="http://www.google.com/jsapi"></script>
- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-
-	<!-- jquery for the happiness buttons http://docs.jquery.com/UI/Button#theming -->
 	<script type="text/javascript">
 		$(function() {
 		$( ".usericons button:first" ).button({
@@ -65,10 +62,17 @@ date_default_timezone_set('America/New_York');
  	
 	$.fx.speeds._default = 700; //animation speed
 $(document).ready(function(){
-          $('div#dismap').show();
+		//$('div#dischart').hide();
+        $('div#dismap').show();
 		$('div#disprog').hide();
 		$('div#ilang').show();
 		$('div#whylang').hide();
+
+    $("#course").autocomplete("autocomplete.php", {
+        width: 230,
+        matchContains: true,
+        selectFirst: false
+    });
 
 	if(!localStorage.lastLatLon){
 		geocoder.geocode( { 'address': 
@@ -344,6 +348,8 @@ $(document).ready(function(){
 								$('div#disprog').show();
 								$('div#ilang').hide();
 								$('div#whylang').show();
+								$('div#dischart').show();
+
 							$( this ).dialog( "close" );
 
 							$.ajax({
@@ -359,10 +365,10 @@ $(document).ready(function(){
 						},
 						Cancel: function() {
 							$( this ).dialog( "close" );
-							    $('div#dismap').show();
-								$('div#disprog').hide();
-								$('div#ilang').show();
-								$('div#whylang').hide();
+							$('div#dismap').show();
+							$('div#disprog').hide();
+							$('div#ilang').show();
+							$('div#whylang').hide();
 						},
 					}
 		});
@@ -397,19 +403,26 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
     }
     
     google.setOnLoadCallback(drawVisualization);
+
+    //autocomplete
+  
 	</script>
 </head>
 <body>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_21 push_2" id="bartitle">
-    <div class="grid_14 alpha">
+<div class="grid_21" id="bartitle">
+    <div class="grid_7 alpha">
       &nbsp;&nbsp;&nbsp;
-      <span class="title">MentalState</span>
+      <span class="title">MentalState </span>
     </div>
     <!-- end .grid_6.alpha -->
-    <div class="grid_7 omega">
+    <div class="grid_14 omega">
       
+      <form action="friends.php" method="post">
+      <input type="text" name="course" id="course"/>
+      <input type="submit" /> </form>
+    
       <div class="usericons" style="float:right;">
 			<button ONCLICK="window.location.href=''">About this site</button>
 			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
@@ -420,7 +433,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
   </div><!-- end .grid_24 -->
  
-<div class="clear"></div>
+
 
 
 <!-- coundown timer time -->
@@ -456,13 +469,13 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	}
 </script>
 <div class="clear"></div>
-<div class="grid_4 prefix_2">
+<div class="grid_4">
 	<br>
 	<div id="dismap">
 	<div id="map"></div>
 <form>
 	
-<input id="address1" type="text" name="address" value="">
+<input id="address1" type="text" name="address" value="here">
 <input type="button" id="button1" value="Submit"/>
 </form>
 
@@ -471,12 +484,13 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
 			<div  id="disprog">
 			<div hidden class="mini" id="status"></div>
-			<div style="width:140px;height:24px" class="pbartop" id="progressbar"></div>
+			<div style="width:130px;height:24px" class="pbartop" id="progressbar"></div>
 			</div>
 
 </div>
-<div class="grid_17 suffix_1">
+<div class="grid_17">
 	<br>
+
 	<div id="ilang">
 	<center>
 		<img src="images/ilanguage.png"><br><br>
@@ -492,7 +506,6 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</form>
 	</center>
 	<br><hr><br>
-<hr>
 </div><!-- end div of boxin css -->
 		<div id="whylang" >
 			<br>
@@ -500,7 +513,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 				<img src="images/whylanguage.png">
 			<form >
 			<textarea id="textarea" name="textarea" rows="4" cols="57"></textarea>
-			<br>
+			<br><br>
 			<input type="button" value="Submit" id="txtdialog" for="txtdialog" />
 		</form>
 		</center>
@@ -508,19 +521,21 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</div>
 
 	
-	<div id="dischart">
+	<div id="dischart" class="dischart">
 	<iframe frameborder="0" scrolling="no" width="680" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
 	</div>
 
 </div>
 <div class="clear"></div>
 <div class="grid_24">
-	<div id="dialog" title="confirmation"></div>
-	<div id="textdialog" title="?">
+	<div id="dialog" title="Are you sure?">
+		Are you sure you want to submit your happiness from 
+		<span id="x"></span>,<span id="y"></span>?
+	</div>
+	<div id="textdialog" title="Are you sure?">
+		<span>You will not have another opertunity to edit your response. Do you still want to submit?</span>
 	</div>
 </div>
-<div id="x"></div>
-<div id="y"></div>
 </div> <!-- end of 960 grid -->
 
 </body>
