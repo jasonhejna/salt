@@ -344,7 +344,7 @@ $(document).ready(function(){
 			modal:true,
 			buttons: {
 						Submit: function() {
-                        		$('div#dismap').hide();
+                $('div#dismap').hide();
 								$('div#disprog').show();
 								$('div#ilang').hide();
 								$('div#whylang').show();

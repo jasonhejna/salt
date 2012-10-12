@@ -5,21 +5,25 @@ page_protect();
 if (isset($_SESSION['user_id'])) {
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<title>Happy Data</title>
-<!-- <style type="text/css">
- #map { width: 150px; height: 150px; border: 0px; padding: 0px; }
- </style> -->
- <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<title>Mental State</title>
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
 <link rel="stylesheet" href="css/angrystyle.css" />
 <link rel="stylesheet" href="css/960_24_col.css" />
 <script type='text/javascript' src='js/jquery.autocomplete.js'></script>
 	<script type="text/javascript">
+  $(document).ready(function(){
+    $("#cdialog").click(function(){
+      $( "#connectdialog" ).dialog( "open" );
+
+    });
+  });
 		$(function() {
 		$( ".usericons button:first" ).button({
             icons: {
@@ -45,6 +49,45 @@ if (isset($_SESSION['user_id'])) {
         selectFirst: false
     	});
 		});
+
+    $(function() {
+    $( "#connectdialog" ).dialog({
+      resizable: false,
+      height:200,
+      width:400,
+      autoOpen: false,
+      show: "blind",
+      hide: "explode",
+      modal:true,
+      buttons: {
+            Submit: function() {
+              //$("input").attr("class:");
+              var friendid = $("input").attr("class","51");
+/*                          $('div#dismap').show();
+                $('div#disprog').hide();
+                $('div#ilang').show();*/
+                //$('div#whylang').hide();
+                
+              $( this ).dialog( "close" );
+                  $.ajax({  
+                    type: "POST",  
+                    url: "connect.php",  
+                    data: friendid,  
+                    success: function() {  
+                      //display message back to user here  
+                    }  
+                  });  
+                  return false;  
+              //$.post("textconec.php", $("#textarea").serialize());
+              
+            },
+            Cancel: function() {
+              $( this ).dialog( "close" );
+
+            },
+          }
+    });
+  });
 	</script>
 </head>
 <body>
@@ -60,7 +103,8 @@ if (isset($_SESSION['user_id'])) {
       
       <form action="friends.php" method="post">
       <input type="text" name="course" id="course"/>
-      <input type="submit" /> </form>
+      <input type="submit" />
+      </form>
     
       <div class="usericons" style="float:right;">
 			<button ONCLICK="window.location.href=''">About this site</button>
@@ -73,10 +117,20 @@ if (isset($_SESSION['user_id'])) {
   </div><!-- end .grid_24 -->
  
 <div class="clear"></div>
-<div class="grid_4">
+<div class="grid_6">
+  <br><br>
 </div>
-<div class="grid_17">
+<div class="grid_15">
+  <br><br>
+  <?php include 'friends_inc.php'; ?>
 </div>
+<div class="clear"></div>
+<div class="grid_24">
+  <div id="connectdialog" title="Are you sure?">
+    <span>Do you want to Connect?</span>
+  </div>
+</div>
+</div> <!-- end 960 -->
 </body>
 </html>
 <?php } ?>

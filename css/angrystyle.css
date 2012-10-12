@@ -92,3 +92,32 @@ span.title {
 	background-color: #0A246A;
 	color: white;
 }
+
+#userbox {
+	margin-bottom:25px;
+	float:left;
+	width:515px;
+	border: 1px solid black;
+	padding-top:25px;
+	padding-bottom:25px;
+	padding-right:35px;
+	padding-left:35px;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.9em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
+}
+div#cdialog {
+	float:left;
+	width:88px;
+	height:88px;
+}
+/* going with nbsp to allign name
+div#coolname {
+	float:left;
+	padding-left:20px;
+}*/
+input#coolbutton {
+	float:right;
+}
+img.upic {
+	width: auto;max-width: 88px;height: auto;max-height: 88px;vertical-align:text-top;
+	float:left;
+}
