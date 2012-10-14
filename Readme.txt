@@ -6,5 +6,6 @@ To begin, download the folder from https://github.com/jasonhejna/obsdino.git
 2. Adjust connection settings in dbc.php
 3. In your web browser, navigate to the folder on your localhost.
 4. Horay, the site works! Now create register a new account and start derping around.
+5. Give me feedback, jason.hejna.com
 
 ***************************************************************/
