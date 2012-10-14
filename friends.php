@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id'])) {
       buttons: {
             Submit: function() {
               //$("input").attr("class:");
-              var friendid = $("input").attr("class","51");
+              var friendid = document.getElementById("cdialog").getAttribute("class");
 /*                          $('div#dismap').show();
                 $('div#disprog').hide();
                 $('div#ilang').show();*/
@@ -71,8 +71,8 @@ if (isset($_SESSION['user_id'])) {
               $( this ).dialog( "close" );
                   $.ajax({  
                     type: "POST",  
-                    url: "connect.php",  
-                    data: friendid,  
+                    url: "connect.php", 
+                    data: {friendid:friendid,},  
                     success: function() {  
                       //display message back to user here  
                     }  

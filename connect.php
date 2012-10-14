@@ -5,7 +5,9 @@ if (isset($_SESSION['user_id'])) {
 	$goturid = $_SESSION['user_id'];
 	$friendid = $_POST['friendid'];
 
-$frienduya = "INSERT INTO users (`id`) VALUES '$friendid' WHERE id = '$goturid'";
+
+
+$frienduya = "UPDATE users SET friends=CONCAT('$friendid,',friends) WHERE id = '$goturid'";
 mysql_query($frienduya) or die(mysql_error()); 
 }
 ?>
