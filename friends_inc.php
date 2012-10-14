@@ -44,6 +44,9 @@ if (isset($_SESSION['user_id'])) {
 		else {
 			// do nothing I guess
 			echo '<div id="userbox">Connect with friends</div>';
+			//something
+			//post the connect result to the freinds_left.php. maybe do this in connect.php
+			<?php include 'friends_left.php'; ?>
 		}
 }
 ?>
