@@ -19,6 +19,8 @@ if (isset($_SESSION['user_id'])) {
 <script type='text/javascript' src='js/jquery.autocomplete.js'></script>
 	<script type="text/javascript">
   $(document).ready(function(){
+    
+
     $("#cdialog").click(function(){
       $( "#connectdialog" ).dialog( "open" );
 
@@ -63,11 +65,9 @@ if (isset($_SESSION['user_id'])) {
             Submit: function() {
               //$("input").attr("class:");
               var friendid = document.getElementById("cdialog").getAttribute("class");
-/*                          $('div#dismap').show();
-                $('div#disprog').hide();
-                $('div#ilang').show();*/
-                //$('div#whylang').hide();
-                
+
+                $('div#userbox').hide();
+                $('div#magnifyfriend').show();
               $( this ).dialog( "close" );
                   $.ajax({  
                     type: "POST",  
@@ -123,6 +123,9 @@ if (isset($_SESSION['user_id'])) {
 <div class="grid_15">
   <br><br>
   <?php include 'friends_inc.php'; ?>
+  <div id="magnifyfriend">
+    <?php include 'friends_left.php'; ?>
+  </div>
 </div>
 <div class="clear"></div>
 <div class="grid_24">
