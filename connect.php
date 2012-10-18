@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-$frienduya = "UPDATE users SET friends=CONCAT('$friendid,',friends) WHERE id = '$goturid'";
+$frienduya = "UPDATE users SET friends=CONCAT('|$goturid',friends) WHERE id = '$friendid'";
 mysql_query($frienduya) or die(mysql_error()); 
 }
 ?>

@@ -19,13 +19,49 @@ if (isset($_SESSION['user_id'])) {
 <script type='text/javascript' src='js/jquery.autocomplete.js'></script>
 	<script type="text/javascript">
   $(document).ready(function(){
-    
+    //var cnfrm;
+      $("#course").autocomplete("autocomplete.php", {
+        width: 230,
+        matchContains: true,
+        selectFirst: false
+      });
 
-    $("#cdialog").click(function(){
-      $( "#connectdialog" ).dialog( "open" );
+      $("input#cdialog").click(function() {
+        //var friendid = document.getElementById("cdialog").getAttribute("class");
+        //var friendid = this.class;
+        var friendid = $("input#cdialog").attr("class");
+        $( "#connectdialog" ).dialog( "open" );
+        return false;
+      });
+
+
+       $('input.confirmfr').click(function() { 
+        document.getElementById("conf").setAttribute("id","monkey");
+          //var conf ='1';
+          //$(this).class;
+          //var confid = this;
+        //var conf = '55';
+        $( "#confirmdialog" ).dialog( "open" );
+          return false; 
+      });
+      //confirm connection
+/*      $("#confirmfr").click(function() {
+        $("#confirmfr").load($(this).attr("class"));
+        return false;
+        $( "#confirm" ).dialog('open');
+        
+      });*/
+
 
     });
-  });
+
+//confirm connection
+/*  function confirmdfunc(id) {
+    //var conf = document.getElementById("confirmfr").getAttribute("class");
+    //var idd = id;
+    $( "#confirm" ).dialog('open');
+  }*/
+
 		$(function() {
 		$( ".usericons button:first" ).button({
             icons: {
@@ -44,13 +80,7 @@ if (isset($_SESSION['user_id'])) {
             text: false
         })
 		});
-		$(document).ready(function(){
-		$("#course").autocomplete("autocomplete.php", {
-        width: 230,
-        matchContains: true,
-        selectFirst: false
-    	});
-		});
+
 
     $(function() {
     $( "#connectdialog" ).dialog({
@@ -63,16 +93,63 @@ if (isset($_SESSION['user_id'])) {
       modal:true,
       buttons: {
             Submit: function() {
-              //$("input").attr("class:");
-              var friendid = document.getElementById("cdialog").getAttribute("class");
 
-                $('div#userbox').hide();
-                $('div#magnifyfriend').show();
+              //$("input").attr("class:");
+              //var friendid = document.getElementById("cdialog").getAttribute("class");
+              //var friendos = friendid;
+
+                //$('.' + friendid).hide();
               $( this ).dialog( "close" );
                   $.ajax({  
                     type: "POST",  
                     url: "connect.php", 
                     data: {friendid:friendid,},  
+                    success: function() {  
+                      //display message back to user here  
+                    }  
+                  });  
+                  return false;  
+              //$.post("textconec.php", $("#textarea").serialize());
+              
+            },
+            Cancel: function() {
+              $( this ).dialog( "close" );
+
+            },
+          }
+    });
+  });
+
+  //confirm connection
+//var confid;
+     
+
+    $(function() {
+      //var confid;
+    $( "#confirmdialog" ).dialog({
+      resizable: false,
+      height:200,
+      width:400,
+      autoOpen: false,
+      show: "blind",
+      hide: "explode",
+      modal:true,
+      buttons: {
+            Submit: function() {
+              //var conf = document.getElementById(cnfrm).getAttribute("class");
+              //$("input").attr("class:");
+              //var confid;
+              var conf = document.getElementById("monkey").getAttribute("name");
+
+              //var conf = this.getAttribute("name");
+              //var confirmos = conf;
+              //var conf = '55';
+                //$('.' + friendid).hide();
+              $( this ).dialog( "close" );
+                  $.ajax({  
+                    type: "POST",  
+                    url: "confirmajax.php", 
+                    data: {conf:conf,},  
                     success: function() {  
                       //display message back to user here  
                     }  
@@ -123,14 +200,18 @@ if (isset($_SESSION['user_id'])) {
 <div class="grid_15">
   <br><br>
   <?php include 'friends_inc.php'; ?>
+
   <div id="magnifyfriend">
-    <?php include 'friends_left.php'; ?>
+    
   </div>
 </div>
 <div class="clear"></div>
 <div class="grid_24">
   <div id="connectdialog" title="Are you sure?">
-    <span>Do you want to Connect?</span>
+    <span>Connecting with friends allows them to see some of your info. Are you sure?</span>
+  </div>
+  <div id="confirmdialog" title="Are you sure?">
+    <span>Connecting with friends allows them to see some of your Info. Are you sure?</span>
   </div>
 </div>
 </div> <!-- end 960 -->

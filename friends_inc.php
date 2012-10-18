@@ -9,7 +9,7 @@ if (isset($_SESSION['user_id'])) {
 
 	$q = strtolower($_POST["course"]);
 
-	$friendq = mysql_query("SELECT `friends` FROM users WHERE `user_name` = 'jasonhejna'"); //add a limit of one here
+	$friendq = mysql_query("SELECT `friends` FROM users WHERE `id` = $sesvar"); //add a limit of one here
 	while($row2 = mysql_fetch_array($friendq)) {
 	//print_r($row2['friends']);
 	$explodefriend = explode('|', $row2['friends']);
@@ -29,24 +29,44 @@ if (isset($_SESSION['user_id'])) {
 
 		<div id="coolbox">
 		<img class="upic" src="images/malesilhouette.png" /></div>&nbsp;&nbsp;' 
-    	. $row['full_name'] . '<input id="cdialog" for="cdialog" class="' . $row['id'] . '" type="button" value="connect"/> </div> </br>';
+    	. $row['full_name'] . '<input  id="cdialog" class="' . $row['id'] . '" type="submit" value="connect"/> </div>';
 	}
 	else {
 		echo '<div id="userbox">
 		
 		<div id="coolbox">
 		<img class="upic" src="data:image/jpeg;base64,' . base64_encode( $row['profile_pic'] ) . '" /></div>&nbsp;&nbsp;' 
-    	. $row['full_name'] . '<input id="cdialog" for="cdialog" class="' . $row['id'] . '" type="button" value="connect"/> </div> <br/>';
+    	. $row['full_name'] . '<input id="cdialog" class="' . $row['id'] . '" type="submit" value="connect"/> </div>';
 	}
 }	
+else {
+		if (is_null($row['profile_pic'])) {
+		echo '<div id="userbox">
+
+		<div id="coolbox">
+		<img class="upic" src="images/malesilhouette.png" /></div>&nbsp;&nbsp;' 
+    	. $row['full_name'] . '</div>';
+	}
+	else {
+		echo '<div id="userbox">
+		
+		<div id="coolbox">
+		<img class="upic" src="data:image/jpeg;base64,' . base64_encode( $row['profile_pic'] ) . '" /></div>&nbsp;&nbsp;' 
+    	. $row['full_name'] . '</div>';
+	}
+}
 }
 		}
 		else {
 			// do nothing I guess
-			echo '<div id="userbox">Connect with friends</div>';
+			echo '<div id="userbox">Pending Connections
+
+			</div>';
+			//there should be something that check for a null value in autocomplete textbox, and if null then do this else
+			include 'friends_conf.php';
 			//something
 			//post the connect result to the freinds_left.php. maybe do this in connect.php
-			<?php include 'friends_left.php'; ?>
+			
 		}
 }
 ?>
