@@ -2,8 +2,16 @@
 /********************** MYSETTINGS.PHP**************************
 This updates user settings and password
 ************************************************************/
+error_reporting (E_ALL ^ E_NOTICE);
 include 'dbc.php';
 page_protect();
+
+/*********************** MYACCOUNT MENU ****************************
+This code shows my account menu only to logged in users. 
+Copy this code till END and place it in a new html or php where
+you want to show myaccount options. This is only visible to logged in users
+*******************************************************************/
+if (isset($_SESSION['user_id'])) { 
 
 $err = array();
 $msg = array();
@@ -52,9 +60,20 @@ $rs_settings = mysql_query("select * from users where id='$_SESSION[user_id]'");
 ?>
 <html>
 <head>
-<title>My Account Settings</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<script language="JavaScript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Jason Hejna">
+  <link rel="shortcut icon" href="images/gauge.ico">
+  <link rel="icon" href="images/gauge.ico">
+<title>Mental State - Account info</title>
+<!-- <style type="text/css">
+ #map { width: 150px; height: 150px; border: 0px; padding: 0px; }
+ </style> -->
+ <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/angrystyle.css" />
+<link rel="stylesheet" href="css/960_24_col.css" />
+<script type='text/javascript' src='js/jquery.autocomplete.js'></script>
 <script language="JavaScript" type="text/javascript" src="js/jquery.validate.js"></script>
   <script>
   $(document).ready(function(){
@@ -62,32 +81,71 @@ $rs_settings = mysql_query("select * from users where id='$_SESSION[user_id]'");
 	 $("#pform").validate();
   });
   </script>
+  <script type="text/javascript">
+  $(function() {
+    $( ".searchicon button:first" ).button({
+            icons: {
+                primary: "ui-icon-search"
+            },
+            text: false
+          })
+    });
+
+    $(function() {
+    $( ".usericons button:first" ).button({
+            icons: {
+                primary: "ui-icon-person"
+            },
+            text: false
+        }).next().button({
+            icons: {
+                primary: "ui-icon-home"
+            },
+            text: false
+        }).next().button({
+            icons: {
+                primary: "ui-icon-locked"
+            },
+            text: false
+        })
+  });
+  </script>
 <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+<div class="container_24">
+<div class="clear"></div>
+<div class="grid_18" id="bartitle">
+  
+<div class="grid_6 alpha">
+      &nbsp;
+      <a href="friends.php"><span class="title">MentalState </span></a>
+</div>
+<div class="grid_12 omega">
+    
+      <form action="friends.php" method="post">
+      <div class="searchicon">
+
+      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:250px;margin-left:8px;" />
+      <button type="submit" class="searchbutton" >Find Friends</button>
+    </div>
+    <div class="usericons">
+      </form>
+      <button ONCLICK="window.location.href='friends.php'">My Friends</button>
+      <button ONCLICK="window.location.href='index.php'">Settings</button>
+      <button ONCLICK="window.location.href='logout.php'">Logout</button>
+    </div>
+</div>
+</div><!-- end .grid_21 -->
+
+<br><br><br>
 <table width="100%" border="0" cellspacing="0" cellpadding="5" class="main">
+
   <tr> 
-    <td colspan="3">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td width="160" valign="top"><?php 
-/*********************** MYACCOUNT MENU ****************************
-This code shows my account menu only to logged in users. 
-Copy this code till END and place it in a new html or php where
-you want to show myaccount options. This is only visible to logged in users
-*******************************************************************/
-if (isset($_SESSION['user_id'])) {?>
-<div class="myaccount">
-  <p><strong>My Account</strong></p>
-  <a href="index.php">Home</a><br>
-  <a href="mysettings.php">Settings</a><br>
-    <a href="logout.php">Logout </a>
-  <p>You can add more links here for users</p></div>
-<?php } 
-/*******************************END**************************/
-?>
+    <td width="160" valign="top">
   <?php 
+  include 'myinc_pic.php';
 if (checkAdmin()) {
 /*******************************END**************************/
 ?>
@@ -119,8 +177,8 @@ if (checkAdmin()) {
       <form action="mysettings.php" method="post" name="myform" id="myform">
         <table width="90%" border="0" align="center" cellpadding="3" cellspacing="3" class="forms">
           <tr> 
-            <td colspan="2"> Your Name / Company Name<br> <input name="name" type="text" id="name"  class="required" value="<?php echo $row_settings['full_name']; ?>" size="50"> 
-              <span class="example">Your name or company name</span></td>
+            <td colspan="2"> <span class="example">Your name</span> <input name="name" type="text" id="name"  class="required" value="<?php echo $row_settings['full_name']; ?>" size="47"> 
+              </td>
           </tr>
 
           <tr> 
@@ -128,7 +186,7 @@ if (checkAdmin()) {
             <td>&nbsp;</td>
           </tr>
           <tr> 
-            <td>User Name</td>
+            <td>User Name/Login Name</td>
             <td><input name="user_name" type="text" id="web2" value="<?php echo $row_settings['user_name']; ?>" disabled></td>
           </tr>
           <tr> 
@@ -173,3 +231,6 @@ if (checkAdmin()) {
 
 </body>
 </html>
+<?php } 
+/*******************************END**************************/
+?>

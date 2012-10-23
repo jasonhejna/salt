@@ -11,8 +11,11 @@ date_default_timezone_set('America/New_York');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Happy Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Jason Hejna">
+  <link rel="shortcut icon" href="images/gauge.ico">
+  <link rel="icon" href="images/gauge.ico">
+<title>Mental State</title>
 <!-- <style type="text/css">
  #map { width: 150px; height: 150px; border: 0px; padding: 0px; }
  </style> -->
@@ -26,10 +29,19 @@ date_default_timezone_set('America/New_York');
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 	<script type="text/javascript">
+    $(function() {
+    $( ".searchicon button:first" ).button({
+            icons: {
+                primary: "ui-icon-search"
+            },
+            text: false
+          })
+    });
+
 		$(function() {
 		$( ".usericons button:first" ).button({
             icons: {
-                primary: "ui-icon-info"
+                primary: "ui-icon-person"
             },
             text: false
         }).next().button({
@@ -39,7 +51,7 @@ date_default_timezone_set('America/New_York');
             text: false
         }).next().button({
             icons: {
-                primary: "ui-icon-locked"
+                primary: "ui-icon-unlocked"
             },
             text: false
         })
@@ -63,10 +75,11 @@ date_default_timezone_set('America/New_York');
 	$.fx.speeds._default = 700; //animation speed
 $(document).ready(function(){
 		//$('div#dischart').hide();
-        $('div#dismap').show();
+    $('div#dismap').show();
 		$('div#disprog').hide();
 		$('div#ilang').show();
 		$('div#whylang').hide();
+    $('div#dischart').hide();
 
     $("#course").autocomplete("autocomplete.php", {
         width: 230,
@@ -404,34 +417,65 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
     
     google.setOnLoadCallback(drawVisualization);
 
-    //autocomplete
+    $(document).ready(function(){
+  var limitnum = 127; // set your int limit for max number of characters
+  
+  function limiting(obj, limit) {
+    var cnt = $("#counter > span");
+    var txt = $(obj).val(); 
+    var len = txt.length;
+    
+    // check if the current length is over the limit
+    if(len > limit){
+       $(obj).val(txt.substr(0,limit));
+       $(cnt).html(limit-len);
+     } 
+     else { 
+       $(cnt).html(limit-len);
+     }
+     
+     // check if user has less than 20 chars left
+     if(limit-len <= 20) {
+      $(cnt).addClass("warning");
+     }
+  }
+
+
+  $('textarea').keyup(function(){
+    limiting($(this), limitnum);
+  });
+});
   
 	</script>
 </head>
 <body>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_21" id="bartitle">
-    <div class="grid_7 alpha">
-      &nbsp;&nbsp;&nbsp;
-      <span class="title">MentalState </span>
-    </div>
-    <!-- end .grid_6.alpha -->
-    <div class="grid_14 omega">
-      
-      <form action="friends.php" method="post">
-      <input type="text" name="course" id="course"/>
-      <input type="submit" /> </form>
+<div class="grid_18" id="bartitle">
+  
+<div class="grid_6 alpha">
+      &nbsp;
+      <a href="friends.php"><span class="title">MentalState</span></a>
+</div>
+<div class="grid_12 omega">
     
-      <div class="usericons" style="float:right;">
-			<button ONCLICK="window.location.href=''">About this site</button>
-			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
-			<button ONCLICK="window.location.href='logout.php'">Logout</button>
-			&nbsp;		
-		</div>
-    </div>
+      <form action="friends.php" method="post">
+        <div class="searchicon">
+      
 
-  </div><!-- end .grid_24 -->
+      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:255px;margin-left:8px;" />
+      <button id="uniqueny1" type="submit" class="searchbutton" >Find Friends</button>
+    
+      </form>
+    </div>
+      <div class="usericons">
+			<button id="uniqueny2" ONCLICK="window.location.href='friends.php'" style="margin-left:27px;">Friends</button>
+			<button id="uniqueny3" >Settings</button>
+			<button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
+      
+    </div>
+</div>
+</div><!-- end .grid_21 -->
  
 
 
@@ -467,10 +511,11 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 		
 	
 	}
+
 </script>
 <div class="clear"></div>
 <div class="grid_4">
-	<br>
+	<br><br><br><br>
 	<div id="dismap">
 	<div id="map"></div>
 <form>
@@ -488,12 +533,11 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 			</div>
 
 </div>
-<div class="grid_17">
-	<br>
-
+<div class="grid_15">
 	<div id="ilang">
+    <br><br><br><br>
 	<center>
-		<img src="images/ilanguage.png"><br><br>
+		<!-- <img src="images/ilanguage.png"><br><br> -->
 	<form>
 	<div id="radio" class="radio">
 		<input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
@@ -505,27 +549,35 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</div>
 	</form>
 	</center>
-	<br><hr><br>
+	<br><br><br>
 </div><!-- end div of boxin css -->
 		<div id="whylang" >
-			<br>
-			<center>
-				<img src="images/whylanguage.png">
+			<br><br><br>
+			
+				<!-- <img src="images/whylanguage.png"> -->
 			<form >
-			<textarea id="textarea" name="textarea" rows="4" cols="57"></textarea>
-			<br><br>
-			<input type="button" value="Submit" id="txtdialog" for="txtdialog" />
+    <div id="w">
+      <textarea name="text" id="text" class="txt" tabindex="1" autofocus="autofocus" rows="5" cols="60"></textarea>
+
+      <br><input type="button" value="Submit" id="txtdialog" for="txtdialog" /><p id="counter" style="display:inline; margin:0px;"><span>120</span> to go.</p>
+    </div>
+
+			
+			
 		</form>
-		</center>
-		<br><hr><br>
+		
+		<br>
 	</div>
-
-	
-	<div id="dischart" class="dischart">
-	<iframe frameborder="0" scrolling="no" width="680" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
-	</div>
-
 </div>
+	<div class="clear"></div>
+<div class="grid_18">
+  <br><br>
+	<div id="dischart" class="dischart">
+  <hr><br><br>
+	<iframe frameborder="0" scrolling="no" width="720" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
+	</div>
+</div>
+
 <div class="clear"></div>
 <div class="grid_24">
 	<div id="dialog" title="Are you sure?">

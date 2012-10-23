@@ -1,7 +1,8 @@
 <?php 
-
+error_reporting (E_ALL ^ E_NOTICE);
 if (isset($_SESSION['user_id'])) {
 	$sesvar = $_SESSION['user_id'];
+
 	$result4 = mysql_query("SELECT `friends` FROM users WHERE `id` = '$sesvar' ");
 		
 	while($row4 = mysql_fetch_array($result4)) {
@@ -19,14 +20,14 @@ if (isset($_SESSION['user_id'])) {
 
 						<div id="coolbox">
 						<img class="upic" src="images/malesilhouette.png" /></div>&nbsp;&nbsp;' 
-				    	. $row['full_name'] . '<form><input id="conf" class="confirmfr" name="' . $row['id'] . '" type="button" /></form></div>';
+				    	. $row['full_name'] . '<form><input id="conf' . $i . '" class="confirmfr" name="' . $row['id'] . '" type="button" onclick="javascript:rundialog('. $row['id'] . ')" /></form></div>';
 					}
 					else {
 						echo '<div id="userbox">
 						
 						<div id="coolbox">
 						<img class="upic" src="data:image/jpeg;base64,' . base64_encode( $row['profile_pic'] ) . '" /></div>&nbsp;&nbsp;' 
-				    	. $row['full_name'] . '<form><input id="conf" class="confirmfr" name="' . $row['id'] . '" type="button" /></form></div>';
+				    	. $row['full_name'] . '<form><input id="conf' . $i . '" class="confirmfr" name="' . $row['id'] . '" type="button" onclick="javascript:rundialog('. $row['id'] . ')" /></form></div>';
 					}
 				}
 

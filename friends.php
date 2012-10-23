@@ -1,4 +1,5 @@
 <?php
+
 include 'dbc.php';
 page_protect();
 
@@ -18,6 +19,29 @@ if (isset($_SESSION['user_id'])) {
 <link rel="stylesheet" href="css/960_24_col.css" />
 <script type='text/javascript' src='js/jquery.autocomplete.js'></script>
 	<script type="text/javascript">
+         //$('input.confirmfr').click(function() { 
+          var confirmedid;
+          var friendid;
+        function rundialog(id){
+
+          confirmedid = id;
+        //var lolz = document.getElementById("conf").getAttribute("class");
+        //var turnkey = this.class;
+        //document.getElementById("conf").setAttribute("id","monkey");
+
+          //var conf ='1';
+          //$(this).class;
+          //var confid = this;
+        //var conf = '55';
+        $( "#confirmdialog" ).dialog( "open" );
+          return false; 
+      }
+
+      function runfriends(runfriendsid) {
+        friendid = runfriendsid;
+        $( "#connectdialog" ).dialog( "open" );
+        return false;
+      }
   $(document).ready(function(){
     //var cnfrm;
       $("#course").autocomplete("autocomplete.php", {
@@ -26,24 +50,29 @@ if (isset($_SESSION['user_id'])) {
         selectFirst: false
       });
 
-      $("input#cdialog").click(function() {
-        //var friendid = document.getElementById("cdialog").getAttribute("class");
-        //var friendid = this.class;
-        var friendid = $("input#cdialog").attr("class");
-        $( "#connectdialog" ).dialog( "open" );
-        return false;
-      });
+      // $("input#cdialog").click(function() {
+      //   //var friendid = document.getElementById("cdialog").getAttribute("class");
+      //   //var friendid = this.class;
+      //   var friendid = $("input#cdialog").attr("class");
+      //   $( "#connectdialog" ).dialog( "open" );
+      //   return false;
+      // });
+    
+       //$('input.confirmfr').click(function() { 
+      //   $(function rundialog(){
 
 
-       $('input.confirmfr').click(function() { 
-        document.getElementById("conf").setAttribute("id","monkey");
-          //var conf ='1';
-          //$(this).class;
-          //var confid = this;
-        //var conf = '55';
-        $( "#confirmdialog" ).dialog( "open" );
-          return false; 
-      });
+      //   //var lolz = document.getElementById("conf").getAttribute("class");
+      //   //var turnkey = this.class;
+      //   document.getElementById("conf").setAttribute("id","monkey");
+
+      //     //var conf ='1';
+      //     //$(this).class;
+      //     //var confid = this;
+      //   //var conf = '55';
+      //   $( "#confirmdialog" ).dialog( "open" );
+      //     return false; 
+      // });
       //confirm connection
 /*      $("#confirmfr").click(function() {
         $("#confirmfr").load($(this).attr("class"));
@@ -65,7 +94,7 @@ if (isset($_SESSION['user_id'])) {
 		$(function() {
 		$( ".usericons button:first" ).button({
             icons: {
-                primary: "ui-icon-info"
+                primary: "ui-icon-home"
             },
             text: false
         }).next().button({
@@ -139,7 +168,7 @@ if (isset($_SESSION['user_id'])) {
               //var conf = document.getElementById(cnfrm).getAttribute("class");
               //$("input").attr("class:");
               //var confid;
-              var conf = document.getElementById("monkey").getAttribute("name");
+              //var conf = document.getElementById("monkey").getAttribute("name");
 
               //var conf = this.getAttribute("name");
               //var confirmos = conf;
@@ -149,7 +178,7 @@ if (isset($_SESSION['user_id'])) {
                   $.ajax({  
                     type: "POST",  
                     url: "confirmajax.php", 
-                    data: {conf:conf,},  
+                    data: {conf:confirmedid,},  
                     success: function() {  
                       //display message back to user here  
                     }  
@@ -170,13 +199,13 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_21" id="bartitle">
+<div class="grid_18" id="bartitle">
     <div class="grid_7 alpha">
       &nbsp;&nbsp;&nbsp;
-      <span class="title">MentalState </span>
+      <a href="index.php"><span class="title">MentalState </span></a>
     </div>
     <!-- end .grid_6.alpha -->
-    <div class="grid_14 omega">
+    <div class="grid_11 omega">
       
       <form action="friends.php" method="post">
       <input type="text" name="course" id="course"/>
@@ -184,7 +213,7 @@ if (isset($_SESSION['user_id'])) {
       </form>
     
       <div class="usericons" style="float:right;">
-			<button ONCLICK="window.location.href=''">About this site</button>
+			<button ONCLICK="window.location.href='index.php'">About this site</button>
 			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
 			<button ONCLICK="window.location.href='logout.php'">Logout</button>
 			&nbsp;		
@@ -194,16 +223,12 @@ if (isset($_SESSION['user_id'])) {
   </div><!-- end .grid_24 -->
  
 <div class="clear"></div>
-<div class="grid_6">
-  <br><br>
+<div class="grid_4">
+  <br><br><br><br>.
 </div>
-<div class="grid_15">
-  <br><br>
+<div class="grid_14">
+  <br><br><br><br>
   <?php include 'friends_inc.php'; ?>
-
-  <div id="magnifyfriend">
-    
-  </div>
 </div>
 <div class="clear"></div>
 <div class="grid_24">

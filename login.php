@@ -298,8 +298,8 @@ $(function() {
 
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_24" id="bartitle">
-    <div class="grid_22 alpha">
+<div class="grid_18" id="bartitle">
+    <div class="grid_16 alpha">
       &nbsp;&nbsp;&nbsp;
       <span class="title">MentalState</span>
 
@@ -312,11 +312,11 @@ $(function() {
 
   </div><!-- end .grid_24 -->
 <div class="clear"></div>
-<div class="grid_15"><br>
+<div class="grid_9"><br>
   <div class="boxin" id="boxin">
-  <center>
+<!--   <center>
     <img src="images/ilanguage.png" width="580" height="470"><br><br>
-  </center>
+  </center> -->
   <br>
 
 </div><!-- end div of boxin css -->

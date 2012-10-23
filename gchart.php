@@ -18,22 +18,56 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
     var data = new google.visualization.DataTable();
       data.addColumn('date', 'Date');
-      data.addColumn('number', 'your happiness');
+      data.addColumn('number', 'happiness');
       data.addColumn('string', 'title1');
       data.addColumn('string', 'text1');
 
       data.addRows([
         
-        <?php
-        $result = mysql_query("SELECT `happiness`, `unix_time` FROM happy WHERE `user_id` = $goturid");
-        
-        while($row = mysql_fetch_array($result)){
+<?php
+$i=0;
+        $result = mysql_query("SELECT `happiness`, `unix_time`,`text` FROM happy WHERE `user_id` = $goturid");
+
+while($row = mysql_fetch_array($result)){
         $time = $row['unix_time'];// -(31*24*60*60);
         $ftime = strftime("%Y,%m-1,%d,%H,%M,%S",$time);
         $happz = $row['happiness'];
-        echo "[new Date($ftime), $happz, null, null],";
+
+        switch ($happz) {
+            case 0:
+                   $smile = ":`(";
+                   break;
+            case 1:
+                   $smile = ":(";
+                   break;
+            case 2:
+                   $smile = ":|";
+                   break;
+            case 3:
+                   $smile = ":/";
+                   break;
+            case 4:
+                   $smile = ":)";
+                   break;
+            case 5:
+                   $smile = ":D";
+                   break;
+            default:
+                  $smile = "undefined";
         }
-		?>
+        $smilestr = (string)$smile;
+        $text = $row['text'];
+        $textstr = "";
+        $textstr = (string)$text;
+        if ($textstr != "") {
+        echo "[new Date($ftime), $happz, '$smile', '$textstr'],";
+        }
+        else {
+          echo "[new Date($ftime), $happz, undefined,undefined],";
+        }
+
+}
+?>
       ]);
     
       var annotatedtimeline = new google.visualization.AnnotatedTimeLine(
@@ -46,7 +80,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 </script>
 </head>
 <body>
-	<div id="visualization" style="width: 680px; height: 400px;"></div>
+	<div id="visualization" style="width: 720px; height: 400px;"></div>
 </body>
 </html>
 <?php } ?>
