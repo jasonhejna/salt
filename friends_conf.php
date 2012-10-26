@@ -1,41 +1,71 @@
 <?php 
-error_reporting (E_ALL ^ E_NOTICE);
+//error_reporting (E_ALL ^ E_NOTICE);
 if (isset($_SESSION['user_id'])) {
 	$sesvar = $_SESSION['user_id'];
 
-	$result4 = mysql_query("SELECT `friends` FROM users WHERE `id` = '$sesvar' ");
-		
-	while($row4 = mysql_fetch_array($result4)) {
+				$result2 = mysql_query("SELECT `friendid` FROM pendingfriend WHERE `myid` = $sesvar");
 
-		$explodefriend = explode('|', $row4['friends']);
 
-		foreach ($explodefriend as $key => $value) {
-
-				$result2 = mysql_query("SELECT `full_name`, `profile_pic`, `id` FROM users WHERE `id` = $value");
 				$i=0;
 				while($row = mysql_fetch_array($result2)) {
+
+
+					$getdaid = $row['friendid'];
+					
+					$profinfo = mysql_query("SELECT `id`,`full_name`,`profile_pic` FROM users WHERE `id` = $getdaid");
+					while($row2 = mysql_fetch_array($profinfo)) {
 					$i++;
-					if (is_null($row['profile_pic'])) {
+					if (is_null($row2['profile_pic'])) {
 						echo '<div id="userbox">
 
 						<div id="coolbox">
-						<img class="upic" src="images/malesilhouette.png" /></div>&nbsp;&nbsp;' 
-				    	. $row['full_name'] . '<form><input id="conf' . $i . '" class="confirmfr" name="' . $row['id'] . '" type="button" onclick="javascript:rundialog('. $row['id'] . ')" /></form></div>';
+						<img class="upic" src="images/malesilhouette.png" />
+						</div><center>' 
+				    	. $row2['full_name'] . '
+				    	<br><form>
+				    	<button  id="conf' . $i . '" class="confirmfr" name="' . $row2['id'] . '" type="button" onclick="javascript:rundialog('. $row2['id'] . ')">
+				    	<span  onmouseover="javascript:puzzle('. $i . ');" >
+				    	
+
+				    	<img src="images/puzzleyes.png" id="puzzle2' . $i . '" width="65" class="puzzle2" />
+				    	<img src="images/puzzlepieceno.png" id="puzzle' . $i . '" width="65" class="puzzle" />
+				    	</span>
+				    	</button>
+				    	</form>
+				    	</center>
+				    	</div>';
 					}
 					else {
 						echo '<div id="userbox">
 						
 						<div id="coolbox">
-						<img class="upic" src="data:image/jpeg;base64,' . base64_encode( $row['profile_pic'] ) . '" /></div>&nbsp;&nbsp;' 
-				    	. $row['full_name'] . '<form><input id="conf' . $i . '" class="confirmfr" name="' . $row['id'] . '" type="button" onclick="javascript:rundialog('. $row['id'] . ')" /></form></div>';
+						<img class="upic" src="data:image/jpeg;base64,' . base64_encode( $row2['profile_pic'] ) . '" />
+						</div><center>' 
+				    	. $row2['full_name'] . '
+				    	<br><form>
+				    	<button  id="conf' . $i . '" class="confirmfr" name="' . $row2['id'] . '" type="button" onclick="javascript:rundialog('. $row2['id'] . ')">
+				    	<span onmouseover="javascript:puzzle('. $i . ');" >
+				    	
+
+				    	<img src="images/puzzleyes.png" id="puzzle2' . $i . '" width="65" class="puzzle2" />
+				    	<img src="images/puzzlepieceno.png" id="puzzle' . $i . '" width="65" class="puzzle" />
+				    	</span>
+				    	</button>
+				    	</form>
+				    	</center>
+				    	</div>';
 					}
+				
+					}
+
 				}
 
-		}
+					if($i<=0) {
+						echo '<div id="userbox">You have no pending connections.</div>';
+						//$i++;
+					}	
 
 	}
 
 
-	
-}
 ?>

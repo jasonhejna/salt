@@ -7,7 +7,7 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-$frienduya = "UPDATE users SET friends=CONCAT('|$goturid',friends) WHERE id = '$friendid'";
+$frienduya = "INSERT INTO pendingfriend (`myid`,`friendid`) VALUES ('$friendid','$goturid')";
 mysql_query($frienduya) or die(mysql_error()); 
 }
 ?>

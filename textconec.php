@@ -6,7 +6,7 @@ if (isset($_SESSION['user_id'])) {
 	$goturid = $_SESSION['user_id'];
 	$last = $_SESSION['lasttime'];
 	$lastround = round($last);
-	$text = $_POST['textarea'];
+	$text = $_POST['dataString'];
 
 //$query = "INSERT INTO happy (text) VALUES ($textarea) ON DUPLICATE KEY UPDATE  text='$textarea' text SET user_id = '$goturid' AND unix_time = '$lastround'";
 

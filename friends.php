@@ -42,7 +42,46 @@ if (isset($_SESSION['user_id'])) {
         $( "#connectdialog" ).dialog( "open" );
         return false;
       }
+
+      function puzzle(dasi) {
+      $iit=0;
+      $iss=0;
+        //$iit++;
+/*        if ($iit = 1 || $iit >=3){}
+        if ($iit >= 4) {$iit=0;}*/
+
+        // $('#puzzle'+ dasi +'').hide();
+        // $('#puzzle2'+ dasi +'').show();
+/*        if ($iit == 2) {$iit=0;}
+        
+        setTimeout(function(){
+        
+        $('#puzzle2'+ dasi +'').hide();
+        $('#puzzle'+ dasi +'').show();
+
+        
+        },1500);
+        clearTimeout();*/
+      
+      while ($iss < 1) {
+        $iss++;
+        $('#puzzle'+ dasi +'').hide();
+        $('#puzzle2'+ dasi +'').show();
+        
+        setTimeout(function(){
+        $('#puzzle'+ dasi +'').show();
+        $('#puzzle2'+ dasi +'').hide();
+        
+        },1500);
+        clearTimeout();
+
+      }
+      }
+
+
   $(document).ready(function(){
+      $('.puzzle2').hide();
+
     //var cnfrm;
       $("#course").autocomplete("autocomplete.php", {
         width: 230,
@@ -174,6 +213,7 @@ if (isset($_SESSION['user_id'])) {
               //var confirmos = conf;
               //var conf = '55';
                 //$('.' + friendid).hide();
+
               $( this ).dialog( "close" );
                   $.ajax({  
                     type: "POST",  
@@ -194,6 +234,8 @@ if (isset($_SESSION['user_id'])) {
           }
     });
   });
+
+
 	</script>
 </head>
 <body>
@@ -223,12 +265,13 @@ if (isset($_SESSION['user_id'])) {
   </div><!-- end .grid_24 -->
  
 <div class="clear"></div>
-<div class="grid_4">
-  <br><br><br><br>.
-</div>
-<div class="grid_14">
-  <br><br><br><br>
+<div class="grid_7">
+  <br><br><br>
   <?php include 'friends_inc.php'; ?>
+</div>
+<div class="grid_11">
+  <br><br><br>.
+  
 </div>
 <div class="clear"></div>
 <div class="grid_24">

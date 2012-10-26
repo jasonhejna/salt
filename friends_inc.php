@@ -10,15 +10,11 @@ if (isset($_SESSION['user_id'])) {
 
 	$q = strtolower($_POST["course"]);
 	if (strlen($q) <= "2") {
-		echo '<p>Not enough Characters in your Search. Please try again. </p>';
+		echo '<p>Not enough Characters in your Search. Try your search again. </p>';
 	}
-	else {
-	$friendq = mysql_query("SELECT `friends` FROM users WHERE `id` = $sesvar"); //add a limit of one here
-	while($row2 = mysql_fetch_array($friendq)) {
-	//print_r($row2['friends']);
-	$explodefriend = explode('|', $row2['friends']);
-	//print_r($explodefriend);
-	}
+	else {}
+
+	
 
 	
 	$result2 = mysql_query("SELECT `full_name`, `profile_pic`, `id` FROM users WHERE `full_name` LIKE '%$q%'");
@@ -63,13 +59,11 @@ else {
 	}
 }
 }
-	} //end of the fewer than two if statement
+	
 }
 		else {
 			// do nothing I guess
-			echo '<div id="userbox">Pending Connections
-
-			</div>';
+			echo '<div id="coltitle"><center>Pending Connections</center></div>';
 			//there should be something that check for a null value in autocomplete textbox, and if null then do this else
 			include 'friends_conf.php';
 			//something

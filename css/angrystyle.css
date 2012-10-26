@@ -25,9 +25,7 @@ div.boxin{
 form, table {display:inline; margin:0px; padding:0px;}
 
 .ui-progressbar .ui-progressbar-value { background-image: url(images/pbar-ani.gif); }
-div#disprog{
-padding-left:19px;
-}
+
 #bartitle {
 position: fixed;
 z-index: 104;
@@ -102,15 +100,20 @@ div.userleft {
 }
 
 #userbox {
-	margin-bottom:25px;
+	margin-bottom:15px;
 	float:left;
-	width:480px;
-	border: 1px solid black;
-	padding-top:25px;
-	padding-bottom:25px;
-	padding-right:35px;
-	padding-left:35px;
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.9em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
+	width:247px;
+	border: 1px solid;
+	border-color:#D6D6D6;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-right:10px;
+	padding-left:10px;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em;color:#000;
+}
+#coltitle {
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.4em;color:#D6D6D6;
+	margin-bottom: 4px;
 }
 div#cdialog {
 	float:left;
@@ -175,6 +178,11 @@ img.upic {
 textarea {
 	resize: none;
 }
-div#whylang {
-	float: right;
+
+.confirmfr {
+margin-top: 18px;
+
+}
+div#whylang{
+	margin-left: 145px;
 }

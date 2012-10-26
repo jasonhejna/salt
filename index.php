@@ -318,17 +318,19 @@ $(document).ready(function(){
 			modal:true,
 			buttons: {
 						Submit: function() {
-							var dataString = $("#textarea").serialize();
+							var datastring = $('#text').val();
+							//var datastring = $("#textarea").serialize();
 /*                       		$('div#dismap').show();
 								$('div#disprog').hide();
 								$('div#ilang').show();*/
 								$('div#whylang').hide();
 								
 							$( this ).dialog( "close" );
+
 							    $.ajax({  
-							      type: "POST",  
-							      url: "textconec.php",  
-							      data: dataString,  
+							      type: 'POST',  
+							      url: 'textconec.php',  
+							      data: {dataString:datastring},
 							      success: function() {  
 							        //display message back to user here  
 							      }  
@@ -393,7 +395,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 
     var data = new google.visualization.DataTable();
       data.addColumn('date', 'Date');
-      data.addColumn('number', 'your happiness');
+      data.addColumn('number', 'My happiness');
       data.addColumn('string', 'title1');
       data.addColumn('string', 'text1');
 
@@ -470,7 +472,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
     </div>
       <div class="usericons">
 			<button id="uniqueny2" ONCLICK="window.location.href='friends.php'" style="margin-left:27px;">Friends</button>
-			<button id="uniqueny3" >Settings</button>
+			<button id="uniqueny3" ONCLICK="window.location.href='mysettings.php'" >Settings</button>
 			<button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
       
     </div>
@@ -527,10 +529,6 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</div>
 
 
-			<div  id="disprog">
-			<div hidden class="mini" id="status"></div>
-			<div style="width:130px;height:24px" class="pbartop" id="progressbar"></div>
-			</div>
 
 </div>
 <div class="grid_15">
@@ -551,25 +549,35 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</center>
 	<br><br><br>
 </div><!-- end div of boxin css -->
+</div> <!-- end grid 15 -->
+<div class="clear"></div>
+<div class="grid_19">
 		<div id="whylang" >
-			<br><br><br>
 			
+			<div  id="disprog">
+			<div hidden class="mini" id="status"></div>
+			<div style="width:130px;height:24px" class="pbartop" id="progressbar"></div>
+			</div>
+			
+			<br>
 				<!-- <img src="images/whylanguage.png"> -->
 			<form >
     <div id="w">
+    	<span id="coltitle">Why do you feel this way? (optional)</span><br>
       <textarea name="text" id="text" class="txt" tabindex="1" autofocus="autofocus" rows="5" cols="60"></textarea>
-
-      <br><input type="button" value="Submit" id="txtdialog" for="txtdialog" /><p id="counter" style="display:inline; margin:0px;"><span>120</span> to go.</p>
+      
+      <br><p id="counter" style="display:inline; margin:0px;color:#BABABA;"><span>127</span> to go.</p>
+      &nbsp;&nbsp;
+      <input type="button" value="Submit" id="txtdialog" for="txtdialog" />
     </div>
 
-			
-			
 		</form>
 		
 		<br>
+	
 	</div>
 </div>
-	<div class="clear"></div>
+<div class="clear"></div>
 <div class="grid_18">
   <br><br>
 	<div id="dischart" class="dischart">
