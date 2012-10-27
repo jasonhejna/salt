@@ -62,6 +62,7 @@ $rs_settings = mysql_query("select * from users where id='$_SESSION[user_id]'");
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="author" content="Jason Hejna">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" href="images/gauge.ico">
   <link rel="icon" href="images/gauge.ico">
 <title>Mental State - Account info</title>
@@ -120,24 +121,27 @@ $rs_settings = mysql_query("select * from users where id='$_SESSION[user_id]'");
   
 <div class="grid_6 alpha">
       &nbsp;
-      <a href="friends.php"><span class="title">MentalState </span></a>
+      <a href="friends.php"><span class="title">HappyData</span></a>
 </div>
 <div class="grid_12 omega">
     
       <form action="friends.php" method="post">
-      <div class="searchicon">
+        <div class="searchicon">
+      
 
-      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:250px;margin-left:8px;" />
-      <button type="submit" class="searchbutton" >Find Friends</button>
-    </div>
-    <div class="usericons">
+      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:255px;margin-left:8px;" />
+      <button id="uniqueny1" type="submit" class="searchbutton" >Find Friends</button>
+    
       </form>
-      <button ONCLICK="window.location.href='friends.php'">My Friends</button>
-      <button ONCLICK="window.location.href='index.php'">Settings</button>
-      <button ONCLICK="window.location.href='logout.php'">Logout</button>
+    </div>
+      <div class="usericons">
+      <button id="uniqueny2" ONCLICK="window.location.href='friends.php'" style="margin-left:26px;">Friends</button>
+      <button id="uniqueny3" ONCLICK="window.location.href='index.php'" >Settings</button>
+      <button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
+      
     </div>
 </div>
-</div><!-- end .grid_21 -->
+</div> <!-- end .grid_18 -->
 
 <br><br><br>
 <table width="100%" border="0" cellspacing="0" cellpadding="5" class="main">

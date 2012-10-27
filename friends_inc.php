@@ -63,7 +63,7 @@ else {
 }
 		else {
 			// do nothing I guess
-			echo '<div id="coltitle"><center>Pending Connections</center></div>';
+			echo '<div id="coltitle">Pending Connections</div>';
 			//there should be something that check for a null value in autocomplete textbox, and if null then do this else
 			include 'friends_conf.php';
 			//something

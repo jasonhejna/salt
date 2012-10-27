@@ -10,8 +10,12 @@ if (isset($_SESSION['user_id'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Mental State</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="author" content="Jason Hejna">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="images/gauge.ico">
+<link rel="icon" href="images/gauge.ico">
+<title>HappyData</title>
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
@@ -130,10 +134,19 @@ if (isset($_SESSION['user_id'])) {
     $( "#confirm" ).dialog('open');
   }*/
 
-		$(function() {
-		$( ".usericons button:first" ).button({
+    $(function() {
+    $( ".searchicon button:first" ).button({
             icons: {
-                primary: "ui-icon-home"
+                primary: "ui-icon-search"
+            },
+            text: false
+          })
+    });
+
+    $(function() {
+    $( ".usericons button:first" ).button({
+            icons: {
+                primary: "ui-icon-person"
             },
             text: false
         }).next().button({
@@ -143,11 +156,11 @@ if (isset($_SESSION['user_id'])) {
             text: false
         }).next().button({
             icons: {
-                primary: "ui-icon-locked"
+                primary: "ui-icon-unlocked"
             },
             text: false
         })
-		});
+  });
 
 
     $(function() {
@@ -161,7 +174,8 @@ if (isset($_SESSION['user_id'])) {
       modal:true,
       buttons: {
             Submit: function() {
-
+            $('.rawz'+ confirmedid +'').hide();
+            
               //$("input").attr("class:");
               //var friendid = document.getElementById("cdialog").getAttribute("class");
               //var friendos = friendid;
@@ -204,15 +218,7 @@ if (isset($_SESSION['user_id'])) {
       modal:true,
       buttons: {
             Submit: function() {
-              //var conf = document.getElementById(cnfrm).getAttribute("class");
-              //$("input").attr("class:");
-              //var confid;
-              //var conf = document.getElementById("monkey").getAttribute("name");
-
-              //var conf = this.getAttribute("name");
-              //var confirmos = conf;
-              //var conf = '55';
-                //$('.' + friendid).hide();
+            
 
               $( this ).dialog( "close" );
                   $.ajax({  
@@ -242,36 +248,43 @@ if (isset($_SESSION['user_id'])) {
 <div class="container_24">
 <div class="clear"></div>
 <div class="grid_18" id="bartitle">
-    <div class="grid_7 alpha">
-      &nbsp;&nbsp;&nbsp;
-      <a href="index.php"><span class="title">MentalState </span></a>
-    </div>
-    <!-- end .grid_6.alpha -->
-    <div class="grid_11 omega">
-      
-      <form action="friends.php" method="post">
-      <input type="text" name="course" id="course"/>
-      <input type="submit" />
-      </form>
+  
+<div class="grid_6 alpha">
+      &nbsp;
+      <a href="index.php"><span class="title">HappyData</span></a>
+</div>
+<div class="grid_12 omega">
     
-      <div class="usericons" style="float:right;">
-			<button ONCLICK="window.location.href='index.php'">About this site</button>
-			<button ONCLICK="window.location.href='mysettings.php'">Settings</button>
-			<button ONCLICK="window.location.href='logout.php'">Logout</button>
-			&nbsp;		
-		</div>
-    </div>
+      <form action="friends.php" method="post">
+        <div class="searchicon">
+      
 
-  </div><!-- end .grid_24 -->
+      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:255px;margin-left:8px;" />
+      <button id="uniqueny1" type="submit" class="searchbutton" >Find Friends</button>
+    
+      </form>
+    </div>
+      <div class="usericons">
+      <button id="uniqueny2" ONCLICK="window.location.href=''" style="margin-left:26px;">Friends</button>
+      <button id="uniqueny3" ONCLICK="window.location.href='mysettings.php'" >Settings</button>
+      <button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
+      
+    </div>
+</div>
+</div> <!-- end .grid_18 -->
  
 <div class="clear"></div>
+<div class="grid_6">
+  <br><br><br>
+.
+</div>
 <div class="grid_7">
   <br><br><br>
   <?php include 'friends_inc.php'; ?>
 </div>
-<div class="grid_11">
-  <br><br><br>.
-  
+<div class="grid_5">
+  <br><br><br>
+  .
 </div>
 <div class="clear"></div>
 <div class="grid_24">

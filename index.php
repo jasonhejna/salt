@@ -12,10 +12,11 @@ date_default_timezone_set('America/New_York');
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Jason Hejna">
   <link rel="shortcut icon" href="images/gauge.ico">
   <link rel="icon" href="images/gauge.ico">
-<title>Mental State</title>
+<title>HappyData</title>
 <!-- <style type="text/css">
  #map { width: 150px; height: 150px; border: 0px; padding: 0px; }
  </style> -->
@@ -29,6 +30,7 @@ date_default_timezone_set('America/New_York');
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
 	<script type="text/javascript">
+
     $(function() {
     $( ".searchicon button:first" ).button({
             icons: {
@@ -74,12 +76,48 @@ date_default_timezone_set('America/New_York');
  	
 	$.fx.speeds._default = 700; //animation speed
 $(document).ready(function(){
+
 		//$('div#dischart').hide();
     $('div#dismap').show();
 		$('div#disprog').hide();
 		$('div#ilang').show();
 		$('div#whylang').hide();
     $('div#dischart').hide();
+
+    $("#button1").click(function(){
+			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
+          		if (status == google.maps.GeocoderStatus.OK) {
+          			lat = results[0].geometry.location.lat();
+          			lon = results[0].geometry.location.lng();
+          			localStorage.lastLatLon = lat+","+lon;
+        			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+  					document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
+  					//document.getElementById("x").innerHTML = document.getElementById("address1").value;
+  					document.getElementById("y").innerHTML = localStorage.lastLatLon;
+            		//alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng());
+            		
+            		//var latlngStr = localStorage.lastLatLon.split(",",2);
+   					//var lat = parseFloat(latlngStr[0]);
+    				//var lng = parseFloat(latlngStr[1]);
+    				var latlng = new google.maps.LatLng(lat, lon);
+					geocoder.geocode({'latLng': latlng}, function(resultz, status) {
+	      				if (status == google.maps.GeocoderStatus.OK) {
+			          		document.getElementById("x").innerHTML=resultz[1].formatted_address;
+    			   		}
+      					else {
+        					//alert("Geocoder failed due to: " + status);
+        					$( "#mapdialog" ).dialog( "open" );
+							return false;
+		        		}
+	    		  	}); 
+          		} else {
+            		//alert("Something went wrong " + status);
+            		$( "#mapdialog" ).dialog( "open" );
+					return false;
+          		}
+        	});
+        	
+		});
 
     $("#course").autocomplete("autocomplete.php", {
         width: 230,
@@ -106,7 +144,9 @@ $(document).ready(function(){
   					document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
           		}
           		else {
-            		alert("Something went wrong " + status);
+            		//alert("Something went wrong " + status);
+            		$( "#mapdialog" ).dialog( "open" );
+					return false;
           		}
           	});
           }
@@ -121,6 +161,11 @@ $(document).ready(function(){
 		$("#txtdialog").click(function(){
 			$( "#textdialog" ).dialog( "open" );
 
+		});
+		//map click button
+		$("#map").click(function(){
+			$( "#mapdialog" ).dialog( "open" );
+			return false;
 		});
 		//addign values when radio onlclick
 		$("#radio1").click(function(){
@@ -176,37 +221,8 @@ $(document).ready(function(){
     		$( "#dialog" ).dialog( "open" );
 			return false;
   		});
-  		$("#button1").click(function(){
-			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
-          		if (status == google.maps.GeocoderStatus.OK) {
-          			lat = results[0].geometry.location.lat();
-          			lon = results[0].geometry.location.lng();
-          			localStorage.lastLatLon = lat+","+lon;
-        			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
-  					document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
-  					//document.getElementById("x").innerHTML = document.getElementById("address1").value;
-  					document.getElementById("y").innerHTML = localStorage.lastLatLon;
-            		//alert("location : " + results[0].geometry.location.lat() + " " +results[0].geometry.location.lng());
-            		
-            		//var latlngStr = localStorage.lastLatLon.split(",",2);
-   					//var lat = parseFloat(latlngStr[0]);
-    				//var lng = parseFloat(latlngStr[1]);
-    				var latlng = new google.maps.LatLng(lat, lon);
-					geocoder.geocode({'latLng': latlng}, function(resultz, status) {
-	      				if (status == google.maps.GeocoderStatus.OK) {
-			          		document.getElementById("x").innerHTML=resultz[1].formatted_address;
-    			   		}
-      					else {
-        					alert("Geocoder failed due to: " + status);
-		        		}
-	    		  	}); 
-          		} else {
-            		alert("Something went wrong " + status);
-          		}
-        	});
-        	
-		});
-  	});
+
+  	}); //end ducument ready
 
 	$(function() {
 		$( "#radio" ).buttonset();
@@ -308,6 +324,31 @@ $(document).ready(function(){
 }*/
 
 	$(function() {
+		$( "#mapdialog" ).dialog({
+			resizable: false,
+			height:200,
+			width:400,
+			autoOpen: false,
+			show: "blind",
+			hide: "explode",
+			modal:true,
+			buttons: {
+						
+						Done: function() {
+							$( this ).dialog( "close" );
+
+						},
+					}
+		});
+		$("#address1").keyup(function(event){
+		    if(event.keyCode == 13){
+		        $("#button1").click();
+		    }
+		});
+
+	});
+
+	$(function() {
 		$( "#textdialog" ).dialog({
 			resizable: false,
 			height:200,
@@ -358,7 +399,7 @@ $(document).ready(function(){
 			hide: "explode",
 			modal:true,
 			buttons: {
-						Submit: function() {
+				Submit: function() {
                 $('div#dismap').hide();
 								$('div#disprog').show();
 								$('div#ilang').hide();
@@ -451,13 +492,14 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</script>
 </head>
 <body>
+
 <div class="container_24">
 <div class="clear"></div>
 <div class="grid_18" id="bartitle">
   
 <div class="grid_6 alpha">
       &nbsp;
-      <a href="friends.php"><span class="title">MentalState</span></a>
+      <a href="friends.php"><span class="title">HappyData</span></a>
 </div>
 <div class="grid_12 omega">
     
@@ -465,19 +507,19 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
         <div class="searchicon">
       
 
-      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:255px;margin-left:8px;" />
+      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:255px;margin-left:1px;" />
       <button id="uniqueny1" type="submit" class="searchbutton" >Find Friends</button>
     
       </form>
     </div>
       <div class="usericons">
-			<button id="uniqueny2" ONCLICK="window.location.href='friends.php'" style="margin-left:27px;">Friends</button>
+			<button id="uniqueny2" ONCLICK="window.location.href='friends.php'" style="margin-left:26px;">Friends</button>
 			<button id="uniqueny3" ONCLICK="window.location.href='mysettings.php'" >Settings</button>
 			<button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
       
     </div>
 </div>
-</div><!-- end .grid_21 -->
+</div> <!-- end .grid_18 -->
  
 
 
@@ -520,22 +562,16 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	<br><br><br><br>
 	<div id="dismap">
 	<div id="map"></div>
-<form>
 	
-<input id="address1" type="text" name="address" value="here">
-<input type="button" id="button1" value="Submit"/>
-</form>
-
 	</div>
 
-
-
 </div>
-<div class="grid_15">
+<div class="grid_14">
 	<div id="ilang">
     <br><br><br><br>
 	<center>
 		<!-- <img src="images/ilanguage.png"><br><br> -->
+		
 	<form>
 	<div id="radio" class="radio">
 		<input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
@@ -546,33 +582,32 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 		<input type="radio" id="radio6" name="radio" /><label for="radio6"><img src="images/hap4.png" width="50px" height="50px"></label>
 	</div>
 	</form>
+	<span id="coltitle">-At this moment, which best describes how you feel?</span>
 	</center>
 	<br><br><br>
 </div><!-- end div of boxin css -->
 </div> <!-- end grid 15 -->
 <div class="clear"></div>
 <div class="grid_19">
-		<div id="whylang" >
-			
-			<div  id="disprog">
+	      	<div  id="disprog">
 			<div hidden class="mini" id="status"></div>
-			<div style="width:130px;height:24px" class="pbartop" id="progressbar"></div>
+			<div style="width:130px;height:24px;float:left;" class="pbartop" id="progressbar"></div>
 			</div>
-			
-			<br>
+		<div id="whylang" >
 				<!-- <img src="images/whylanguage.png"> -->
 			<form >
     <div id="w">
-    	<span id="coltitle">Why do you feel this way? (optional)</span><br>
-      <textarea name="text" id="text" class="txt" tabindex="1" autofocus="autofocus" rows="5" cols="60"></textarea>
-      
-      <br><p id="counter" style="display:inline; margin:0px;color:#BABABA;"><span>127</span> to go.</p>
+    	<span id="coltitle">
+    		Why do you feel this way? (optional)
+		</span><br>
+      <textarea name="text" id="text" class="txt" tabindex="1" autofocus="autofocus" rows="3" cols="60"></textarea>
+      <p id="counter" style="display:inline; margin:0px;font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em;color:#BABABA;float:right;margin-right:240px;"><span>127</span> to go.</p>
       &nbsp;&nbsp;
-      <input type="button" value="Submit" id="txtdialog" for="txtdialog" />
+      <input type="button" value="Submit" id="txtdialog" for="txtdialog" style="float:right;margin-right:15px;" />
     </div>
 
 		</form>
-		
+
 		<br>
 	
 	</div>
@@ -582,7 +617,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
   <br><br>
 	<div id="dischart" class="dischart">
   <hr><br><br>
-	<iframe frameborder="0" scrolling="no" width="720" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart"></iframe>
+	<iframe frameborder="0" scrolling="no" width="720" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart" style="z-index:3;"></iframe>
 	</div>
 </div>
 
@@ -594,6 +629,14 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	</div>
 	<div id="textdialog" title="Are you sure?">
 		<span>You will not have another opertunity to edit your response. Do you still want to submit?</span>
+	</div>
+	<div id="mapdialog" title="Update your Address">
+	<span>
+		<form>
+		<input id="address1" type="text" name="address" value="Address" width="30">
+		<input type="button" id="button1" value="Search" tabindex="1" />
+		</form>
+	</span>
 	</div>
 </div>
 </div> <!-- end of 960 grid -->

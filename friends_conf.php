@@ -16,7 +16,7 @@ if (isset($_SESSION['user_id'])) {
 					while($row2 = mysql_fetch_array($profinfo)) {
 					$i++;
 					if (is_null($row2['profile_pic'])) {
-						echo '<div id="userbox">
+						echo '<div id="userbox" class="rawz' . $row2['id'] . '">
 
 						<div id="coolbox">
 						<img class="upic" src="images/malesilhouette.png" />

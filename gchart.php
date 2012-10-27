@@ -80,7 +80,7 @@ while($row = mysql_fetch_array($result)){
 </script>
 </head>
 <body>
-	<div id="visualization" style="width: 720px; height: 400px;"></div>
+	<div id="visualization" style="width: 720px; height: 400px;z-index:3;"></div>
 </body>
 </html>
 <?php } ?>
