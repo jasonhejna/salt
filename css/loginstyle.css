@@ -1,3 +1,7 @@
+a {
+  text-decoration: none;
+
+}
 input[type="text"],
 input[type="password"] {
   -webkit-box-sizing: border-box;
@@ -31,13 +35,14 @@ input[type="password"] {
 form#logForm{
   background-color:#FFF;
   border-style:solid;
-  border-width:4px;
-  border-color:#1c94c4;
-  -moz-border-radius: 21px;
-  border-radius: 17px; 
+  border-width:1px;
+  border-color:#D6D6D6;
+  -moz-border-radius: 6px;
+  border-radius: 5px; 
+  /*
   -moz-box-shadow: 4px 5px 0 0px #C0D8EF;
   -webkit-box-shadow: 4px 5px 0 0px #C0D8EF;
-  box-shadow: 15px 15px 0 0px #1c94c4;
+  box-shadow: 15px 15px 0 0px #1c94c4;*/
   padding-top:20px;
   padding-bottom:20px;
   padding-right:1px;
@@ -48,16 +53,17 @@ form#logForm{
 form#regForm{
   background-color:#FFF;
   border-style:solid;
-  border-width:4px;
-  border-color:#1c94c4;
-  -moz-border-radius: 21px;
-  border-radius: 17px; 
-  -moz-box-shadow: 5px 5px 0 0px #1c94c4;
-  -webkit-box-shadow: 5px 5px 0 0px #1c94c4;
-  box-shadow: 15px 15px 0 0px #1c94c4;
+  border-width:1px;
+  border-color:#D6D6D6;
+  -moz-border-radius: 6px;
+  border-radius: 5px; 
+  /*
+  -moz-box-shadow: 4px 5px 0 0px #C0D8EF;
+  -webkit-box-shadow: 4px 5px 0 0px #C0D8EF;
+  box-shadow: 15px 15px 0 0px #1c94c4;*/
   padding-top:20px;
   padding-bottom:20px;
-  padding-right:0px;
+  padding-right:1px;
   padding-left:12px;
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.9em;color:#969696;
 
@@ -81,18 +87,39 @@ span.title {
   font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.5em;color:#FFF;
 }
 #bartitle {
-  border-style:solid;
+position: fixed;
+z-index: 104;
+max-width: 710px;
+max-height: 49px;
+/*border-style:solid;
 border-width:3px;
-border-color:#FFF;
-  background-color: #1c94c4;
-  -moz-border-radius: 14px;
-  border-radius: 14px; 
-  -moz-box-shadow: 4px 5px 0 0px #1c94c4;
+border-color:#FFF;*/
+background-color: #1c94c4;
+/*-webkit-box-shadow: 0px -2px 20px rgba(0, 0, 0, 0.6); 
+-moz-box-shadow: 0px -1px 16px rgba(23, 69, 88, .5);*/
+-webkit-box-shadow: 0px -4px 7px rbga(230, 230, 230, .5);
+-moz-box-shadow: 0px -4px 7px rbga(230, 230, 230, .5);
+box-shadow: 0px -4px 7px rbga(230, 230, 230, .5);
+/*-moz-box-shadow: 4px 5px 0 0px #1c94c4;
 -webkit-box-shadow: 4px 5px 0 0px #1c94c4;
-box-shadow: 10px 10px 0 0px #1c94c4;
+box-shadow: 10px 10px 0 0px #1c94c4;*/
 background-image: url("../images/stripe.png");
 background-repeat: repeat-x;
 }
-span.lang {
-  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.8em;color:#FFFFFF;
+span#lang {
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.8em;color:#FFF;
+  float:right;
+  margin-right: 11px;
+}
+h3 {
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#969696;
+  margin-left: 6px;
+  margin-top: 0px;
+  margin-bottom: 8px;
+}
+h4 {
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.8em;color:#969696;
+  margin-left: 12px;
+  margin-top: 0px;
+  margin-bottom: 9px;
 }

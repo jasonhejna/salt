@@ -146,7 +146,7 @@ if (isset($_SESSION['user_id'])) {
     $(function() {
     $( ".usericons button:first" ).button({
             icons: {
-                primary: "ui-icon-person"
+                primary: "ui-icon-home"
             },
             text: false
         }).next().button({
@@ -156,7 +156,7 @@ if (isset($_SESSION['user_id'])) {
             text: false
         }).next().button({
             icons: {
-                primary: "ui-icon-unlocked"
+                primary: "ui-icon-locked"
             },
             text: false
         })
@@ -174,8 +174,8 @@ if (isset($_SESSION['user_id'])) {
       modal:true,
       buttons: {
             Submit: function() {
-            $('.rawz'+ confirmedid +'').hide();
             
+            $('#userbox').hide();
               //$("input").attr("class:");
               //var friendid = document.getElementById("cdialog").getAttribute("class");
               //var friendos = friendid;
@@ -218,7 +218,7 @@ if (isset($_SESSION['user_id'])) {
       modal:true,
       buttons: {
             Submit: function() {
-            
+            $('.rawz'+ confirmedid +'').hide();
 
               $( this ).dialog( "close" );
                   $.ajax({  
@@ -265,7 +265,7 @@ if (isset($_SESSION['user_id'])) {
       </form>
     </div>
       <div class="usericons">
-      <button id="uniqueny2" ONCLICK="window.location.href=''" style="margin-left:26px;">Friends</button>
+      <button id="uniqueny2" ONCLICK="window.location.href='index.php'" style="margin-left:26px;">Friends</button>
       <button id="uniqueny3" ONCLICK="window.location.href='mysettings.php'" >Settings</button>
       <button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
       

@@ -102,18 +102,27 @@ $num = mysql_num_rows($result);
 }
 					 
 ?>
-<html>
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Jason Hejna">
+  <link rel="shortcut icon" href="images/gauge.ico">
+  <link rel="icon" href="images/gauge.ico">
 <title>HappyData.me - Self-Reported Happiness Question</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="css/960_24_col.css" />
-<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/loginstyle.css" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
-<link rel="stylesheet" href="css/loginstyle.css" />
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+
+
   <script type="text/javascript">
+
+
   $(function() { //jquery button register
-        $( "input[type=submit], button" )
+        $( "button" )
             .button()
             .click(function( event ) {
                 event.preventDefault();
@@ -165,45 +174,49 @@ $(function() {
 <div class="container_24">
 <div class="clear"></div>
 <div class="grid_18" id="bartitle">
-    <div class="grid_16 alpha">
-      &nbsp;&nbsp;&nbsp;
-      <span class="title">HappyData</span>
-
-    </div>
-    <!-- end .grid_6.alpha -->
-    <div class="grid_2 omega">
-      <br>
-      <span class="lang">english</span>
+  
+<div class="grid_15 alpha">
+      &nbsp;
+      <a href="register.php"><span class="title">HappyData</span></a>
+</div>
+<div class="grid_3 omega">
+<span id="lang"><br>english</span>
     </div>
 
-  </div><!-- end .grid_24 -->
+
+</div> <!-- end .grid_18 -->
 <div class="clear"></div>
-<div class="grid_9"><br>
+
+<div class="grid_9">
+  <br><br><br><br><br>
   <div class="boxin" id="boxin">
 <!--   <center>
     <img src="images/ilanguage.png" width="580" height="470"><br><br>
   </center> -->
   <br>
-
+..
 </div><!-- end div of boxin css -->
 </div>
-<div class="grid_9"><br>
+<div class="grid_9">
+  <br><br><br>
 <form action="login.php" method="post" name="logForm" id="logForm" >
-            <span class="ftitle">Login</span><br>
+            <span class="ftitle">Login</span><br><br>
             Email or Username:<br/>
             <input name="usr_email" type="text" class="required" id="txtbox" size="25" tabindex="1">
             <br/>
             Password:<br>
             <input name="pwd" type="password" class="required password" id="txtbox" size="25" tabindex="2">
             
-            <a href="forgot.php">Forgot Password?</a><br>
+            &nbsp;<a href="forgot.php">Forgot Password?</a><br>
             <input name="remember" type="checkbox" id="remember" value="1">
                 Remember me
                 <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input name="doLogin" type="submit" id="doLogin3" value="Login" tabindex="3">
+            <input name="doLogin" type="submit" id="doLogin3" value="Login"  tabindex="3">
 </form>
-<br><br>
-<button ONCLICK="window.location.href='register.php'">Register</button>
+<center>
+  <button ONCLICK="window.location.href='register.php'" style="font-size: 2.03em;padding:4px;">Register / Sign-Up</button><br>
+</center>
+  <h4>HappyData is free, and always will be.</h4>
 
   </div>
 <div class="clear"></div>

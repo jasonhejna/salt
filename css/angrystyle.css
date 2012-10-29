@@ -115,6 +115,14 @@ div.userleft {
 	padding-left:10px;
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em;color:#000;
 }
+#bordertextarea {
+	background-color:#FFF;
+  border-style:solid;
+  border-width:1px;
+  border-color:#D6D6D6;
+  -moz-border-radius: 6px;
+  border-radius: 5px;
+}
 #coltitle {
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#D6D6D6;
 	margin-bottom: 4px;

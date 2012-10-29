@@ -164,25 +164,68 @@ THIS IS AN AUTOMATED RESPONSE.
 ?>
 <html>
 <head>
-<title>PHP Login :: Free Registration/Signup Form</title>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<script language="JavaScript" type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
-<script language="JavaScript" type="text/javascript" src="js/jquery.validate.js"></script>
 
-  <script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Jason Hejna">
+  <link rel="shortcut icon" href="images/gauge.ico">
+  <link rel="icon" href="images/gauge.ico">
+<title>HappyData.me - Register / SignUp</title>
+
+<link rel="stylesheet" href="css/960_24_col.css" />
+<link rel="stylesheet" href="css/loginstyle.css" />
+<script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
+<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+  <script type="text/javascript">
+
+  
   $(document).ready(function(){
     $.validator.addMethod("username", function(value, element) {
         return this.optional(element) || /^[a-z0-9\_]+$/i.test(value);
     }, "Username must contain only letters, numbers, or underscore.");
 
-    $("#regForm").validate();
+
   });
+
+  var RecaptchaOptions = {
+    theme : 'white'
+ };
+
+    $("#regForm").validate();
+
+    $(function() {
+        $( "input[type=submit], a, button" )
+            .button()
+            .click(function( event ) {
+                event.preventDefault();
+            });
+    });
   </script>
 
-<link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+<div class="container_24">
+<div class="clear"></div>
+<div class="grid_18" id="bartitle">
+  
+<div class="grid_15 alpha">
+      &nbsp;
+      <a href="login.php"><span class="title">HappyData</span></a>
+</div>
+<div class="grid_3 omega">
+<span id="lang"><br>english</span>
+    </div>
+
+
+</div> <!-- end .grid_18 -->
+<div class="clear"></div>
+<div class="grid_5">
+<br><br><br>
+</div>
+<div class="grid_13">
+
 <table width="100%" border="0" cellspacing="0" cellpadding="5" class="main">
   <tr> 
     <td colspan="3">&nbsp;</td>
@@ -200,26 +243,26 @@ THIS IS AN AUTOMATED RESPONSE.
      <?php exit();
       }
     ?></p>
-      <h3 class="titlehdr">Free Registration / Signup</h3>
-      <p>Please register a free account, before you can start posting your ads. 
-        Registration is quick and free! Please note that fields marked <span class="required">*</span> 
-        are required.</p>
-     <?php  
-     if(!empty($err))  {
-       echo "<div class=\"msg\">";
-      foreach ($err as $e) {
-        echo "* $e <br>";
-        }
-      echo "</div>";    
-       }
-     ?> 
-     
-      <br>
-      <form action="register.php" method="post" name="regForm" id="regForm" >
-        <table width="95%" border="0" cellpadding="3" cellspacing="3" class="forms">
 
+      <br><br>
+      <form action="register.php" method="post" name="regForm" id="regForm" >
+        <table width="100%" border="0" cellpadding="3" cellspacing="3" class="forms">
           <tr> 
-            <td colspan="2"><h4><strong>Login Details</strong></h4></td>
+            <td colspan="2">
+              <h3><strong>Registration / Sign Up</strong></h3>
+              <h4>It's free forever.</h4>
+          </td>
+          </tr>
+          <tr>
+            <?php  
+              if(!empty($err))  {
+               echo "<div class=\"msg\">";
+              foreach ($err as $e) {
+                echo "* $e <br>";
+                }
+              echo "</div>";    
+               }
+            ?> 
           </tr>
           <tr> 
             <td>Your Name<span class="required"><font color="#CC0000">*</font></span></td> 
@@ -238,13 +281,13 @@ THIS IS AN AUTOMATED RESPONSE.
             <td>Your Email<span class="required"><font color="#CC0000">*</font></span> 
             </td>
             <td><input name="usr_email" type="text" id="usr_email3" class="required email"> 
-              <span class="example">** Valid email please..</span></td>
+              <span class="example">needed for activation.</span></td>
           </tr>
           <tr> 
             <td>Password<span class="required"><font color="#CC0000">*</font></span> 
             </td>
             <td><input name="pwd" type="password" class="required password" minlength="5" id="pwd"> 
-              <span class="example">** 5 chars minimum..</span></td>
+              <span class="example">5 chars minimum.</span></td>
           </tr>
           <tr> 
             <td>Retype Password<span class="required"><font color="#CC0000">*</font></span> 
@@ -269,16 +312,19 @@ THIS IS AN AUTOMATED RESPONSE.
           <input name="doRegister" type="submit" id="doRegister" value="Register">
         </p>
       </form>
-      <p align="right"><span style="font: normal 9px verdana">Powered by <a href="http://php-login-script.com">PHP 
-                  Login Script v2.0</a></span></p>
+      
        
       </td>
-    <td width="196" valign="top">&nbsp;</td>
+    
   </tr>
   <tr> 
     <td colspan="3">&nbsp;</td>
   </tr>
 </table>
+<br>
+<input type="button" ONCLICK="window.location.href='login.php'">
 
+</div>
+<div class="clear"></div>
 </body>
 </html>

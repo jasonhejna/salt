@@ -27,8 +27,8 @@ if (isset($_SESSION['user_id'])) {
 				    	<span  onmouseover="javascript:puzzle('. $i . ');" >
 				    	
 
-				    	<img src="images/puzzleyes.png" id="puzzle2' . $i . '" width="65" class="puzzle2" />
-				    	<img src="images/puzzlepieceno.png" id="puzzle' . $i . '" width="65" class="puzzle" />
+				    	<img src="images/puzzleyes.png" id="puzzle2' . $i . '" width="65" height="38" class="puzzle2" />
+				    	<img src="images/puzzlepieceno.png" id="puzzle' . $i . '" width="65" height="38" class="puzzle" />
 				    	</span>
 				    	</button>
 				    	</form>
@@ -36,7 +36,7 @@ if (isset($_SESSION['user_id'])) {
 				    	</div>';
 					}
 					else {
-						echo '<div id="userbox">
+						echo '<div id="userbox" class="rawz' . $row2['id'] . '">
 						
 						<div id="coolbox">
 						<img class="upic" src="data:image/jpeg;base64,' . base64_encode( $row2['profile_pic'] ) . '" />
@@ -47,8 +47,8 @@ if (isset($_SESSION['user_id'])) {
 				    	<span onmouseover="javascript:puzzle('. $i . ');" >
 				    	
 
-				    	<img src="images/puzzleyes.png" id="puzzle2' . $i . '" width="65" class="puzzle2" />
-				    	<img src="images/puzzlepieceno.png" id="puzzle' . $i . '" width="65" class="puzzle" />
+				    	<img src="images/puzzleyes.png" id="puzzle2' . $i . '" width="65" height="38" class="puzzle2" />
+				    	<img src="images/puzzlepieceno.png" id="puzzle' . $i . '" width="65" height="38" class="puzzle" />
 				    	</span>
 				    	</button>
 				    	</form>

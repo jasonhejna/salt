@@ -53,7 +53,7 @@ date_default_timezone_set('America/New_York');
             text: false
         }).next().button({
             icons: {
-                primary: "ui-icon-unlocked"
+                primary: "ui-icon-locked"
             },
             text: false
         })
@@ -138,6 +138,7 @@ $(document).ready(function(){
           		if (status == google.maps.GeocoderStatus.OK) {
           			lat = results[0].geometry.location.lat();
           			lon = results[0].geometry.location.lng();
+
           			latlon = lat+","+lon;
           			localStorage.lastLatLon = latlon;
           			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=2&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
@@ -253,10 +254,22 @@ $(document).ready(function(){
 			var latlngStr = localStorage.lastLatLon.split(",",2);
    			var lat = parseFloat(latlngStr[0]);
     		var lng = parseFloat(latlngStr[1]);
+
     		var latlng = new google.maps.LatLng(lat, lng);
 			geocoder.geocode({'latLng': latlng}, function(results, status) {
       			if (status == google.maps.GeocoderStatus.OK) {
 	          		document.getElementById("x").innerHTML=results[0].formatted_address;
+	          			var jfjf = "3.1415";
+$.ajax({  
+							      type: 'POST',  
+							      url: 'locations.php',  
+							      data: {lat:jfjf},
+							      success: function() {  
+							        //display message back to user here  
+							      }  
+							    });  
+							    return false; 
+
     	   		}
       			else {
         			alert("Geocoder failed due to: " + status);
@@ -274,6 +287,7 @@ $(document).ready(function(){
 		geocoder.geocode({'latLng': latlng}, function(results, status) {
       		if (status == google.maps.GeocoderStatus.OK) {
           		document.getElementById("x").innerHTML=results[0].formatted_address;
+ 
        		}
       		else {
         		alert("Geocoder failed due to: " + status);
@@ -322,6 +336,10 @@ $(document).ready(function(){
 /*function textdialog(){
 	$( "#textdialog" ).dialog( "open" );
 }*/
+
+
+
+
 
 	$(function() {
 		$( "#mapdialog" ).dialog({
@@ -488,7 +506,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
     limiting($(this), limitnum);
   });
 });
-  
+
 	</script>
 </head>
 <body>
@@ -562,7 +580,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 	<br><br><br><br>
 	<div id="dismap">
 	<div id="map"></div>
-	
+	<?php include 'locations.php'; ?>
 	</div>
 
 </div>
@@ -589,10 +607,12 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 </div> <!-- end grid 15 -->
 <div class="clear"></div>
 <div class="grid_19">
+	<div id="bordertextarea">
 	      	<div  id="disprog">
 			<div hidden class="mini" id="status"></div>
 			<div style="width:130px;height:24px;float:left;" class="pbartop" id="progressbar"></div>
 			</div>
+			<br><br>
 		<div id="whylang" >
 				<!-- <img src="images/whylanguage.png"> -->
 			<form >
@@ -611,6 +631,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 		<br>
 	
 	</div>
+		</div>
 </div>
 <div class="clear"></div>
 <div class="grid_18">
