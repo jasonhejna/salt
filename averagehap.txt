@@ -1,0 +1,1 @@
+pkey	response_number	running_average
