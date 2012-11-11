@@ -7,6 +7,7 @@ if (isset($_SESSION['user_id'])) {
 	$goturid = $_SESSION['user_id'];
 date_default_timezone_set('America/New_York');
 	}
+
 	?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,12 +78,14 @@ date_default_timezone_set('America/New_York');
 	$.fx.speeds._default = 700; //animation speed
 $(document).ready(function(){
 
+//$("#latlonstart").dialog({modal: true});
 		//$('div#dischart').hide();
     $('div#dismap').show();
 		$('div#disprog').hide();
 		$('div#ilang').show();
 		$('div#whylang').hide();
     $('div#dischart').hide();
+
 
     $("#button1").click(function(){
 			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
@@ -141,6 +144,7 @@ $(document).ready(function(){
 
           			latlon = lat+","+lon;
           			localStorage.lastLatLon = latlon;
+          			//localStorage.lastLatLon = latlon;
           			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=2&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
   					document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
           		}
@@ -148,6 +152,7 @@ $(document).ready(function(){
             		//alert("Something went wrong " + status);
             		$( "#mapdialog" ).dialog( "open" );
 					return false;
+
           		}
           	});
           }
@@ -155,10 +160,17 @@ $(document).ready(function(){
         //localStorage.lastLatLon = '0,0'
         	var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
   			document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
+
         }
-	
+        
+
+	          		
 		document.getElementById("y").innerHTML = localStorage.lastLatLon;
+
 		$.getLocation();
+
+
+
 		$("#txtdialog").click(function(){
 			$( "#textdialog" ).dialog( "open" );
 
@@ -259,16 +271,8 @@ $(document).ready(function(){
 			geocoder.geocode({'latLng': latlng}, function(results, status) {
       			if (status == google.maps.GeocoderStatus.OK) {
 	          		document.getElementById("x").innerHTML=results[0].formatted_address;
-	          			var jfjf = "3.1415";
-$.ajax({  
-							      type: 'POST',  
-							      url: 'locations.php',  
-							      data: {lat:jfjf},
-							      success: function() {  
-							        //display message back to user here  
-							      }  
-							    });  
-							    return false; 
+
+
 
     	   		}
       			else {
@@ -447,6 +451,41 @@ $.ajax({
 					}
 		});
 	});
+
+/*	$(function() {
+		$( "#latlonstart" ).dialog({
+			resizable: false,
+			height:200,
+			width:400,
+			autoOpen: false,
+			show: "blind",
+			hide: "explode",
+			modal:true,
+			buttons: {
+				Submit: function() {
+                
+
+							$( this ).dialog( "close" );
+
+							$.ajax({
+							    type: 'post',
+							    url: 'locations.php',
+							    data: {supbro:localStorage.lastLatLon},
+							    success: function () {//On Successful service call
+                       			
+                        		//question(happiness, happiness); 
+                    			},
+							});
+							
+						},
+						Cancel: function() {
+							$( this ).dialog( "close" );
+
+						},
+					}
+		});
+	});*/
+
 //google calendar
 google.load('visualization', '1', {packages: ['annotatedtimeline']});
     function drawVisualization() {
@@ -507,7 +546,58 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
   });
 });
 
-	</script>
+//countdown timer
+	function countDown(secs,elem) {
+	if (secs > 1) {
+	var element = document.getElementById(elem);
+	var mins = Math.round(secs/60);
+	element.innerHTML = ""+mins+"minutes";
+}
+	if(secs < 1) {
+	clearTimeout(timer);
+	//var secs = 660;
+
+	$('div#dismap').show();
+	$('div#disprog').hide();
+	$('div#ilang').show();
+	$('div#whylang').hide();
+	 element.innerHTML += 'go';
+	 //element.innerHTML += '<a href="#">Click here now</a>';
+	}
+	secs--;
+
+	var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
+
+			$( "#progressbar" ).progressbar({
+				
+				value: secs/6.6
+			});
+		
+	
+	}
+
+/*okayso = localStorage.lastLatLon;
+function SetCookie(cookiebro,okayso,nDays) {
+ var today = new Date();
+ var expire = new Date();
+ if (nDays==null || nDays==0) nDays=9999;
+ expire.setTime(today.getTime() + 3600000*24*nDays);
+ document.cookie = cookieName+"="+escape(cookieValue)
+                 + ";expires="+expire.toGMTString();
+}*/
+
+$(document).ready(function(){
+	setTimeout(loctime,3000);
+	
+});
+function loctime(){
+	var latylonlon = document.getElementById("y");
+	alert(latylonlon.innerHTML);
+   	xmlhttp.open("GET","locations.php?lati=latylonlon",true);
+	xmlhttp.send();
+	$('div#showmebro').show();
+}
+</script>
 </head>
 <body>
 
@@ -538,49 +628,14 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
     </div>
 </div>
 </div> <!-- end .grid_18 -->
- 
-
-
-
-<!-- coundown timer time -->
-<script type="text/javascript">
-
-	function countDown(secs,elem) {
-	if (secs > 1) {
-	var element = document.getElementById(elem);
-	var mins = Math.round(secs/60);
-	element.innerHTML = ""+mins+"minutes";
-}
-	if(secs < 1) {
-	clearTimeout(timer);
-	//var secs = 660;
-
-	$('div#dismap').show();
-	$('div#disprog').hide();
-	$('div#ilang').show();
-	$('div#whylang').hide();
-	 element.innerHTML += 'go';
-	 //element.innerHTML += '<a href="#">Click here now</a>';
-	}
-	secs--;
-
-	var timer = setTimeout('countDown('+secs+',"'+elem+'")',1000);
-
-			$( "#progressbar" ).progressbar({
-				
-				value: secs/6.6
-			});
-		
-	
-	}
-
-</script>
 <div class="clear"></div>
 <div class="grid_4">
 	<br><br><br><br>
 	<div id="dismap">
 	<div id="map"></div>
-	<?php include 'locations.php'; ?>
+
+
+
 	</div>
 
 </div>
@@ -607,7 +662,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 </div> <!-- end grid 15 -->
 <div class="clear"></div>
 <div class="grid_19">
-	<div id="bordertextarea">
+	
 	      	<div  id="disprog">
 			<div hidden class="mini" id="status"></div>
 			<div style="width:130px;height:24px;float:left;" class="pbartop" id="progressbar"></div>
@@ -631,7 +686,7 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 		<br>
 	
 	</div>
-		</div>
+		
 </div>
 <div class="clear"></div>
 <div class="grid_18">
@@ -646,12 +701,12 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 <div class="grid_24">
 	<div id="dialog" title="Are you sure?">
 		Are you sure you want to submit your happiness from 
-		<span id="x"></span>,<span id="y"></span>?
+		<span id="x"></span>?
 	</div>
 	<div id="textdialog" title="Are you sure?">
 		<span>You will not have another opertunity to edit your response. Do you still want to submit?</span>
 	</div>
-	<div id="mapdialog" title="Update your Address">
+	<div id="mapdialog" title="Update your Address" onload=function(){alert(alalalal);};>
 	<span>
 		<form>
 		<input id="address1" type="text" name="address" value="Address" width="30">
@@ -659,6 +714,12 @@ google.load('visualization', '1', {packages: ['annotatedtimeline']});
 		</form>
 	</span>
 	</div>
+
+		<span id="y"></span>
+		<div id="showmebro">
+		<?php include 'locations.php'; ?>
+		</div>
+	  
 </div>
 </div> <!-- end of 960 grid -->
 
