@@ -587,15 +587,20 @@ function SetCookie(cookiebro,okayso,nDays) {
 }*/
 
 $(document).ready(function(){
-	setTimeout(loctime,3000);
+	setTimeout(loctime,800);
 	
 });
 function loctime(){
-	var latylonlon = document.getElementById("y");
-	alert(latylonlon.innerHTML);
-   	xmlhttp.open("GET","locations.php?lati=latylonlon",true);
-	xmlhttp.send();
-	$('div#showmebro').show();
+
+   								$.ajax({
+							    type: 'post',
+							    url: 'locations.php',
+							    data: {lati:localStorage.lastLatLon},
+							    success: function (result) {//On Successful service call
+							    $('#locname').attr("value", result);
+                    			},
+							});
+
 }
 </script>
 </head>
@@ -657,7 +662,9 @@ function loctime(){
 	</form>
 	<span id="coltitle">-At this moment, which best describes how you feel?</span>
 	</center>
-	<br><br><br>
+	<br>
+	<input type="text" readonly id="locname"></input>
+	<br><br>
 </div><!-- end div of boxin css -->
 </div> <!-- end grid 15 -->
 <div class="clear"></div>
@@ -717,8 +724,8 @@ function loctime(){
 
 		<span id="y"></span>
 		<div id="showmebro">
-		<?php include 'locations.php'; ?>
 		</div>
+		
 	  
 </div>
 </div> <!-- end of 960 grid -->

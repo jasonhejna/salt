@@ -241,7 +241,6 @@ if (isset($_SESSION['user_id'])) {
     });
   });
 
-
 	</script>
 </head>
 <body>
@@ -274,15 +273,17 @@ if (isset($_SESSION['user_id'])) {
 </div> <!-- end .grid_18 -->
  
 <div class="clear"></div>
-<div class="grid_6">
+<div class="grid_5 suffix_1">
   <br><br><br>
-.
+<div id="coltitle">My Friends</div>
+<?php include 'friends_ihave.php'; ?>
+
 </div>
-<div class="grid_7">
+<div class="grid_8" id="moremargin">
   <br><br><br>
   <?php include 'friends_inc.php'; ?>
 </div>
-<div class="grid_5">
+<div class="grid_3">
   <br><br><br>
   .
 </div>

@@ -104,9 +104,10 @@ div.userleft {
 }
 
 #userbox {
-	margin-bottom:15px;
+	margin-bottom:11px;
 	float:left;
 	width:247px;
+	height:90px;
 	border: 1px solid;
 	border-color:#D6D6D6;
 	padding-top:10px;
@@ -114,6 +115,22 @@ div.userleft {
 	padding-right:10px;
 	padding-left:10px;
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em;color:#000;
+}
+#mahem {
+margin-bottom:11px;
+	float:left;
+	width:218px;
+	height:90px;
+	border: 1px solid;
+	border-color:#D6D6D6;
+	padding-top:10px;
+	padding-bottom: 10px;
+	padding-right:10px;
+	padding-left:10px;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em;color:#000;
+}
+#moremargin {
+	margin-left: 15px;
 }
 #bordertextarea {
 	background-color:#FFF;
@@ -139,6 +156,12 @@ div#coolname {
 }*/
 input#coolbutton {
 	float:left;
+}
+.top {
+	background-color: #000;
+}
+.top1{
+	background-color: #fff;
 }
 img.upic {
 	width: auto;max-width: 88px;height: auto;max-height: 88px;vertical-align:text-top;
