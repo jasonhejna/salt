@@ -723,8 +723,6 @@ function loctime(){
 	</div>
 
 		<span id="y"></span>
-		<div id="showmebro">
-		</div>
 		
 	  
 </div>

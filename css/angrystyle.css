@@ -2,7 +2,9 @@ a {
 	text-decoration: none;
 
 }
-
+#ilang {
+	float: right;
+}
 h1.q{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
 }
@@ -229,4 +231,7 @@ div#whylang{
 }
 .visualization {
 	z-index: 2;
+}
+input {
+	border: 0px;
 }
