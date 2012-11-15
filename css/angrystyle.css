@@ -3,26 +3,30 @@ a {
 
 }
 #ilang {
-	float: right;
+	float: left;
 }
-h1.q{
+.usericons {
+float:right;
+vertical-align:top;
+margin-top:11px;
+}
+/*h1.q{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
 }
 h1.hide{
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.0em;color:#458ED2;text-shadow: 3px 3px #C0D8EF;
 }
+div.mini{
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.1em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
+}*/
 h1.greyed{
 	color:#A9A9A9;
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
 	 font-size: 1.7em;
 	 text-shadow: 2px 2px #93968F;
 }
-div.mini{
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 0.1em;color:#458ED2;text-shadow: 2px 1px #C0D8EF;
-}
-div.boxin{ 
-
-
+body {
+font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.0em;color:#BFBFBF;
 }
 form, table {display:inline; margin:0px; padding:0px;}
 
@@ -31,11 +35,14 @@ form, table {display:inline; margin:0px; padding:0px;}
 }
 
 #bartitle {
-position: fixed;
+position: fixed !important;
 z-index: 104;
+max-width: 960px;
+width: 960px;
+height:64px;
+/*
 max-width: 710px;
-max-height: 49px;
-/*border-style:solid;
+border-style:solid;
 border-width:3px;
 border-color:#FFF;*/
 background-color: #1c94c4;
@@ -48,11 +55,20 @@ background-image: url("../images/stripe.png");
 background-repeat: repeat-x;
 }
 span.title {
-  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 2.5em;color:#FFF;
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 3.0em;color:#FFF;
+  	vertical-align:bottom;
+	margin-bottom: 0px;
+}
+span.titleme {
+  font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.0em;color:#FFF;
 }
 div.userleft {
 	padding-left: 8px;
 	padding-right: 3px;
+}
+.radio {
+	margin-right: 0px;
+	padding-right: 0px;
 }
 
 /* autocomplete */
@@ -74,9 +90,12 @@ div.userleft {
 
 .ac_results li {
 	margin: 0px;
-	padding: 2px 5px;
+	padding-top: 13px;
+	padding-left: 6px;
+	height:48px;
 	cursor: default;
 	display: block;
+
 	/* 
 	if width will be 100% horizontal scrollbar will apear 
 	when scroll mode will be used
@@ -90,6 +109,7 @@ div.userleft {
 	*/
 	line-height: 16px;
 	overflow: hidden;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#BFBFBF;
 }
 
 .ac_loading {
@@ -101,17 +121,15 @@ div.userleft {
 }
 
 .ac_over {
-	background-color: #0A246A;
-	color: white;
+	background-color: #1c94c4;
 }
 
 #userbox {
 	margin-bottom:11px;
 	float:left;
 	width:247px;
-	height:90px;
 	border: 1px solid;
-	border-color:#D6D6D6;
+	border-color:#BFBFBF;
 	padding-top:10px;
 	padding-bottom:10px;
 	padding-right:10px;
@@ -124,7 +142,7 @@ margin-bottom:11px;
 	width:218px;
 	height:90px;
 	border: 1px solid;
-	border-color:#D6D6D6;
+	border-color:#BFBFBF;
 	padding-top:10px;
 	padding-bottom: 10px;
 	padding-right:10px;
@@ -138,12 +156,12 @@ margin-bottom:11px;
 	background-color:#FFF;
   border-style:solid;
   border-width:1px;
-  border-color:#D6D6D6;
+  border-color:#BFBFBF;
   -moz-border-radius: 6px;
   border-radius: 5px;
 }
 #coltitle {
-	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.3em;color:#D6D6D6;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.6em;color:#BFBFBF;
 	margin-bottom: 4px;
 }
 div#cdialog {
@@ -169,15 +187,25 @@ img.upic {
 	width: auto;max-width: 88px;height: auto;max-height: 88px;vertical-align:text-top;
 	float:left;
 }
+#course {
+	float:left;
+	vertical-align:inherit;
+	margin-top:18px;
+	margin-left:1px;
+	width:284px;
+	height:25px;
+	padding-left:4px;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.2em;color:#BFBFBF;
+}
 .searchbutton {
-	max-width:20px;
-	height:18px;
+	max-width:25px;
+	height:27px;
 
-	margin-top: 15px;
+	margin-top: 20px;
 	vertical-align:bottom;
 
 	float: left;
-	margin-left:-21px;
+	margin-left:-27px;
 	z-index:3;
 
 
@@ -185,31 +213,6 @@ img.upic {
 
 	border:0px;
 	padding: 0px;
-
-}
-/*.searchicon {
-	max-width:20px;
-	height:20px;
-
-	margin-top: 15px;
-	vertical-align:bottom;
-
-	float: left;
-	margin-left:-21px;
-	z-index:3;
-
-
-
-
-	border:0px;
-	padding: 0px;
-}
-*/
-.usericons {
-
-	margin-top:4px;
-	
-	vertical-align:top;
 
 }
 textarea {
@@ -232,6 +235,10 @@ div#whylang{
 .visualization {
 	z-index: 2;
 }
-input {
+input#locname {
 	border: 0px;
+	padding-left: 4px;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.6em;color:#BFBFBF;
+	height: 39px;
+	width: 274px;
 }

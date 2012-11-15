@@ -13,13 +13,13 @@ date_default_timezone_set('America/New_York');
 <html lang="en">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--<meta name="viewport" content="width=device-width, initial-scale=.79"> -->
 <meta name="author" content="Jason Hejna">
   <link rel="shortcut icon" href="images/gauge.ico">
   <link rel="icon" href="images/gauge.ico">
 <title>HappyData</title>
 <!-- <style type="text/css">
- #map { width: 150px; height: 150px; border: 0px; padding: 0px; }
+ #map { width: 274px; height: 274px; border: 0px; padding: 0px; }
  </style> -->
  <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
@@ -49,6 +49,16 @@ date_default_timezone_set('America/New_York');
             text: false
         }).next().button({
             icons: {
+                primary: "ui-icon-contact"
+            },
+            text: false
+        }).next().button({
+            icons: {
+                primary: "ui-icon-comment"
+            },
+            text: false
+        }).next().button({
+            icons: {
                 primary: "ui-icon-wrench"
             },
             text: false
@@ -64,28 +74,15 @@ date_default_timezone_set('America/New_York');
 	var unix_time;
 	var date = new Date();
 	var geocoder = new google.maps.Geocoder();
-
-/*	var icon = new google.maps.MarkerImage("http://maps.google.com/mapfiles/ms/micons/blue.png",
- 		new google.maps.Size(32, 32),
- 		new google.maps.Point(0, 0),
- 		new google.maps.Point(16, 32)
- 	);
- 	var center = null;
- 	var map = null;
- 	var currentPopup;
- 	var bounds = new google.maps.LatLngBounds();*/
  	
-	$.fx.speeds._default = 700; //animation speed
+$.fx.speeds._default = 700; //animation speed
 $(document).ready(function(){
-
-//$("#latlonstart").dialog({modal: true});
-		//$('div#dischart').hide();
     $('div#dismap').show();
 		$('div#disprog').hide();
 		$('div#ilang').show();
 		$('div#whylang').hide();
     $('div#dischart').hide();
-
+    //$('#y').hide();
 
     $("#button1").click(function(){
 			geocoder.geocode( { 'address': document.getElementById("address1").value}, function(results, status) {
@@ -93,7 +90,7 @@ $(document).ready(function(){
           			lat = results[0].geometry.location.lat();
           			lon = results[0].geometry.location.lng();
           			localStorage.lastLatLon = lat+","+lon;
-        			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+        			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=274x274&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
   					document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
   					//document.getElementById("x").innerHTML = document.getElementById("address1").value;
   					document.getElementById("y").innerHTML = localStorage.lastLatLon;
@@ -118,14 +115,16 @@ $(document).ready(function(){
             		$( "#mapdialog" ).dialog( "open" );
 					return false;
           		}
+          		setTimeout(loctime,800);
         	});
         	
 		});
 
     $("#course").autocomplete("autocomplete.php", {
-        width: 230,
+        width: 290,
         matchContains: true,
-        selectFirst: false
+        selectFirst: false,
+        minLength: 3,
     });
 
 	if(!localStorage.lastLatLon){
@@ -145,7 +144,7 @@ $(document).ready(function(){
           			latlon = lat+","+lon;
           			localStorage.lastLatLon = latlon;
           			//localStorage.lastLatLon = latlon;
-          			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=2&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+          			var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=2&size=274x274&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
   					document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
           		}
           		else {
@@ -158,7 +157,7 @@ $(document).ready(function(){
           }
         else{
         //localStorage.lastLatLon = '0,0'
-        	var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+        	var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=274x274&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
   			document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
 
         }
@@ -168,72 +167,6 @@ $(document).ready(function(){
 		document.getElementById("y").innerHTML = localStorage.lastLatLon;
 
 		$.getLocation();
-
-
-
-		$("#txtdialog").click(function(){
-			$( "#textdialog" ).dialog( "open" );
-
-		});
-		//map click button
-		$("#map").click(function(){
-			$( "#mapdialog" ).dialog( "open" );
-			return false;
-		});
-		//addign values when radio onlclick
-		$("#radio1").click(function(){
-    		//$("#boxin").hide();
-
-			happiness = '5';
-			
-    		unix_time = date.getTime()/1000;
-
-    		$( "#dialog" ).dialog( "open" );
-			return false;
-  		});
-  		$("#radio2").click(function(){
-    		//$("#radio").hide();
-
-			happiness = '4';
-
-    		unix_time = date.getTime()/1000;
-    		$( "#dialog" ).dialog( "open" );
-			return false;
-  		});
-  		$("#radio3").click(function(){
-    		//$("#radio").hide();
-
-			happiness = '3';
-
-    		unix_time = date.getTime()/1000;
-    		$( "#dialog" ).dialog( "open" );
-			return false;
-  		});
-  		$("#radio4").click(function(){
-    		//$("#radio").hide();
-
-			happiness = '2';
-
-    		unix_time = date.getTime()/1000;
-    		$( "#dialog" ).dialog( "open" );
-			return false;
-  		});
-  		$("#radio5").click(function(){
-    		//$("#radio").hide();
-
-			happiness = '1';
-
-    		unix_time = date.getTime()/1000;
-    		$( "#dialog" ).dialog( "open" );
-			return false;
-  		});
-  		$("#radio6").click(function(){
-			happiness = '0';
-
-    		unix_time = date.getTime()/1000;
-    		$( "#dialog" ).dialog( "open" );
-			return false;
-  		});
 
   	}); //end ducument ready
 
@@ -245,7 +178,7 @@ $(document).ready(function(){
 	  switch(error.code) {
 		case error.PERMISSION_DENIED:
 	    	document.getElementById("x").innerHTML="User denied the request for Geolocation.";
-	    	//var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
+	    	//var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+localStorage.lastLatLon+"&zoom=10&size=274x274&sensor=false&markers=color:blue|"+localStorage.lastLatLon;
   			//document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
   			break;
 		case error.POSITION_UNAVAILABLE:
@@ -297,53 +230,11 @@ $(document).ready(function(){
         		alert("Geocoder failed due to: " + status);
         	}
       	});
-  		var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=10&size=150x150&sensor=false&markers=color:blue|"+latlon;
+  		var img_url="http://maps.googleapis.com/maps/api/staticmap?center="+latlon+"&zoom=10&size=274x274&sensor=false&markers=color:blue|"+latlon;
   		document.getElementById("map").innerHTML="<img src='"+img_url+"'>";
   		localStorage.lastLatLon = latlon;
   		document.getElementById("y").innerHTML = localStorage.lastLatLon;
   	};
-/*
-	$.addMarker= function(lat, lng, info) {
-		var pt = new google.maps.LatLng(lat, lng);
-		bounds.extend(pt);
-		var marker = new google.maps.Marker({
- 			position: pt,
- 			icon: icon,
- 			map: map
-		});
- 		var popup = new google.maps.InfoWindow({
- 			content: info,
- 			maxWidth: 300
- 	});
- 	};
- 	
- 	$.initMap = function() {
- 		map = new google.maps.Map(document.getElementById("map"), {
- 			center: new google.maps.LatLng(0, 0),
-	 		zoom: 2,
- 			mapTypeId: google.maps.MapTypeId.ROADMAP,
- 			mapTypeControl: false,
-	 		mapTypeControlOptions: {
- 				style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
- 			},
-	 		navigationControl: true,
- 			navigationControlOptions: {
- 				style: google.maps.NavigationControlStyle.SMALL
-	 		}
- 		});
- 		$.addMarker(0,0,'yoyo');
- 	 	center = bounds.getCenter();
-	 	//map.fitBounds(bounds);
- 		};*/
-
-
-/*function textdialog(){
-	$( "#textdialog" ).dialog( "open" );
-}*/
-
-
-
-
 
 	$(function() {
 		$( "#mapdialog" ).dialog({
@@ -356,7 +247,7 @@ $(document).ready(function(){
 			modal:true,
 			buttons: {
 						
-						Done: function() {
+						Cancel: function() {
 							$( this ).dialog( "close" );
 
 						},
@@ -395,7 +286,7 @@ $(document).ready(function(){
 							      url: 'textconec.php',  
 							      data: {dataString:datastring},
 							      success: function() {  
-							        //display message back to user here  
+							        
 							      }  
 							    });  
 							    return false;  
@@ -451,7 +342,38 @@ $(document).ready(function(){
 					}
 		});
 	});
+	$(function() {
+		$( "#newlocdialog" ).dialog({
+			resizable: false,
+			height:200,
+			width:400,
+			autoOpen: false,
+			show: "blind",
+			hide: "explode",
+			modal:true,
+			buttons: {
+						Submit: function() {
+								
+							$( this ).dialog( "close" );
 
+/*							    $.ajax({  
+							      type: 'POST',  
+							      url: 'newlocation.php',  
+							      data: {locname:locname},
+							      success: function() {  
+							        //display message back to user here  
+							      }  
+							    });
+							    return false;  */
+							
+						},
+						Cancel: function() {
+							$( this ).dialog( "close" );
+
+						},
+					}
+		});
+	});
 /*	$(function() {
 		$( "#latlonstart" ).dialog({
 			resizable: false,
@@ -587,9 +509,74 @@ function SetCookie(cookiebro,okayso,nDays) {
 }*/
 
 $(document).ready(function(){
-	setTimeout(loctime,800);
 	
+	document.getElementById("button1").onclick = function() { HideError(id); }
+
+	$("#txtdialog").click(function(){
+			$( "#textdialog" ).dialog( "open" );
+
+		});
+		//map click button
+		$("#map").click(function(){
+			$( "#mapdialog" ).dialog( "open" );
+			return false;
+		});
+		//addign values when radio onlclick
+		$("#radio1").click(function(){
+    		//$("#boxin").hide();
+
+			happiness = '5';
+			
+    		unix_time = date.getTime()/1000;
+
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
+  		$("#radio2").click(function(){
+    		//$("#radio").hide();
+
+			happiness = '4';
+
+    		unix_time = date.getTime()/1000;
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
+  		$("#radio3").click(function(){
+    		//$("#radio").hide();
+
+			happiness = '3';
+
+    		unix_time = date.getTime()/1000;
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
+  		$("#radio4").click(function(){
+    		//$("#radio").hide();
+
+			happiness = '2';
+
+    		unix_time = date.getTime()/1000;
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
+  		$("#radio5").click(function(){
+    		//$("#radio").hide();
+
+			happiness = '1';
+
+    		unix_time = date.getTime()/1000;
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
+  		$("#radio6").click(function(){
+			happiness = '0';
+
+    		unix_time = date.getTime()/1000;
+    		$( "#dialog" ).dialog( "open" );
+			return false;
+  		});
 });
+setTimeout(loctime,800);
 function loctime(){
 
    								$.ajax({
@@ -598,72 +585,88 @@ function loctime(){
 							    data: {lati:localStorage.lastLatLon},
 							    success: function (result) {//On Successful service call
 							    $('#locname').attr("value", result);
+							    if (result == "Set a new location") {
+							    	//$( "#mapdialog" ).dialog( "close" );
+							    	//$( "#newlocdialog" ).dialog( "open" ); set time instead
+							    	setTimeout(sweetime,800);
+							    }
                     			},
 							});
 
 }
+function sweetime(){
+	$.ajax({
+	type: 'post',
+	url: 'otheruserloc.php',
+	 data: {lati2:localStorage.lastLatLon},
+	success: function (otheruserloc) {//On Successful service call
+	$('#locname').attr("value", otheruserloc);
+
+    },
+	});
+	$( "#newlocdialog" ).dialog( "open" );
+}
+
 </script>
 </head>
 <body>
 
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_18" id="bartitle">
+<div class="grid_24" id="bartitle">
   
-<div class="grid_6 alpha">
+<div class="grid_8 alpha">
       &nbsp;
-      <a href="friends.php"><span class="title">HappyData</span></a>
+      <a href="friends.php" id="titleid"><span class="title">HappyData</span><span class="titleme">&nbsp;.me</span></a>
 </div>
-<div class="grid_12 omega">
+<div class="grid_16 omega">
     
       <form action="friends.php" method="post">
         <div class="searchicon">
       
 
-      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:255px;margin-left:1px;" />
+      <input type="text" name="course" id="course" />
       <button id="uniqueny1" type="submit" class="searchbutton" >Find Friends</button>
     
       </form>
     </div>
       <div class="usericons">
-			<button id="uniqueny2" ONCLICK="window.location.href='friends.php'" style="margin-left:26px;">Friends</button>
-			<button id="uniqueny3" ONCLICK="window.location.href='mysettings.php'" >Settings</button>
-			<button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
-      
+      		<button id="uniqueny2" ONCLICK="window.location.href='myprofile.php'" class="topbutton">My Profile</button>
+			<button id="uniqueny3" ONCLICK="window.location.href='friends.php'" class="topbutton">Friends</button>
+			<button id="uniqueny4" ONCLICK="window.location.href='messenger.php'" class="topbutton">Messages</button>
+			<button id="uniqueny5" ONCLICK="window.location.href='mysettings.php'" class="topbutton">Settings</button>
+			<button id="uniqueny6" ONCLICK="window.location.href='logout.php'" class="topbutton">Logout</button>
     </div>
 </div>
 </div> <!-- end .grid_18 -->
 <div class="clear"></div>
-<div class="grid_4">
-	<br><br><br><br>
+<div class="grid_8">
+	<br><br><br><br><br>
 	<div id="dismap">
 	<div id="map"></div>
-
+<span id="coltitle">&#8627;</span><input type="text" id="locname"></input>
 
 
 	</div>
 
 </div>
-<div class="grid_14">
+<div class="grid_16">
 	<div id="ilang">
-    <br><br><br><br>
-	<center>
+    <br><br><br><br><br>
 		<!-- <img src="images/ilanguage.png"><br><br> -->
 		
 	<form>
 	<div id="radio" class="radio">
-		<input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="50px" height="50px"></label>
-		<input type="radio" id="radio2" name="radio" /><label for="radio2"><img src="images/hap2.png" width="50px" height="50px"></label>
-		<input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap6.png" width="50px" height="50px"></label>
-		<input type="radio" id="radio4" name="radio" /><label for="radio4"><img src="images/hap5.png" width="50px" height="50px"></label>
-		<input type="radio" id="radio5" name="radio" /><label for="radio5"><img src="images/hap3.png" width="50px" height="50px"></label>
-		<input type="radio" id="radio6" name="radio" /><label for="radio6"><img src="images/hap4.png" width="50px" height="50px"></label>
+		<input type="radio" id="radio1" name="radio" /><label for="radio1"><img src="images/hap1.png" width="68.915px" height="68.915px"></label>
+		<input type="radio" id="radio2" name="radio" /><label for="radio2"><img src="images/hap2.png" width="68.915px" height="68.915px"></label>
+		<input type="radio" id="radio3" name="radio" /><label for="radio3"><img src="images/hap6.png" width="68.915px" height="68.915px"></label>
+		<input type="radio" id="radio4" name="radio" /><label for="radio4"><img src="images/hap5.png" width="68.915px" height="68.915px"></label>
+		<input type="radio" id="radio5" name="radio" /><label for="radio5"><img src="images/hap3.png" width="68.915px" height="68.915px"></label>
+		<input type="radio" id="radio6" name="radio" /><label for="radio6"><img src="images/hap4.png" width="68.915px" height="68.915px"></label>
 	</div>
 	</form>
-	<span id="coltitle">-At this moment, which best describes how you feel?</span>
-	</center>
 	<br>
-	<input type="text" readonly id="locname"></input>
+	<span id="coltitle">&#8627;At this moment, which best describes how you feel?</span>
 	<br><br>
 </div><!-- end div of boxin css -->
 </div> <!-- end grid 15 -->
@@ -711,9 +714,9 @@ function loctime(){
 		<span id="x"></span>?
 	</div>
 	<div id="textdialog" title="Are you sure?">
-		<span>You will not have another opertunity to edit your response. Do you still want to submit?</span>
+		<span>You will not have another opportunity to edit your response. Do you still want to submit?</span>
 	</div>
-	<div id="mapdialog" title="Update your Address" onload=function(){alert(alalalal);};>
+	<div id="mapdialog" title="Update your Address">
 	<span>
 		<form>
 		<input id="address1" type="text" name="address" value="Address" width="30">
@@ -721,9 +724,10 @@ function loctime(){
 		</form>
 	</span>
 	</div>
-
 		<span id="y"></span>
-		
+	<div id="newlocdialog" title="Set a new location">
+		Where are you?<br> ex) Home, Comet Coffee, Work at Microsoft, Gym
+	</div>
 	  
 </div>
 </div> <!-- end of 960 grid -->

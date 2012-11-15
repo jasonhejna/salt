@@ -22,11 +22,13 @@ while($row = mysql_fetch_array($result22)) {
 
 }*/
 //$loner = $_GET['loni'];
+$i=0;
 	$result43 = mysql_query("SELECT `place_name`, `lat`, `lon` FROM whereorigin WHERE `user_id` = $goturid");
+
 	while($row = mysql_fetch_array($result43)) {
+$i++;
 		$laat = substr($row['lat'], 0, 6);
 		$loon = substr($row['lon'], 0, 6);
-		
 		
 		if ($laat == $trimlat && $loon == $trimlon) {
 			//$lat = $row['lat'];
@@ -40,8 +42,12 @@ while($row = mysql_fetch_array($result22)) {
 		echo $row['place_name'];
 
 		}
-		
+		else {
+			echo 'Set a new location';
+		}
 	}
+if ($i == 0) {
+	echo 'Set a new location';
+}
 
-//}
 ?>
