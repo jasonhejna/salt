@@ -1,12 +1,12 @@
 <?php 
  include 'dbc.php';
  page_protect();
-//if (isset($_SESSION['user_id'])) {
+if (isset($_SESSION['user_id'])) {
 
 $goturid = $_SESSION['user_id'];
 $later = $_POST['lati'];
 $pieces = explode(",", $later);
-$trimlat = substr($pieces[0], 0, 6);
+$trimlat = substr($pieces[0], 0, 5);
 $trimlon = substr($pieces[1], 0, 6);
 //echo $trimlat;
 $trimlat = str_replace(',', '', $trimlat);
@@ -27,7 +27,7 @@ $i=0;
 
 	while($row = mysql_fetch_array($result43)) {
 $i++;
-		$laat = substr($row['lat'], 0, 6);
+		$laat = substr($row['lat'], 0, 5);
 		$loon = substr($row['lon'], 0, 6);
 		
 		if ($laat == $trimlat && $loon == $trimlon) {
@@ -49,5 +49,5 @@ $i++;
 if ($i == 0) {
 	echo 'Set a new location';
 }
-
+}
 ?>

@@ -81,7 +81,7 @@ $(document).ready(function(){
 		$('div#disprog').hide();
 		$('div#ilang').show();
 		$('div#whylang').hide();
-    $('div#dischart').hide();
+    //$('div#dischart').hide();
     //$('#y').hide();
 
     $("#button1").click(function(){
@@ -247,7 +247,7 @@ $(document).ready(function(){
 			modal:true,
 			buttons: {
 						
-						Cancel: function() {
+						Done: function() {
 							$( this ).dialog( "close" );
 
 						},
@@ -317,7 +317,7 @@ $(document).ready(function(){
 								$('div#disprog').show();
 								$('div#ilang').hide();
 								$('div#whylang').show();
-								$('div#dischart').show();
+								//$('div#dischart').show();
 
 							$( this ).dialog( "close" );
 
@@ -358,7 +358,7 @@ $(document).ready(function(){
 
 /*							    $.ajax({  
 							      type: 'POST',  
-							      url: 'newlocation.php',  
+							      url: 'addlocation.php',  
 							      data: {locname:locname},
 							      success: function() {  
 							        //display message back to user here  
@@ -599,12 +599,12 @@ function sweetime(){
 	type: 'post',
 	url: 'otheruserloc.php',
 	 data: {lati2:localStorage.lastLatLon},
-	success: function (otheruserloc) {//On Successful service call
-	$('#locname').attr("value", otheruserloc);
-
+	success: function (otherloc) {//On Successful service call
+	//$('#locname').attr("value", otherloc);
+	//alert(otherloc);
+	$( "#newlocdialog" ).dialog( "open" );
     },
 	});
-	$( "#newlocdialog" ).dialog( "open" );
 }
 
 </script>
@@ -699,15 +699,6 @@ function sweetime(){
 		
 </div>
 <div class="clear"></div>
-<div class="grid_18">
-  <br><br>
-	<div id="dischart" class="dischart">
-  <hr><br><br>
-	<iframe frameborder="0" scrolling="no" width="720" height="400" marginheight="0" marginwidth="0" src="gchart.php" class="gchart" style="z-index:3;"></iframe>
-	</div>
-</div>
-
-<div class="clear"></div>
 <div class="grid_24">
 	<div id="dialog" title="Are you sure?">
 		Are you sure you want to submit your happiness from 
@@ -727,6 +718,7 @@ function sweetime(){
 		<span id="y"></span>
 	<div id="newlocdialog" title="Set a new location">
 		Where are you?<br> ex) Home, Comet Coffee, Work at Microsoft, Gym
+		<span>
 	</div>
 	  
 </div>

@@ -127,7 +127,7 @@ div.userleft {
 #userbox {
 	margin-bottom:11px;
 	float:left;
-	width:247px;
+	width:255px;
 	border: 1px solid;
 	border-color:#BFBFBF;
 	padding-top:10px;
@@ -137,9 +137,9 @@ div.userleft {
 	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif; font-size: 1.1em;color:#000;
 }
 #mahem {
-margin-bottom:11px;
+	margin-bottom:11px;
 	float:left;
-	width:218px;
+	width:255px;
 	height:90px;
 	border: 1px solid;
 	border-color:#BFBFBF;

@@ -85,7 +85,9 @@ if (isset($_SESSION['user_id'])) {
 
   $(document).ready(function(){
       $('.puzzle2').hide();
-
+      $("#mahem").click(function() {
+        alert("Handler for .click() called.");
+      });
     //var cnfrm;
       $("#course").autocomplete("autocomplete.php", {
         width: 230,
@@ -146,7 +148,17 @@ if (isset($_SESSION['user_id'])) {
     $(function() {
     $( ".usericons button:first" ).button({
             icons: {
-                primary: "ui-icon-home"
+                primary: "ui-icon-person"
+            },
+            text: false
+        }).next().button({
+            icons: {
+                primary: "ui-icon-contact"
+            },
+            text: false
+        }).next().button({
+            icons: {
+                primary: "ui-icon-comment"
             },
             text: false
         }).next().button({
@@ -246,41 +258,41 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_18" id="bartitle">
+<div class="grid_24" id="bartitle">
   
-<div class="grid_6 alpha">
+<div class="grid_8 alpha">
       &nbsp;
-      <a href="index.php"><span class="title">HappyData</span></a>
+      <a href="friends.php" id="titleid"><span class="title">HappyData</span><span class="titleme">&nbsp;.me</span></a>
 </div>
-<div class="grid_12 omega">
+<div class="grid_16 omega">
     
       <form action="friends.php" method="post">
         <div class="searchicon">
       
 
-      <input type="text" name="course" id="course" style="float:left;vertical-align:inherit;margin-top:14px;width:255px;margin-left:8px;" />
+      <input type="text" name="course" id="course" />
       <button id="uniqueny1" type="submit" class="searchbutton" >Find Friends</button>
     
       </form>
     </div>
       <div class="usericons">
-      <button id="uniqueny2" ONCLICK="window.location.href='index.php'" style="margin-left:26px;">Friends</button>
-      <button id="uniqueny3" ONCLICK="window.location.href='mysettings.php'" >Settings</button>
-      <button id="uniqueny4" ONCLICK="window.location.href='logout.php'" style="margin-right:3px;">Logout</button>
-      
+      <button id="uniqueny2" ONCLICK="window.location.href='myprofile.php'" class="topbutton">My Profile</button>
+      <button id="uniqueny3" ONCLICK="window.location.href='friends.php'" class="topbutton">Friends</button>
+      <button id="uniqueny4" ONCLICK="window.location.href='messenger.php'" class="topbutton">Messages</button>
+      <button id="uniqueny5" ONCLICK="window.location.href='mysettings.php'" class="topbutton">Settings</button>
+      <button id="uniqueny6" ONCLICK="window.location.href='logout.php'" class="topbutton">Logout</button>
     </div>
 </div>
-</div> <!-- end .grid_18 -->
- 
+</div> <!-- end .grid_24 -->
 <div class="clear"></div>
-<div class="grid_5 suffix_1">
-  <br><br><br>
+<div class="grid_7 suffix_1">
+  <br><br><br><br>
 <div id="coltitle">My Friends</div>
 <?php include 'friends_ihave.php'; ?>
 
 </div>
 <div class="grid_8" id="moremargin">
-  <br><br><br>
+  <br><br><br><br>
   <?php include 'friends_inc.php'; ?>
 </div>
 <div class="grid_3">
