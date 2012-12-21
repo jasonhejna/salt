@@ -173,14 +173,14 @@ $(function() {
 
 <div class="container_24">
 <div class="clear"></div>
-<div class="grid_18" id="bartitle">
+<div class="grid_24" id="bartitle">
   
 <div class="grid_15 alpha">
       &nbsp;
       <a href="register.php"><span class="title">HappyData</span></a>
 </div>
 <div class="grid_3 omega">
-<span id="lang"><br>english</span>
+..
     </div>
 
 

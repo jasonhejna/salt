@@ -170,7 +170,7 @@ THIS IS AN AUTOMATED RESPONSE.
 <meta name="author" content="Jason Hejna">
   <link rel="shortcut icon" href="images/gauge.ico">
   <link rel="icon" href="images/gauge.ico">
-<title>HappyData.me - Register / SignUp</title>
+<title>HappyData.me - Register / Sign-Up</title>
 
 <link rel="stylesheet" href="css/960_24_col.css" />
 <link rel="stylesheet" href="css/loginstyle.css" />
@@ -272,7 +272,7 @@ THIS IS AN AUTOMATED RESPONSE.
             <td>Username<span class="required"><font color="#CC0000">*</font></span></td>
             <td><input name="user_name" type="text" id="user_name" class="required username" minlength="5" > 
               <input name="btnAvailable" type="button" id="btnAvailable" 
-              onclick='$("#checkid").html("Please wait..."); $.get("checkuser.php",{ cmd: "check", user: $("#user_name").val() } ,function(data){  $("#checkid").html(data); });'
+              onclick='javascript:$("#checkid").html("Please wait..."); $.get("checkuser.php",{ cmd: "check", user: $("#user_name").val() } ,function(data){  $("#checkid").html(data); });'
               value="Check Availability"> 
                 <span style="color:red; font: bold 12px verdana; " id="checkid" ></span> 
             </td>
