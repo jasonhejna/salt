@@ -1,13 +1,12 @@
-body {
-font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 0.8em;color:#eeeeee;
+body{
+font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 0.9em;color:#eeeeee;
 }
-a {
-  text-decoration: none;
-  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 0.9em;color:#fff;
+span#regspaceing{
+font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 1.1em;color:#969696;line-height:26px;
 }
 input[type="text"],
 input[type="password"] {
-  width:175px;
+  max-width:175px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
@@ -36,11 +35,7 @@ input[type="password"] {
   height: auto;
 }
 
-form#logForm{
 
-  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 0.9em;color:#fff;
-
-}
 form#regForm{
   width: 330px;
   background-color:#FFF;
@@ -59,10 +54,7 @@ form#regForm{
   font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 0.9em;color:#969696;
 
 }
-#registext {
-  margin-bottom: 15px;
-  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 1.1em;color:#969696;
-}
+
 #righttop {
   margin-left: 4px;
 }
@@ -71,11 +63,8 @@ form#regForm{
 }
 #pwdmargin {
   float: right;
-  margin-right: 17px;
 }
-span.ftitle{
-  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 1.7em;color:#1c94c4;
-}
+
 div.boxin{ 
 
   padding-top:0px;
@@ -83,50 +72,13 @@ div.boxin{
   padding-right:5px;
   padding-left:5px;
 }
-hr{
-  border:0;
-  height:3px;
-  background-color: #4747FF;
-}
-span.title {
-  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 3.4em;color:#FFF;
-}
-span.titleme {
-  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 1.5em;color:#FFF;
-}
-#bartitle {
-position: absolute;
-z-index: 104;
-padding-top: 9px;
-}
-#leftbartitle {
-position: absolute;
-z-index: 80;
-width: 103%;
-height: 85px;
-margin-left: -10px;
-/*border-style:solid;
-border-width:3px;
-border-color:#FFF;*/
 
-background-image: url("../images/stripe.png");
-background-repeat: repeat;
-/*-webkit-box-shadow: 0px 8px 11px rgba(50, 50, 50, 0.69);
--moz-box-shadow:    0px 8px 11px rgba(50, 50, 50, 0.69);
-box-shadow:         0px 8px 11px rgba(50, 50, 50, 0.69);*/
-}
-.barme {
 
-}
 #left {
   margin-left: -20px;
   margin-top: 8px;
 }
-span#lang {
-  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 0.8em;color:#FFF;
-  float:right;
-  margin-right: 11px;
-}
+
 h3 {
   font-family: 'Grand Hotel', cursive; font-size: 2.8em;color:#1c94c4;
   margin-left: 6px;
@@ -135,18 +87,15 @@ h3 {
 }
 h4 {
   font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 1.3em;color:#969696;
-  margin-left: 17px;
+  margin-left: 15px;
   margin-top: 0px;
   margin-bottom: 9px;
 }
-.submitLink {
-background-color: transparent;
-text-decoration: underline;
-border: none;
-cursor: pointer;
-cursor: hand;
+
+input#doRegister{
+	float:right;
+	margin: 15px;
 }
-input#doLogin3,
 input#btnAvailable,
 input#doRegister
  {
@@ -180,19 +129,20 @@ input#doRegister
     0px -1px 0px rgba(000,000,000,0.2),
     0px 1px 0px rgba(255,255,255,0.4);
 }
-#usr_email3,#full_name,#last_name,#user_name,#pwd,#pwd2 {
+#usr_email3,
+#first_name,
+#last_name,
+#user_name,
+#pwd,#pwd2 {
   float: right;
-  margin-right: 3px;
-}
-#doLogin3 {
-  margin-left: 28px;
-}
-.required password{
-
+  margin-right: 15px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  margin-left: 0px;
 }
 .msg {
 padding: 5px;
-max-width: 400px;
+max-width: 301px;
 margin: 2px;
 color: #c00;
 border: 1px solid #c00;

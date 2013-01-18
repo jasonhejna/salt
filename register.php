@@ -39,22 +39,28 @@ This code checks and validates recaptcha
                                       $_POST["recaptcha_response_field"]);
 
       if (!$resp->is_valid) {
-        die ("<h3>Image Verification failed!. Go back and try again.</h3>" .
-             "(reCAPTCHA said: " . $resp->error . ")");         
+        // die ("<h3>Image Verification failed!. Go back and try again.</h3>" .
+        //      "(reCAPTCHA said: " . $resp->error . ")");
+        $err[] = "ERROR - Invalid reCAPTCHA.";  
       }
 /************************ SERVER SIDE VALIDATION **************************************/
 /********** This validation is useful if javascript is disabled in the browswer ***/
 
-if(empty($data['full_name']) || strlen($data['full_name']) < 4)
+if(empty($data['first_name']) || strlen($data['first_name']) < 3)
 {
-$err[] = "ERROR - Invalid name. Please enter atleast 3 or more characters for your name";
+$err[] = "ERROR - Invalid name. Please enter atleast 2 or more characters for your first name.";
 //header("Location: register.php?msg=$err");
 //exit();
 }
-
+if(empty($data['last_name']) || strlen($data['last_name']) < 3)
+{
+$err[] = "ERROR - Invalid name. Please enter atleast 2 or more characters for your last name.";
+//header("Location: register.php?msg=$err");
+//exit();
+}
 // Validate User Name
 if (!isUserID($data['user_name'])) {
-$err[] = "ERROR - Invalid user name. It can contain alphabet, number and underscore.";
+$err[] = "ERROR - Invalid email address.";
 //header("Location: register.php?msg=$err");
 //exit();
 }
@@ -65,9 +71,15 @@ $err[] = "ERROR - Invalid email address.";
 //header("Location: register.php?msg=$err");
 //exit();
 }
+// Check that User Name (email1) and Email (email 2) match, or are ==
+if(!isMatchEmail($data['usr_email'],$data['user_name'])) {
+$err[] = "ERROR - email address does not match.";
+//header("Location: register.php?msg=$err");
+//exit();
+}
 // Check User Passwords
 if (!checkPwd($data['pwd'],$data['pwd2'])) {
-$err[] = "ERROR - Invalid Password or mismatch. Enter 5 chars or more";
+$err[] = "ERROR - Invalid Password or mismatch. Enter 5 chars or more.";
 //header("Location: register.php?msg=$err");
 //exit();
 }
@@ -106,12 +118,12 @@ $err[] = "ERROR - The username/email already exists. Please try again with diffe
 /***************************************************************************/
 
 if(empty($err)) {
-
+$full_name = "{$data[first_name]}{ }{$data[last_name]}";
 $sql_insert = "INSERT into `users`
             (`full_name`,`user_email`,`pwd`,`date`,`users_ip`,`activation_code`,`user_name`,`approved`
             )
             VALUES
-            ('$data[full_name]','$usr_email','$sha1pass',now(),'$user_ip','$activ_code','$user_name','$approved'
+            ('$full_name','$usr_email','$sha1pass',now(),'$user_ip','$activ_code','$user_name','$approved'
             )
             ";
             
@@ -155,7 +167,7 @@ THIS IS AN AUTOMATED RESPONSE.
     "From: \"Member Registration\" <auto-reply@$host>\r\n" .
      "X-Mailer: PHP/" . phpversion());
 
-  header("Location: login.php");  //remember to delete thankyou.php, as login is always true without email activation as set in login.php
+  header("Location: thankyou.php");  //remember to delete thankyou.php, as login is always true without email activation as set in login.php
   exit();
      
      } 
@@ -171,12 +183,13 @@ THIS IS AN AUTOMATED RESPONSE.
   <link rel="shortcut icon" href="images/gauge.ico">
   <link rel="icon" href="images/gauge.ico">
 <title>HappyData.me - Register / Sign-Up</title>
-
-<link rel="stylesheet" href="css/960_24_col.css" />
-<link rel="stylesheet" href="css/loginstyle.css" />
+<link href='http://fonts.googleapis.com/css?family=Grand+Hotel|Text+Me+One' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/registstyle.css" />
 <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.23.custom.min.js"></script>
 <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.23.custom.css" rel="stylesheet" />
+<style type="text/css">
+</style>
   <script type="text/javascript">
 
   
@@ -206,37 +219,8 @@ THIS IS AN AUTOMATED RESPONSE.
 </head>
 
 <body>
-<div class="container_24">
-<div class="clear"></div>
-<div class="grid_18" id="bartitle">
-  
-<div class="grid_15 alpha">
-      &nbsp;
-      <a href="login.php"><span class="title">HappyData</span></a>
-</div>
-<div class="grid_3 omega">
-<span id="lang"><br>english</span>
-    </div>
 
-
-</div> <!-- end .grid_18 -->
-<div class="clear"></div>
-<div class="grid_5">
-<br><br><br>
-</div>
-<div class="grid_13">
-
-<table width="100%" border="0" cellspacing="0" cellpadding="5" class="main">
-  <tr> 
-    <td colspan="3">&nbsp;</td>
-  </tr>
-  <tr> 
-    <td width="160" valign="top"><p>&nbsp;</p>
-      <p>&nbsp; </p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p>
-      <p>&nbsp;</p></td>
-    <td width="732" valign="top"><p>
+  <p>
     <?php 
      if (isset($_GET['done'])) { ?>
       <h2>Thank you</h2> Your registration is now complete and you can <a href="login.php">login here</a>";
@@ -244,87 +228,72 @@ THIS IS AN AUTOMATED RESPONSE.
       }
     ?></p>
 
-      <br><br>
       <form action="register.php" method="post" name="regForm" id="regForm" >
-        <table width="100%" border="0" cellpadding="3" cellspacing="3" class="forms">
-          <tr> 
+        
+          
             <td colspan="2">
-              <h3><strong>Registration / Sign Up</strong></h3>
-              <h4>It's free forever.</h4>
-          </td>
-          </tr>
-          <tr>
+              <h3><strong>Register / Sign Up</strong></h3>
+              <h4>It's free forever.</h4><br>
+          <div id="registext">
+          
+          
+            <td colspan="2">
             <?php  
               if(!empty($err))  {
                echo "<div class=\"msg\">";
               foreach ($err as $e) {
-                echo "* $e <br>";
+                echo "* $e <br><br>";
                 }
               echo "</div>";    
                }
-            ?> 
-          </tr>
-          <tr> 
-            <td>Your Name<span class="required"><font color="#CC0000">*</font></span></td> 
-            <td><input name="full_name" type="text" id="full_name" class="required"></td>
-          </tr>
-          <tr> 
-            <td>Username<span class="required"><font color="#CC0000">*</font></span></td>
-            <td><input name="user_name" type="text" id="user_name" class="required username" minlength="5" > 
-              <input name="btnAvailable" type="button" id="btnAvailable" 
+            ?>
+          
+          
+          
+            <span id="regspaceing">First Name<span class="required"><font color="#CC0000">*</font></span></span>
+            <input name="first_name" type="text" id="first_name" class="required"><br>
+          
+            <span id="regspaceing">Last Name<span class="required"><font color="#CC0000">*</font></span>
+          </span><input name="last_name" type="text" id="last_name" class="required"><br>
+
+            <span id="regspaceing">Your Email<span class="required"><font color="#CC0000">*</font></span></span>
+            <input name="btnAvailable" type="button" id="btnAvailable" 
               onclick='javascript:$("#checkid").html("Please wait..."); $.get("checkuser.php",{ cmd: "check", user: $("#user_name").val() } ,function(data){  $("#checkid").html(data); });'
-              value="Check Availability"> 
-                <span style="color:red; font: bold 12px verdana; " id="checkid" ></span> 
-            </td>
-          </tr>
-          <tr> 
-            <td>Your Email<span class="required"><font color="#CC0000">*</font></span> 
-            </td>
-            <td><input name="usr_email" type="text" id="usr_email3" class="required email"> 
-              <span class="example">needed for activation.</span></td>
-          </tr>
-          <tr> 
-            <td>Password<span class="required"><font color="#CC0000">*</font></span> 
-            </td>
-            <td><input name="pwd" type="password" class="required password" minlength="5" id="pwd"> 
-              <span class="example">5 chars minimum.</span></td>
-          </tr>
-          <tr> 
-            <td>Retype Password<span class="required"><font color="#CC0000">*</font></span> 
-            </td>
-            <td><input name="pwd2"  id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd"></td>
-          </tr>
-          <tr> 
-            <td colspan="2">&nbsp;</td>
-          </tr>
-          <tr> 
-            <td width="22%"><strong>Image Verification </strong></td>
-            <td width="78%"> 
+              value="Check"> 
+            <input name="user_name" type="text" id="user_name" class="required username" minlength="5" ><br>
+              <span style="color:red;" id="checkid" ></span>
+
+                
+            
+          
+          
+            <span id="regspaceing">Confirm Email<span class="required"><font color="#CC0000">*</font></span></span>
+            
+            <input name="usr_email" type="text" id="usr_email3" class="required email"><br>
+          
+          
+            <span id="regspaceing">Password<span class="required"><font color="#CC0000">*</font></span></span>
+            
+            <input name="pwd" type="password" class="required password" minlength="5" id="pwd"><br>
+          
+          
+            <span id="regspaceing">Retype Password<span class="required"><font color="#CC0000">*</font></span></span>
+            
+            <input name="pwd2"  id="pwd2" class="required password" type="password" minlength="5" equalto="#pwd"><br>
+          </div>
+            <div><br></div>
+
               <?php 
             require_once('recaptchalib.php');
             
                 echo recaptcha_get_html($publickey);
             ?>
-            </td>
-          </tr>
-        </table>
-        <p align="center">
+
+        <br>
           <input name="doRegister" type="submit" id="doRegister" value="Register">
-        </p>
+        <br><br>
       </form>
       
-       
-      </td>
-    
-  </tr>
-  <tr> 
-    <td colspan="3">&nbsp;</td>
-  </tr>
-</table>
-<br>
-<input type="button" ONCLICK="window.location.href='login.php'">
 
-</div>
-<div class="clear"></div>
 </body>
 </html>

@@ -1,0 +1,27 @@
+#bartitle {
+position: relative;
+z-index: 104;
+margin-top: -59px;
+}
+#leftbartitle {
+position: relative;
+z-index: 80;
+width: 103%;
+height: 53px;
+margin-left: -10px;
+/*border-style:solid;
+border-width:3px;
+border-color:#FFF;*/
+
+background-image: url("../images/stripe.png");
+background-repeat: repeat;
+/*-webkit-box-shadow: 0px 8px 11px rgba(50, 50, 50, 0.69);
+-moz-box-shadow:    0px 8px 11px rgba(50, 50, 50, 0.69);
+box-shadow:         0px 8px 11px rgba(50, 50, 50, 0.69);*/
+}
+span.title {
+  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 2.2em;color:#FFF;
+}
+span.titleme {
+  font-family: lucida grande,tahoma,verdana,arial,sans-serif; font-size: 1.0em;color:#FFF;
+}

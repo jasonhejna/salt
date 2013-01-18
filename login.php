@@ -55,7 +55,7 @@ $num = mysql_num_rows($result);
 	
 	if(!$approved) {
 	//$msg = urlencode("Account not activated. Please check your email for activation code");
-	$err[] = "Account not activated. Please check your email for activation code";
+	$err[] = "Account not activated. Please check your email for activation code.";
 	
 	//header("Location: login.php?msg=$msg");
 	 //exit();
@@ -148,7 +148,32 @@ $(function() {
         $("#doLogin3").click();
     }
   });
+      	$("#dialogclick").click(function(){
+			$( "#passworddialog" ).dialog( "open" );
+
+		});
   });
+
+  	$(function() {
+		$( "#passworddialog" ).dialog({
+			resizable: false,
+			height:200,
+			width:400,
+			autoOpen: false,
+			show: "blind",
+			hide: "explode",
+			modal:true,
+			buttons: {
+				Submit: function() {
+							$( this ).dialog( "close" );
+						},
+						Cancel: function() {
+							$( this ).dialog( "close" );
+						},
+					}
+		});
+	});
+
 
 
   </script>
@@ -156,71 +181,57 @@ $(function() {
 </head>
 
 <body>
-
-	  <?php
-	  /******************** ERROR MESSAGES*************************************************
-	  This code is to show error messages 
-	  **************************************************************************/
-	  if(!empty($err))  {
-	   echo "<div class=\"msg\">";
-	  foreach ($err as $e) {
-	    echo "$e <br>";
-	    }
-	  echo "</div>";	
-	   }
-	  /******************************* END ********************************/	  
-	  ?>
-
+<div id="leftbartitle"></div>
 <div class="container_24">
 <div class="clear"></div>
 <div class="grid_24" id="bartitle">
   
-<div class="grid_15 alpha">
-      &nbsp;
-      <a href="register.php"><span class="title">HappyData</span></a>
+<div class="grid_12 alpha">
+      <span class="title">HappyData</span><span class="titleme">.me</span>
 </div>
-<div class="grid_3 omega">
-..
-    </div>
+<form action="login.php" method="post" name="logForm" id="logForm" >
+<div class="grid_12 omega">
+
+            <div class="grid_5">
+
+            <div id="righttop">Email:</div>
+            <input name="usr_email" type="text" class="required" id="txtbox" size="25" tabindex="1"><br>
+            <span id="rememe">
+            <input name="remember" type="checkbox" id="remember" value="1">
+            Remember me</span>
+            </div>
+            <div class="grid_5">
+            <div id="righttop">Password:</div>
+            <input name="pwd" type="password" class="required password" id="txtbox" tabindex="2"><br>
+            <span id="pwdmargin"><input type="submit" id="dialogclick" class="submitLink" value="Forgot Password?"></span>
+        	</div>
+            <div class="grid_1">
+            	<br>
+            <input name="doLogin" type="submit" id="doLogin3" value="Login"  tabindex="3">
+            
+        	</div>
+</div>
+</form>
 
 
-</div> <!-- end .grid_18 -->
+
+</div> <!-- end .grid_24 -->
 <div class="clear"></div>
 
-<div class="grid_9">
-  <br><br><br><br><br>
-  <div class="boxin" id="boxin">
-<!--   <center>
-    <img src="images/ilanguage.png" width="580" height="470"><br><br>
-  </center> -->
-  <br>
-..
-</div><!-- end div of boxin css -->
+<div class="grid_15">
+  <br><br><br><br><br><br>
+  <div id="left">
+<img src="images/websiteimage.png" width="627" alt="response and timeline">
+	</div>
 </div>
 <div class="grid_9">
-  <br><br><br>
-<form action="login.php" method="post" name="logForm" id="logForm" >
-            <span class="ftitle">Login</span><br><br>
-            Email or Username:<br/>
-            <input name="usr_email" type="text" class="required" id="txtbox" size="25" tabindex="1">
-            <br/>
-            Password:<br>
-            <input name="pwd" type="password" class="required password" id="txtbox" size="25" tabindex="2">
-            
-            &nbsp;<a href="forgot.php">Forgot Password?</a><br>
-            <input name="remember" type="checkbox" id="remember" value="1">
-                Remember me
-                <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input name="doLogin" type="submit" id="doLogin3" value="Login"  tabindex="3">
-</form>
-<center>
-  <button ONCLICK="window.location.href='register.php'" style="font-size: 2.03em;padding:4px;">Register / Sign-Up</button><br>
-</center>
-  <h4>HappyData is free, and always will be.</h4>
-
+  <br><br><br><br><br><br>
+<iframe src="register.php" frameborder="0" width="355" height="730" scrolling="no"></iframe>
   </div>
 <div class="clear"></div>
 </div>  <!-- end 960 container_24 --> 
-
+<div id="passworddialog" title="Basic dialog">
+    <p>This is an animated dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+</div>
 </body>
 </html>

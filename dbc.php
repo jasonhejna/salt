@@ -157,16 +157,30 @@ function ChopStr($str, $len)
 
 function isEmail($email){
   return preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $email) ? TRUE : FALSE;
+/*  	if (preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $email)) {
+		return true;
+	} else {
+		return false;
+	}*/
 }
 
 function isUserID($username)
 {
-	if (preg_match('/^[a-z\d_]{5,20}$/i', $username)) {
+	if (preg_match('/^\S+@[\w\d.-]{2,}\.[\w]{2,6}$/iU', $username)) {
 		return true;
 	} else {
 		return false;
 	}
  }	
+function isMatchEmail($email,$username)
+{ echo $email;
+	echo $username;
+	if ($email == $username) {
+		return true;
+	} else {
+		return false;
+	}
+ }
  
 function isURL($url) 
 {
